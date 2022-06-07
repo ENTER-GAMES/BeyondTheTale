@@ -366,3 +366,5 @@ MonoBehaviour:
   requestedWidth: 640
   requestedHeight: 480
   requestedFPS: 0
+  isImage: 0
+  imagePath: Assets/Resources/test.png

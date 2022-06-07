@@ -14,12 +14,16 @@ public class CameraBasedShadowDetector : ShadowDetector
     private int requestedHeight;
     [SerializeField]
     private int requestedFPS;
+    [SerializeField]
+    private bool isImage;
+    [SerializeField]
+    private string imagePath;
 
     private Texture2D texture;
     private WebCamTexture webCamTexture;
     private WebCamDevice webCamDevice;
     private Color32[] colors;
-    private Mat rgbaMat;
+    private Mat src;
     private Mat gray = new Mat();
     private Mat thr = new Mat();
 
@@ -31,29 +35,55 @@ public class CameraBasedShadowDetector : ShadowDetector
 
     private void Init()
     {
+        if (isImage)
+        {
+            InitImage();
+            OnInitImage();
+        }
+        else
+        {
+            InitCamera();
+            OnInitCamera();
+        }
+    }
+
+    private void InitCamera()
+    {
         WebCamDevice[] devices = WebCamTexture.devices;
         webCamDevice = devices[0];
         webCamTexture = new WebCamTexture(webCamDevice.name, requestedWidth, requestedHeight, requestedFPS);
         webCamTexture.Play();
-
-        OnInit();
     }
 
-    private void OnInit()
+    private void OnInitCamera()
     {
         colors = new Color32[webCamTexture.width * webCamTexture.height];
         texture = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.RGBA32, false);
-        rgbaMat = new Mat(webCamTexture.height, webCamTexture.width, CvType.CV_8UC4, new Scalar(0, 0, 0, 255));
+        src = new Mat(webCamTexture.height, webCamTexture.width, CvType.CV_8UC4, new Scalar(0, 0, 0, 255));
+        gameObject.GetComponent<Renderer>().material.mainTexture = texture;
+    }
+
+    private void InitImage()
+    {
+        src = Imgcodecs.imread(imagePath);
+    }
+
+    private void OnInitImage()
+    {
+        Run();
+        texture = new Texture2D(src.cols(), src.rows(), TextureFormat.RGBA32, false);
+        Utils.matToTexture2D (src, texture);
         gameObject.GetComponent<Renderer>().material.mainTexture = texture;
     }
 
     private void Update()
     {
-        Utils.webCamTextureToMat(webCamTexture, rgbaMat, colors);
+        if (isImage)
+            return;
 
+        Utils.webCamTextureToMat(webCamTexture, src, colors);
         Run();
-
-        Utils.matToTexture2D(rgbaMat, texture, colors);
+        Utils.matToTexture2D(src, texture, colors);
     }
 
     private void Run()
@@ -73,16 +103,16 @@ public class CameraBasedShadowDetector : ShadowDetector
             DrawContours(contours, i);
             //DrawCircle(center);
 
-            List<Point> pts = MergeList(contours[i], center);
-            SetOffset(ref pts);
-
-            MeshDrawer.Draw(pts);
+            List<Point> points = MergeList(contours[i], center);
+            SetOffset(ref points);
+            Shadow shadow = new Shadow(PointToVector3(points));
+            MeshDrawer.Draw(shadow);
         }
     }
 
     private void ConvertToGrayscale()
     {
-        Imgproc.cvtColor(rgbaMat, gray, Imgproc.COLOR_BGR2GRAY);
+        Imgproc.cvtColor(src, gray, Imgproc.COLOR_BGR2GRAY);
     }
 
     private void Threshold()
@@ -103,29 +133,37 @@ public class CameraBasedShadowDetector : ShadowDetector
 
     private void DrawContours(List<MatOfPoint> contours, int i)
     {
-        Imgproc.drawContours(rgbaMat, contours, i, new Scalar(255, 0, 0), 3);
+        Imgproc.drawContours(src, contours, i, new Scalar(255, 0, 0), 3);
     }
 
     private void DrawCircle(Point point)
     {
-        Imgproc.circle(rgbaMat, point, 7, new Scalar(255, 0, 0), -1);
+        Imgproc.circle(src, point, 7, new Scalar(255, 0, 0), -1);
     }
 
     private List<Point> MergeList(MatOfPoint contour, Point point)
     {
-        List<Point> pts = contour.toList();
-        pts.Insert(0, point);
+        List<Point> points = contour.toList();
+        points.Insert(0, point);
 
-        return pts;
+        return points;
     }
 
-    private void SetOffset(ref List<Point> pts)
+    private void SetOffset(ref List<Point> points)
     {
-        for (int j = 0; j < pts.Count; j++)
+        for (int j = 0; j < points.Count; j++)
         {
-            pts[j].x -= requestedWidth / 2;
-            pts[j].y *= -1;
-            pts[j].y += requestedHeight / 2;
+            points[j].x -= requestedWidth / 2;
+            points[j].y *= -1;
+            points[j].y += requestedHeight / 2;
         }
+    }
+
+    private List<Vector3> PointToVector3(List<Point> points)
+    {
+        List<Vector3> vector3 = new List<Vector3>();
+        for (int i = 0; i < points.Count; i++)
+            vector3.Add(new Vector3((float)points[i].x, (float)points[i].y, 0));
+        return vector3;
     }
 }

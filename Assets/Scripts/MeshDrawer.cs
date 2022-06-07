@@ -12,28 +12,24 @@ public class MeshDrawer : MonoBehaviour
     private List<Vector2> uv;
     private List<int> tri;
 
-    public void Draw(List<Point> pts)
+    public void Draw(Shadow shadow)
     {
-        if (pts.Count < 3)
+        if (shadow.points.Count < 3)
             return;
 
         CreateObject();
-        SettingsMesh(pts);
+        SettingsMesh(shadow.points);
         CreateMesh();
     }
 
     public void Clear()
     {
         if (polys == null)
-        {
             polys = new List<GameObject>();
-        }
         else
         {
             for (int i = 0; i < polys.Count; i++)
-            {
                 Destroy(polys[i]);
-            }
             polys.Clear();
         }
     }
@@ -46,18 +42,18 @@ public class MeshDrawer : MonoBehaviour
         polys.Add(poly);
     }
 
-    private void SettingsMesh(List<Point> pts)
+    private void SettingsMesh(List<Vector3> points)
     {
         InitMeshData();
         AddFirstTriangle();
 
-        for (int i = 0; i < pts.Count; i++)
+        for (int i = 0; i < points.Count; i++)
         {
-            AddVertex(pts[i]);
+            AddVertex(points[i]);
             AddUV(Vector2.zero);
             if (i >= 3)
                 AddTriangle();
-            if (i == pts.Count - 1)
+            if (i == points.Count - 1)
                 AddLastTriangle();
         }
     }
@@ -69,7 +65,7 @@ public class MeshDrawer : MonoBehaviour
         tri = new List<int>();
     }
 
-    private void AddVertex(Point pt) { ver.Add(new Vector2((float)pt.x, (float)pt.y)); }
+    private void AddVertex(Vector3 pt) { ver.Add(new Vector2(pt.x, pt.y)); }
 
     private void AddUV(Vector2 v) { uv.Add(v); }
 
