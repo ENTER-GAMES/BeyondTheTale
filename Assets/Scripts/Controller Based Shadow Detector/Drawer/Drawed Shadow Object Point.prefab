@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6275056420489419898}
   - component: {fileID: 6275056420489419897}
   m_Layer: 0
-  m_Name: Controller Based Shadow Point
+  m_Name: Drawed Shadow Object Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

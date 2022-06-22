@@ -6,8 +6,15 @@ using UnityEngine;
 
 public abstract class ControllerBasedShadowDetectorTool : MonoBehaviour
 {
+    protected ControllerBasedShadowDetector detector;       // 컨트롤러 기반 그림자 인식기
+
     [SerializeField]
-    protected bool isSelected = false;
+    protected bool isSelected = false;                      // 본 도구 선택 여부
+
+    public void Init(ControllerBasedShadowDetector detector)
+    {
+        this.detector = detector;
+    }
 
     public virtual void Select()
     {

@@ -198,7 +198,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f46aabbf97f1b4411aa932893a5606be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSelected: 0
+  isSelected: 1
+  createDrawedShadowObjectKey: 13
+  deleteAllPointsKey: 8
+  drawedShadowObjectPrefab: {fileID: 6714393671499861834, guid: 72eabcda2dcb64960a484224c150097f, type: 3}
+  drawedShadowObjectPointPrefab: {fileID: 6275056420489419896, guid: ce757acc8c877414e88d9cda28e57e5d, type: 3}
+  addPointDeltaTime: 0.05
 --- !u!1 &750614562
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,8 +248,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0630310a901f04bc6a0fa48357edd7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSelected: 1
-  drawedShadowPrefab: {fileID: 6714393671499861834, guid: c67c805520ff644cea8db8e609caae59, type: 3}
+  isSelected: 0
+  drawedShadowObjectPrefab: {fileID: 6714393671499861834, guid: c67c805520ff644cea8db8e609caae59, type: 3}
 --- !u!1 &882969557
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,24 +524,6 @@ PrefabInstance:
       objectReference: {fileID: 6275056420489419896, guid: ce757acc8c877414e88d9cda28e57e5d, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
---- !u!1 &1020509994142419909 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1020509994210423022, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
-  m_PrefabInstance: {fileID: 1020509994142419908}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1020509994142419910
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1020509994142419909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f46aabbf97f1b4411aa932893a5606be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isSelected: 0
 --- !u!4 &1020509994142419913 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1020509994210423017, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
