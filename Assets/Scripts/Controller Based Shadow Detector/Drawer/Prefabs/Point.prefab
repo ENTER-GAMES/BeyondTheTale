@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6275056420489419898}
   - component: {fileID: 6275056420489419897}
   m_Layer: 0
-  m_Name: Drawed Shadow Object Point
+  m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9253e5d37b23b4ff6a9d43c14a5b5006, type: 2}
+  - {fileID: 2100000, guid: 8531ff442416f4d3a86eb78b6fcd2de5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

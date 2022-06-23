@@ -21,7 +21,7 @@ public abstract class ControllerBasedShadowDetectorTool : MonoBehaviour
         isSelected = true;
     }
 
-    public virtual void Unselect()
+    public virtual void Deselect()
     {
         isSelected = false;
     }

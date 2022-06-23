@@ -5,15 +5,6 @@ using UnityEngine;
 public class PointBasedDrawer : Drawer
 {
     [SerializeField]
-    private KeyCode createDrawedShadowObjectKey = KeyCode.Return;           // 그림자 생성 키
-    [SerializeField]
-    private KeyCode deleteAllPointsKey = KeyCode.Backspace;                 // 포인트 삭제 키
-
-    [SerializeField]
-    private GameObject drawedShadowObjectPrefab;                        // 그려질 그림자 오브젝트 프리팹
-    private GameObject currentDrawedShadowObject;                       // 현재 그려지고 있는 그림자 오브젝트 
-
-    [SerializeField]
     private GameObject drawedShadowObjectPointPrefab;                   // 그림자 오브젝트 포인트 프리팹
     private List<GameObject> pointObjects = new List<GameObject>();     // 그림자 오브젝트 포인트 리스트
     private List<Vector3> points = new List<Vector3>();                 // 포인트 좌표 리스트
@@ -22,16 +13,28 @@ public class PointBasedDrawer : Drawer
     private float addPointDeltaTime;        // 몇 초 후에 다음 포인트 추가됨 (드래그 기능을 위해서 추가됨)
     private float lastAddPointTime;         // 마지막으로 포인트 추가된 시간
 
+    [Header("Key Code")]
+    [SerializeField]
+    private KeyCode deleteAllPointsKey = KeyCode.Backspace;                 // 포인트 삭제 키
+
+    public override void Select()
+    {
+        base.Select();
+        DeleteAllPoints();
+    }
+
+    public override void Deselect()
+    {
+        base.Deselect();
+        DeleteAllPoints();
+    }
+
     protected override void Update()
     {
         base.Update();
 
-        // 그림자 생성
-        if (Input.GetKeyDown(createDrawedShadowObjectKey))
-            CreateDrawedShadowObject();
-
         // 그리기 초기화
-        else if (Input.GetKeyDown(deleteAllPointsKey))
+        if (Input.GetKeyDown(deleteAllPointsKey))
             DeleteAllPoints();
     }
 
@@ -55,6 +58,13 @@ public class PointBasedDrawer : Drawer
         mouseWorldPos.z = 0;
 
         CreatePoint(mouseWorldPos);
+    }
+
+    protected override void OnMouseUp(Vector3 mousePosition, int mouseIndex = 0)
+    {
+        base.OnMouseUp(mousePosition, mouseIndex);
+
+        CreateDrawedShadowObject();
     }
 
     private void CreatePoint(Vector3 position)
