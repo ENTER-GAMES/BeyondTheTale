@@ -50,11 +50,10 @@ MonoBehaviour:
   shadow:
     points: []
   meshFilter: {fileID: 1663077842957930128}
-  polygonCollider: {fileID: 6141813761310551897}
+  polygonCollider2D: {fileID: 6141813761310551897}
   defaultMaterial: {fileID: 2100000, guid: 29714bf43fcb043b0952555eae44d87b, type: 2}
   selectMaterial: {fileID: 2100000, guid: 738794da1d70744779155737ce7ba6d3, type: 2}
   meshRenderer: {fileID: 1162996472647198691}
-  spriteRenderer: {fileID: 0}
 --- !u!23 &1162996472647198691
 MeshRenderer:
   m_ObjectHideFlags: 0

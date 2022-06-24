@@ -9,8 +9,8 @@ public class DrawedShadowObject : MonoBehaviour
     [SerializeField]
     private MeshFilter meshFilter;
     [SerializeField]
-    private PolygonCollider2D polygonCollider;
-    public Bounds Bounds => polygonCollider.bounds;
+    private PolygonCollider2D polygonCollider2D;
+    public Bounds Bounds => polygonCollider2D.bounds;
 
     [Header("Render")]
     [SerializeField]
@@ -60,12 +60,12 @@ public class DrawedShadowObject : MonoBehaviour
             points[i] = shadow.points[i] - center;
 
         // 폴리곤 콜라이더 포인트 지정
-        polygonCollider.points = points;
+        polygonCollider2D.points = points;
 
 
         /*---------- 메쉬 ----------*/
         // 메쉬 생성
-        Mesh mesh = polygonCollider.CreateMesh(false, false);
+        Mesh mesh = polygonCollider2D.CreateMesh(false, false);
 
         // 콜라이더와 메쉬 좌표 맞추기
         for (int i = 0; i < mesh.vertices.Length; i++)
