@@ -69,11 +69,11 @@ public class MeshDrawer : MonoBehaviour
 
     private void AddUV(Vector2 v) { uv.Add(v); }
 
-    private void AddFirstTriangle() { tri.AddRange(new List<int> {0, 1, 2}); }
+    private void AddFirstTriangle() { tri.AddRange(new List<int> {0, 2, 1}); }
 
-    private void AddTriangle() { tri.AddRange(new List<int> {0, ver.Count - 2, ver.Count - 1}); }
+    private void AddTriangle() { tri.AddRange(new List<int> {0, ver.Count - 1, ver.Count - 2}); }
 
-    private void AddLastTriangle() { tri.AddRange(new List<int> {0, ver.Count - 1, 1}); }
+    private void AddLastTriangle() { tri.AddRange(new List<int> {0, 1, ver.Count - 1}); }
 
 
     private void CreateMesh()

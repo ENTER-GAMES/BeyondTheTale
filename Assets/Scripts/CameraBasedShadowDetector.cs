@@ -14,18 +14,29 @@ public class CameraBasedShadowDetector : ShadowDetector
     private int requestedHeight;
     [SerializeField]
     private int requestedFPS;
+
     [SerializeField]
-    private bool isImage;
+    private new Renderer renderer;
+
     [SerializeField]
-    private string imagePath;
+    [Range(0, 255)]
+    private int threshold = 20;
+    [SerializeField]
+    [Range(0.001f, 0.01f)]
+    private double epsilon = 0.001f;
 
     private Texture2D texture;
     private WebCamTexture webCamTexture;
     private WebCamDevice webCamDevice;
     private Color32[] colors;
-    private Mat src;
-    private Mat gray = new Mat();
-    private Mat thr = new Mat();
+    private Mat origin;
+    private Mat frame;
+    private Mat result = new Mat();
+
+    private int width;
+    private int height;
+
+    private bool isCaptureOrigin = false;
 
 
     private void Start()
@@ -35,94 +46,112 @@ public class CameraBasedShadowDetector : ShadowDetector
 
     private void Init()
     {
-        if (isImage)
-        {
-            InitImage();
-            OnInitImage();
-        }
-        else
-        {
-            InitCamera();
-            OnInitCamera();
-        }
-    }
-
-    private void InitCamera()
-    {
         WebCamDevice[] devices = WebCamTexture.devices;
         webCamDevice = devices[0];
         webCamTexture = new WebCamTexture(webCamDevice.name, requestedWidth, requestedHeight, requestedFPS);
         webCamTexture.Play();
+
+        width = webCamTexture.width;
+        height = webCamTexture.height;
+
+        OnInit();
     }
 
-    private void OnInitCamera()
+    private void OnInit()
     {
-        colors = new Color32[webCamTexture.width * webCamTexture.height];
-        texture = new Texture2D(webCamTexture.width, webCamTexture.height, TextureFormat.RGBA32, false);
-        src = new Mat(webCamTexture.height, webCamTexture.width, CvType.CV_8UC4, new Scalar(0, 0, 0, 255));
-        gameObject.GetComponent<Renderer>().material.mainTexture = texture;
-    }
-
-    private void InitImage()
-    {
-        src = Imgcodecs.imread(imagePath);
-    }
-
-    private void OnInitImage()
-    {
-        Run();
-        texture = new Texture2D(src.cols(), src.rows(), TextureFormat.RGBA32, false);
-        Utils.matToTexture2D (src, texture);
-        gameObject.GetComponent<Renderer>().material.mainTexture = texture;
+        colors = new Color32[width * height];
+        texture = new Texture2D(width, height, TextureFormat.RGBA32, false);
+        origin = new Mat(height, width, CvType.CV_8UC4, new Scalar(0, 0, 0, 255));
+        frame = new Mat(height, width, CvType.CV_8UC4, new Scalar(0, 0, 0, 255));
+        
+        renderer.material.mainTexture = texture;
     }
 
     private void Update()
     {
-        if (isImage)
-            return;
+        if (!isCaptureOrigin)
+        {
+            Utils.webCamTextureToMat(webCamTexture, origin, colors);
+            Utils.matToTexture2D(origin, texture, colors);
+        }
+        else
+        {
+            Utils.webCamTextureToMat(webCamTexture, frame, colors);
+            Run();
+            Utils.matToTexture2D(frame, texture, colors);
+        }
+    }
 
-        Utils.webCamTextureToMat(webCamTexture, src, colors);
-        Run();
-        Utils.matToTexture2D(src, texture, colors);
+    public void CaptureOrigin()
+    {
+        isCaptureOrigin = true;
+        Utils.webCamTextureToMat(webCamTexture, origin, colors, true);
     }
 
     private void Run()
     {
-        ConvertToGrayscale();
-        Threshold();
+        Mat grayA = ConvertToGrayscale(origin);
+        Mat grayB = ConvertToGrayscale(frame);
+        Mat diff = AbsDiff(grayA, grayB);
+        //Mat blur = GaussianBlur(diff, new Size(9, 9), 0);
+        result = Threshold(diff, threshold, 255);
         Mat hierarchy = new Mat();
         List<MatOfPoint> contours = new List<MatOfPoint>();
-        FindContours(ref contours, ref hierarchy);
+        FindContours(result, ref contours, ref hierarchy);
 
         MeshDrawer.Clear();
 
-        for (int i = 0; i < contours.Count; ++i)
+        foreach (MatOfPoint c in contours)
         {
-            Point center = FindCenter(contours[i]);
+            Point center = FindCenter(c);
+            double area = Imgproc.contourArea(c);
+            if (area > 100)
+            {
+                //DrawCircle(center);
+                MatOfPoint2f curve = new MatOfPoint2f(c.toArray());
+                MatOfPoint2f approx = new MatOfPoint2f();
+                double p = Imgproc.arcLength(curve, true);
+                Imgproc.approxPolyDP(curve, approx, epsilon * p, true);
 
-            DrawContours(contours, i);
-            //DrawCircle(center);
-
-            List<Point> points = MergeList(contours[i], center);
-            SetOffset(ref points);
-            Shadow shadow = new Shadow(PointToVector3(points));
-            MeshDrawer.Draw(shadow);
+                List<Point> points = MergeList(new MatOfPoint(approx.toArray()), center);
+                SetOffset(ref points);
+                Shadow shadow = new Shadow(PointToVector3(points));
+                MeshDrawer.Draw(shadow);
+            }
         }
     }
 
-    private void ConvertToGrayscale()
+    private Mat ConvertToGrayscale(Mat src)
     {
-        Imgproc.cvtColor(src, gray, Imgproc.COLOR_BGR2GRAY);
+        Mat result = new Mat();
+        Imgproc.cvtColor(src, result, Imgproc.COLOR_BGR2GRAY);
+        return result;
     }
 
-    private void Threshold()
+    private Mat Threshold(Mat src, int threshold, int max)
     {
-        Imgproc.threshold(gray, thr, 127, 255, Imgproc.THRESH_BINARY);
+        Mat result = new Mat();
+        Imgproc.threshold(src, result, threshold, max, Imgproc.THRESH_BINARY);
+        return result;
     }
 
-    private void FindContours(ref List<MatOfPoint> contours, ref Mat hierarchy)
+    private Mat AbsDiff(Mat srcA, Mat srcB)
     {
-        Imgproc.findContours(thr, contours, hierarchy, Imgproc.RETR_LIST, Imgproc.CHAIN_APPROX_SIMPLE);
+        Mat result = new Mat();
+        Core.absdiff(srcA, srcB, result);
+        return result;
+    }
+
+    private Mat GaussianBlur(Mat src, Size ksize, double sigmaX)
+    {
+        Mat result = new Mat();
+        Imgproc.GaussianBlur(src, result, ksize, sigmaX);
+        return result;
+    }
+
+    private void FindContours(Mat src, ref List<MatOfPoint> contours, ref Mat hierarchy)
+    {
+        Imgproc.findContours(src, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
     }
 
     private Point FindCenter(MatOfPoint contour)
@@ -131,12 +160,12 @@ public class CameraBasedShadowDetector : ShadowDetector
         return new Point((int)(m.m10 / m.m00), (int)(m.m01 / m.m00));
     }
 
-    private void DrawContours(List<MatOfPoint> contours, int i)
+    private void DrawContours(ref Mat src, List<MatOfPoint> contours, int i)
     {
         Imgproc.drawContours(src, contours, i, new Scalar(255, 0, 0), 3);
     }
 
-    private void DrawCircle(Point point)
+    private void DrawCircle(ref Mat src, Point point)
     {
         Imgproc.circle(src, point, 7, new Scalar(255, 0, 0), -1);
     }
@@ -151,11 +180,11 @@ public class CameraBasedShadowDetector : ShadowDetector
 
     private void SetOffset(ref List<Point> points)
     {
-        for (int j = 0; j < points.Count; j++)
+        for (int i = 0; i < points.Count; i++)
         {
-            points[j].x -= requestedWidth / 2;
-            points[j].y *= -1;
-            points[j].y += requestedHeight / 2;
+            points[i].x -= width / 2;
+            points[i].y *= -1;
+            points[i].y += height / 2;
         }
     }
 
