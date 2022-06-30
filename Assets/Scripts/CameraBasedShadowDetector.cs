@@ -72,7 +72,7 @@ public class CameraBasedShadowDetector : ShadowDetector
     {
         Run();
         texture = new Texture2D(src.cols(), src.rows(), TextureFormat.RGBA32, false);
-        Utils.matToTexture2D (src, texture);
+        Utils.matToTexture2D(src, texture);
         gameObject.GetComponent<Renderer>().material.mainTexture = texture;
     }
 
@@ -106,7 +106,8 @@ public class CameraBasedShadowDetector : ShadowDetector
             List<Point> points = MergeList(contours[i], center);
             SetOffset(ref points);
             Shadow shadow = new Shadow(PointToVector3(points));
-            MeshDrawer.Draw(shadow);
+            // 오류나서 임시로 주석 처리
+            // MeshDrawer.Draw(shadow);
         }
     }
 

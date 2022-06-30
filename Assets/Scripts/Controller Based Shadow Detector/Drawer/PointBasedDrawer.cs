@@ -79,11 +79,9 @@ public class PointBasedDrawer : Drawer
 
     private void CreateDrawedShadowObject()
     {
-        Shadow shadow = new Shadow(points);
-        GameObject drawedShadowObjGameObj = Instantiate(drawedShadowObjectPrefab, Vector3.zero, Quaternion.identity);
-        DrawedShadowObject drawedShadowObj = drawedShadowObjGameObj.GetComponent<DrawedShadowObject>();
+        Shadow shadow = new Shadow(new List<Vector3>(points));
 
-        drawedShadowObj.Init(shadow);
+        detector?.AddShadow(shadow);
 
         DeleteAllPoints();
     }

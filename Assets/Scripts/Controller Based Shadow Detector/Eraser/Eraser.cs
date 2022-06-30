@@ -19,6 +19,7 @@ public abstract class Eraser : ControllerBasedShadowDetectorTool
         // 그림자 삭제
         foreach (DrawedShadowObject obj in drawedShadowObjs)
         {
+            detector?.RemoveShadow(obj.Shadow);
             Destroy(obj.gameObject);
         }
     }

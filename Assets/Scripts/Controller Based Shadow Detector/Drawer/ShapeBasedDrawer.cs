@@ -72,10 +72,7 @@ public class ShapeBasedDrawer : Drawer
             new Vector3(mouseWorldPos.x, startDrawPosition.y, 0)
         });
 
-        GameObject drawedShadowObjGameObj = Instantiate(drawedShadowObjectPrefab, Vector3.zero, Quaternion.identity);
-        DrawedShadowObject drawedShadowObj = drawedShadowObjGameObj.GetComponent<DrawedShadowObject>();
-
-        drawedShadowObj.Init(shadow);
+        detector?.AddShadow(shadow);
     }
 
     private void DeleteRect()

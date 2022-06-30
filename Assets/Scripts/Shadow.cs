@@ -11,4 +11,14 @@ public class Shadow
     {
         this.points = points;
     }
+
+    public Shadow(List<Vector3> points)
+    {
+        Vector2[] pointsArr = new Vector2[points.Count];
+
+        for (int i = 0; i < pointsArr.Length; i++)
+            pointsArr[i] = points[i];
+
+        this.points = pointsArr;
+    }
 }

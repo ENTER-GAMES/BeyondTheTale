@@ -2,135 +2,67 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class ControllerBasedShadowDetector : ShadowDetector
 {
-    /* Enum */
-    [Serializable]
-    public enum ToolType { Selector, Drawer, Eraser }
-    [Serializable]
-    public enum DrawType { Point, Line, Rect, Circle }
-
-    /* Property */
-    [Header("[Controller Based Shadow Detector]")]
-
-    [Header("Tools")]
     [SerializeField]
-    private ToolType toolType = ToolType.Drawer;
-    private ToolType preToolType = ToolType.Drawer;                 // 직전 도구 타입
+    private ControllerBasedShadowDetectorTool[] tools;
+    private ControllerBasedShadowDetectorTool currentTool;
 
-    [Header("Drawer")]
+    [Header("@Debug: Shadows")]
     [SerializeField]
-    private DrawType drawType = DrawType.Point;
-    private DrawType preDrawType = DrawType.Point;                  // 직전 그리기 타입
+    private List<Shadow> shadows = new List<Shadow>();
 
-    [Header("Point")]
-    [SerializeField]
-    private GameObject pointPrefab;
-    private List<GameObject> pointObjectList = new List<GameObject>();
-
-    /* Variable */
-    private List<Shadow> shadowList = new List<Shadow>();           // 그림자 리스트
-
-    [SerializeField]
-    private List<Vector3> pointList = new List<Vector3>();          // 포인트 리스트
-    private bool isDrawing = false;                                 // 그려지고 있는지 여부
-
-    private void Awake()
+    private void Start()
     {
-        // 직전 타입 저장
-        preToolType = toolType;
-        preDrawType = drawType;
+        // 도구 초기화
+        InitTools();
+
+        // 0번 도구 선택
+        DeselectAll();
+        Select(0);
     }
 
-    private void Update()
+    private void InitTools()
     {
-        CheckChangedToolType();     // 도구 타입이 변경되었는지 확인
-        CheckChangedDrawType();     // 그리기 타입이 변경되었는지 확인
-
-
-        // 선택된 도구에 맞게 Update
-        if (toolType == ToolType.Selector)
-            UpdateSelector();
-        else if (toolType == ToolType.Drawer)
-            UpdateDrawer();
-        else if (toolType == ToolType.Eraser)
-            UpdateEraser();
-    }
-
-    private void CheckChangedToolType()
-    {
-        if (toolType == preToolType) return;
-
-        preToolType = toolType;
-        isDrawing = false;
-        pointList.Clear();
-    }
-
-    private void CheckChangedDrawType()
-    {
-        if (drawType == preDrawType) return;
-
-        preDrawType = drawType;
-        isDrawing = false;
-        pointList.Clear();
-    }
-
-    private void UpdateSelector()
-    {
-
-    }
-
-    private void UpdateDrawer()
-    {
-        if (drawType == DrawType.Point)
-            UpdateDrawerPoint();
-    }
-
-    private void UpdateDrawerPoint()
-    {
-        // 마우스 버튼 클릭
-        if (Input.GetMouseButtonDown(0))
+        foreach (ControllerBasedShadowDetectorTool tool in tools)
         {
-            // 클릭 위치
-            Vector3 clickPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            clickPoint.z = 0;
-            pointList.Add(clickPoint);
-
-            // 포인트 오브젝트 생성
-            GameObject pointObj = Instantiate(pointPrefab, clickPoint, Quaternion.identity);
-            pointObjectList.Add(pointObj);
-        }
-
-        // 엔터
-        if (Input.GetKeyDown(KeyCode.Return) && pointList.Count > 0)
-        {
-            // 그림자 생성
-            Shadow shadow = new Shadow(new List<Vector3>(pointList));
-            shadowList.Add(shadow);
-            MeshDrawer.Draw(shadow);
-
-            // 포인트 및 포인트 오브젝트 삭제
-            pointList.Clear();
-            ClearPointObjects();
+            tool.Init(this);
         }
     }
 
-    private void ClearPointObjects()
+    public void Select(int index)
     {
-        foreach (var pointObj in pointObjectList)
+        if (index >= tools.Length || index < 0) return;
+
+        DeselectAll();
+        tools[index].Select();
+    }
+
+    public void DeselectAll()
+    {
+        foreach (ControllerBasedShadowDetectorTool tool in tools)
         {
-            GameObject.Destroy(pointObj);
+            tool.Deselect();
         }
     }
 
-    private void UpdateEraser()
+    public void AddShadow(Shadow shadow)
     {
+        if (shadows.Contains(shadow)) return;
 
+        shadows.Add(shadow);
+
+        // 선택 도구에서 이동, 회전, 크기에 대한 변형이 일어나기 때문에
+        // 새로 그려졌올 때, 딱 한 번만 그려준다.
+        MeshDrawer.Draw(new List<Shadow>() { shadow });
     }
 
-    private void UpdateDrawMesh()
+    public void RemoveShadow(Shadow shadow)
     {
+        if (!shadows.Contains(shadow)) return;
+
+        shadows.Remove(shadow);
     }
 }
