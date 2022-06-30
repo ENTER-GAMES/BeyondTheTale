@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Shadow
 {
-    public List<Vector3> points;
+    public Vector2[] points;
 
-    public Shadow(List<Vector3> points)
+    public Shadow(Vector2[] points)
     {
         this.points = points;
     }

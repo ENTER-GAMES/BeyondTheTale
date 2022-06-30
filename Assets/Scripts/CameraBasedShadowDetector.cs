@@ -14,10 +14,8 @@ public class CameraBasedShadowDetector : ShadowDetector
     private int requestedHeight;
     [SerializeField]
     private int requestedFPS;
-
     [SerializeField]
     private new Renderer renderer;
-
     [SerializeField]
     [Range(0, 255)]
     private int threshold = 20;
@@ -32,10 +30,8 @@ public class CameraBasedShadowDetector : ShadowDetector
     private Mat origin;
     private Mat frame;
     private Mat result = new Mat();
-
     private int width;
     private int height;
-
     private bool isCaptureOrigin = false;
 
 
@@ -90,20 +86,19 @@ public class CameraBasedShadowDetector : ShadowDetector
 
     private void Run()
     {
-        Mat grayA = ConvertToGrayscale(origin);
-        Mat grayB = ConvertToGrayscale(frame);
-        Mat diff = AbsDiff(grayA, grayB);
-        //Mat blur = GaussianBlur(diff, new Size(9, 9), 0);
-        result = Threshold(diff, threshold, 255);
+        Mat grayA = MyUtils.ConvertToGrayscale(origin);
+        Mat grayB = MyUtils.ConvertToGrayscale(frame);
+        Mat diff = MyUtils.AbsDiff(grayA, grayB);
+        Mat blur = MyUtils.GaussianBlur(diff, new Size(9, 9), 0);
+        result = MyUtils.Threshold(diff, threshold, 255);
         Mat hierarchy = new Mat();
         List<MatOfPoint> contours = new List<MatOfPoint>();
-        FindContours(result, ref contours, ref hierarchy);
+        MyUtils.FindContours(result, ref contours, ref hierarchy);
 
-        MeshDrawer.Clear();
-
+        List<Shadow> shadows = new List<Shadow>();
         foreach (MatOfPoint c in contours)
         {
-            Point center = FindCenter(c);
+            Point center = MyUtils.FindCenter(c);
             double area = Imgproc.contourArea(c);
             if (area > 100)
             {
@@ -113,86 +108,23 @@ public class CameraBasedShadowDetector : ShadowDetector
                 double p = Imgproc.arcLength(curve, true);
                 Imgproc.approxPolyDP(curve, approx, epsilon * p, true);
 
-                List<Point> points = MergeList(new MatOfPoint(approx.toArray()), center);
+                Point[] points = approx.toArray();
                 SetOffset(ref points);
-                Shadow shadow = new Shadow(PointToVector3(points));
-                MeshDrawer.Draw(shadow);
+                Shadow shadow = new Shadow(MyUtils.PointToVector2(points));
+                shadows.Add(shadow);
             }
         }
+        MeshDrawer.Clear();
+        MeshDrawer.Draw(shadows);
     }
 
-    private Mat ConvertToGrayscale(Mat src)
+    private void SetOffset(ref Point[] points)
     {
-        Mat result = new Mat();
-        Imgproc.cvtColor(src, result, Imgproc.COLOR_BGR2GRAY);
-        return result;
-    }
-
-    private Mat Threshold(Mat src, int threshold, int max)
-    {
-        Mat result = new Mat();
-        Imgproc.threshold(src, result, threshold, max, Imgproc.THRESH_BINARY);
-        return result;
-    }
-
-    private Mat AbsDiff(Mat srcA, Mat srcB)
-    {
-        Mat result = new Mat();
-        Core.absdiff(srcA, srcB, result);
-        return result;
-    }
-
-    private Mat GaussianBlur(Mat src, Size ksize, double sigmaX)
-    {
-        Mat result = new Mat();
-        Imgproc.GaussianBlur(src, result, ksize, sigmaX);
-        return result;
-    }
-
-    private void FindContours(Mat src, ref List<MatOfPoint> contours, ref Mat hierarchy)
-    {
-        Imgproc.findContours(src, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
-    }
-
-    private Point FindCenter(MatOfPoint contour)
-    {
-        Moments m = Imgproc.moments(contour);
-        return new Point((int)(m.m10 / m.m00), (int)(m.m01 / m.m00));
-    }
-
-    private void DrawContours(ref Mat src, List<MatOfPoint> contours, int i)
-    {
-        Imgproc.drawContours(src, contours, i, new Scalar(255, 0, 0), 3);
-    }
-
-    private void DrawCircle(ref Mat src, Point point)
-    {
-        Imgproc.circle(src, point, 7, new Scalar(255, 0, 0), -1);
-    }
-
-    private List<Point> MergeList(MatOfPoint contour, Point point)
-    {
-        List<Point> points = contour.toList();
-        points.Insert(0, point);
-
-        return points;
-    }
-
-    private void SetOffset(ref List<Point> points)
-    {
-        for (int i = 0; i < points.Count; i++)
+        for (int i = 0; i < points.Length; i++)
         {
             points[i].x -= width / 2;
             points[i].y *= -1;
             points[i].y += height / 2;
         }
-    }
-
-    private List<Vector3> PointToVector3(List<Point> points)
-    {
-        List<Vector3> vector3 = new List<Vector3>();
-        for (int i = 0; i < points.Count; i++)
-            vector3.Add(new Vector3((float)points[i].x, (float)points[i].y, 0));
-        return vector3;
     }
 }

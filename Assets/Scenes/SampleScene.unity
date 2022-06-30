@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409aa431329fc4748848e5ab01992a8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shadowObjectPrefab: {fileID: 8260767198521068925, guid: d610cad55edd09841aff874268c276a6, type: 3}
 --- !u!4 &371874099
 Transform:
   m_ObjectHideFlags: 0
