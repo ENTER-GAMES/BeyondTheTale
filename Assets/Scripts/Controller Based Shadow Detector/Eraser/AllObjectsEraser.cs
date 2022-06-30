@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class AllObjectsEraser : Eraser
 {
-    protected override DrawedShadowObject[] Raycast(Vector2 startPosition)
+    protected override ControllerBasedShadowObject[] Raycast(Vector2 startPosition)
     {
         Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(startPosition, int.MaxValue, targetLayerMask);
 
-        List<DrawedShadowObject> drawedShadowObjects = new List<DrawedShadowObject>();
+        List<ControllerBasedShadowObject> shadowObjects = new List<ControllerBasedShadowObject>();
 
         foreach (Collider2D col in collider2Ds)
-            if (col.TryGetComponent<DrawedShadowObject>(out DrawedShadowObject drawedShadowObj))
-                drawedShadowObjects.Add(drawedShadowObj);
+            if (col.TryGetComponent<ControllerBasedShadowObject>(out ControllerBasedShadowObject shadowObject))
+                shadowObjects.Add(shadowObject);
 
-        return drawedShadowObjects.ToArray();
+        return shadowObjects.ToArray();
     }
 }

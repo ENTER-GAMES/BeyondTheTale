@@ -9,11 +9,9 @@ public class Selector : ControllerBasedShadowDetectorTool
     [SerializeField]
     private Mode currentMode = Mode.Select;
 
-    [Header("Select")]
-    [SerializeField]
-    private LayerMask targetLayerMask;
-    [SerializeField]
-    private List<DrawedShadowObject> selectedDrawedShadowObjects = new List<DrawedShadowObject>();
+    // 선택된 그림자 오브젝트 리스트
+    private List<ControllerBasedShadowObject> selectedShadowObjects
+        = new List<ControllerBasedShadowObject>();
 
     private Vector2 lastMouseWorldPosition;
 
@@ -91,24 +89,24 @@ public class Selector : ControllerBasedShadowDetectorTool
 
         if (currentMode == Mode.Select)
         {
-            DrawedShadowObject drawedShadowObj = Raycast(mouseWorldPos);
-            Select(drawedShadowObj);
+            ControllerBasedShadowObject shadowObject = Raycast(mouseWorldPos);
+            Select(shadowObject);
         }
     }
 
-    private DrawedShadowObject Raycast(Vector2 startPosition)
+    private ControllerBasedShadowObject Raycast(Vector2 startPosition)
     {
         RaycastHit2D hit = Physics2D.Raycast(startPosition, Vector2.zero, int.MaxValue, targetLayerMask);
 
         if (hit.collider == null) return null;
 
-        if (hit.collider.TryGetComponent<DrawedShadowObject>(out DrawedShadowObject drawedShadowObject))
-            return drawedShadowObject;
+        if (hit.collider.TryGetComponent<ControllerBasedShadowObject>(out ControllerBasedShadowObject shadowObject))
+            return shadowObject;
         else
             return null;
     }
 
-    private void Select(DrawedShadowObject item)
+    private void Select(ControllerBasedShadowObject item)
     {
         // 빈 공간 클릭하면
         if (item == null)
@@ -122,17 +120,17 @@ public class Selector : ControllerBasedShadowDetectorTool
         if (isMultiSelectable)
         {
             // 이미 선택되어 있던 그림자일 경우
-            if (selectedDrawedShadowObjects.Contains(item))
+            if (selectedShadowObjects.Contains(item))
             {
                 // 해당 그림자만 제외
-                selectedDrawedShadowObjects.Remove(item);
+                selectedShadowObjects.Remove(item);
                 item.Deselect();
                 item.transform.parent = transform.root;
             }
             else
             {
                 // 해당 그림자 추가
-                selectedDrawedShadowObjects.Add(item);
+                selectedShadowObjects.Add(item);
                 item.Select();
             }
         }
@@ -141,33 +139,33 @@ public class Selector : ControllerBasedShadowDetectorTool
         {
             // 해당 그림자만 선택
             Clear();
-            selectedDrawedShadowObjects.Add(item);
+            selectedShadowObjects.Add(item);
             item.Select();
         }
 
         // 중앙 설정
-        foreach (DrawedShadowObject obj in selectedDrawedShadowObjects)
+        foreach (ControllerBasedShadowObject obj in selectedShadowObjects)
             obj.transform.parent = transform.root;
 
         transform.position = FindCenterOfSelcetedItems();
         transform.rotation = Quaternion.Euler(0, 0, 0);
         transform.localScale = Vector3.one;
 
-        foreach (DrawedShadowObject obj in selectedDrawedShadowObjects)
+        foreach (ControllerBasedShadowObject obj in selectedShadowObjects)
             obj.transform.parent = this.transform;
     }
 
     private void Clear()
     {
         // 선택 취소
-        foreach (DrawedShadowObject obj in selectedDrawedShadowObjects)
+        foreach (ControllerBasedShadowObject obj in selectedShadowObjects)
         {
             obj.Deselect();
             obj.transform.parent = transform.root;
         }
 
         // 리스트 초기화
-        selectedDrawedShadowObjects.Clear();
+        selectedShadowObjects.Clear();
 
         return;
     }
@@ -177,7 +175,7 @@ public class Selector : ControllerBasedShadowDetectorTool
         Vector3 min = new Vector3(int.MaxValue, int.MaxValue, 0);
         Vector3 max = new Vector3(int.MinValue, int.MinValue, 0);
 
-        foreach (DrawedShadowObject obj in selectedDrawedShadowObjects)
+        foreach (ControllerBasedShadowObject obj in selectedShadowObjects)
         {
             Vector2 curMin = obj.Bounds.min;
             Vector2 curMax = obj.Bounds.max;

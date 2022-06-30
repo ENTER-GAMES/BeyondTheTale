@@ -5,7 +5,7 @@ using UnityEngine;
 public class PointBasedDrawer : Drawer
 {
     [SerializeField]
-    private GameObject drawedShadowObjectPointPrefab;                   // 그림자 오브젝트 포인트 프리팹
+    private GameObject pointPrefab;                                     // 그림자 오브젝트 포인트 프리팹
     private List<GameObject> pointObjects = new List<GameObject>();     // 그림자 오브젝트 포인트 리스트
     private List<Vector3> points = new List<Vector3>();                 // 포인트 좌표 리스트
 
@@ -64,20 +64,20 @@ public class PointBasedDrawer : Drawer
     {
         base.OnMouseUp(mousePosition, mouseIndex);
 
-        CreateDrawedShadowObject();
+        CreateShadow();
     }
 
     private void CreatePoint(Vector3 position)
     {
         points.Add(position);
 
-        GameObject pointObject = Instantiate(drawedShadowObjectPointPrefab, position, Quaternion.identity);
+        GameObject pointObject = Instantiate(pointPrefab, position, Quaternion.identity);
         pointObjects.Add(pointObject);
 
         lastAddPointTime = Time.time;
     }
 
-    private void CreateDrawedShadowObject()
+    private void CreateShadow()
     {
         Shadow shadow = new Shadow(new List<Vector3>(points));
 

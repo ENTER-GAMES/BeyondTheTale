@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class OneObjectEraser : Eraser
 {
-    protected override DrawedShadowObject[] Raycast(Vector2 startPosition)
+    protected override ControllerBasedShadowObject[] Raycast(Vector2 startPosition)
     {
         RaycastHit2D hit = Physics2D.Raycast(startPosition, Vector2.zero, int.MaxValue, targetLayerMask);
 
-        if (hit.collider == null) return new DrawedShadowObject[0];
+        if (hit.collider == null) return new ControllerBasedShadowObject[0];
 
-        if (hit.collider.TryGetComponent<DrawedShadowObject>(out DrawedShadowObject drawedShadowObject))
-            return new DrawedShadowObject[1] { drawedShadowObject };
+        if (hit.collider.TryGetComponent<ControllerBasedShadowObject>(out ControllerBasedShadowObject shadowObject))
+            return new ControllerBasedShadowObject[1] { shadowObject };
         else
-            return new DrawedShadowObject[0];
+            return new ControllerBasedShadowObject[0];
     }
 }

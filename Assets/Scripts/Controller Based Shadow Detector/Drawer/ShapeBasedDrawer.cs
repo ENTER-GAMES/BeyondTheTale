@@ -9,7 +9,7 @@ public class ShapeBasedDrawer : Drawer
     private GameObject currentRect;       // 현재 그려지고 있는 그림자 오브젝트 
 
     private Vector3 startDrawPosition;          // 그리기 시작한 위치 (월드)
-    private bool startDraw = false;
+    private bool startDraw = false;             // 그리기 시작했는지 여부
 
     public override void Select()
     {
@@ -63,16 +63,21 @@ public class ShapeBasedDrawer : Drawer
 
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        DeleteRect();
+        CreateShadow(mouseWorldPos);
+    }
 
+    private void CreateShadow(Vector3 endDrawPosition)
+    {
         Shadow shadow = new Shadow(new List<Vector3>(){
             new Vector3(startDrawPosition.x, startDrawPosition.y, 0),
-            new Vector3(startDrawPosition.x, mouseWorldPos.y, 0),
-            new Vector3(mouseWorldPos.x, mouseWorldPos.y, 0),
-            new Vector3(mouseWorldPos.x, startDrawPosition.y, 0)
+            new Vector3(startDrawPosition.x, endDrawPosition.y, 0),
+            new Vector3(endDrawPosition.x, endDrawPosition.y, 0),
+            new Vector3(endDrawPosition.x, startDrawPosition.y, 0)
         });
 
         detector?.AddShadow(shadow);
+
+        DeleteRect();
     }
 
     private void DeleteRect()

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1663077842957930128}
   - component: {fileID: 6141813761310551897}
   m_Layer: 30
-  m_Name: Drawed Shadow Object
+  m_Name: Controller Based Shadow Object
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

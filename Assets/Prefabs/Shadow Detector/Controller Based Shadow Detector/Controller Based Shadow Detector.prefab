@@ -497,12 +497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e3e35e3aefd48f9b22ac18b72b5aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSelected: 1
+  isSelected: 0
   currentMode: 0
-  targetLayerMask:
-    serializedVersion: 2
-    m_Bits: 1073741824
-  selectedDrawedShadowObjects: []
   selectModeKey: 113
   moveModeKey: 119
   rotateModeKey: 101
@@ -847,7 +843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSelected: 0
-  drawedShadowObjectPointPrefab: {fileID: 6275056420489419896, guid: ce757acc8c877414e88d9cda28e57e5d, type: 3}
+  pointPrefab: {fileID: 6275056420489419896, guid: ce757acc8c877414e88d9cda28e57e5d, type: 3}
   addPointDeltaTime: 0.05
   deleteAllPointsKey: 8
 --- !u!1 &743877210
@@ -1087,9 +1083,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSelected: 0
-  targetLayerMask:
-    serializedVersion: 2
-    m_Bits: 1073741824
 --- !u!1 &1125162073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1705,9 +1698,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSelected: 0
-  targetLayerMask:
-    serializedVersion: 2
-    m_Bits: 1073741824
 --- !u!1 &1786288219
 GameObject:
   m_ObjectHideFlags: 0
@@ -2048,6 +2038,9 @@ MonoBehaviour:
   - {fileID: 750614564}
   - {fileID: 882969559}
   - {fileID: 1620141042}
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 1073741824
   shadows: []
 --- !u!114 &1020509994210423016
 MonoBehaviour:

@@ -10,6 +10,9 @@ public class ControllerBasedShadowDetector : ShadowDetector
     private ControllerBasedShadowDetectorTool[] tools;
     private ControllerBasedShadowDetectorTool currentTool;
 
+    [SerializeField]
+    private LayerMask targetLayerMask;
+
     [Header("@Debug: Shadows")]
     [SerializeField]
     private List<Shadow> shadows = new List<Shadow>();
@@ -28,7 +31,7 @@ public class ControllerBasedShadowDetector : ShadowDetector
     {
         foreach (ControllerBasedShadowDetectorTool tool in tools)
         {
-            tool.Init(this);
+            tool.Init(this, targetLayerMask);
         }
     }
 

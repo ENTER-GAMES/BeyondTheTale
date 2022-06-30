@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DrawedShadowObject : ShadowObject
+public class ControllerBasedShadowObject : ShadowObject
 {
     public Bounds Bounds => polygonCollider2D.bounds;
 
