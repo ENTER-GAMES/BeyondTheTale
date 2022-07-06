@@ -7,30 +7,30 @@ public static class MyUtils
 {
     public static Mat ConvertToGrayscale(Mat src)
     {
-        Mat result = new Mat();
-        Imgproc.cvtColor(src, result, Imgproc.COLOR_BGR2GRAY);
-        return result;
+        Mat dst = new Mat();
+        Imgproc.cvtColor(src, dst, Imgproc.COLOR_BGR2GRAY);
+        return dst;
     }
 
     public static Mat Threshold(Mat src, int threshold, int max)
     {
-        Mat result = new Mat();
-        Imgproc.threshold(src, result, threshold, max, Imgproc.THRESH_BINARY);
-        return result;
+        Mat dst = new Mat();
+        Imgproc.threshold(src, dst, threshold, max, Imgproc.THRESH_BINARY_INV);
+        return dst;
     }
 
     public static Mat AbsDiff(Mat srcA, Mat srcB)
     {
-        Mat result = new Mat();
-        Core.absdiff(srcA, srcB, result);
-        return result;
+        Mat dst = new Mat();
+        Core.absdiff(srcA, srcB, dst);
+        return dst;
     }
 
     public static Mat GaussianBlur(Mat src, Size ksize, double sigmaX)
     {
-        Mat result = new Mat();
-        Imgproc.GaussianBlur(src, result, ksize, sigmaX);
-        return result;
+        Mat dst = new Mat();
+        Imgproc.GaussianBlur(src, dst, ksize, sigmaX);
+        return dst;
     }
 
     public static void FindContours(Mat src, ref List<MatOfPoint> contours, ref Mat hierarchy)
@@ -46,12 +46,12 @@ public static class MyUtils
 
     public static void DrawContours(ref Mat src, List<MatOfPoint> contours, int i)
     {
-        Imgproc.drawContours(src, contours, i, new Scalar(255, 0, 0), 3);
+        Imgproc.drawContours(src, contours, i, new Scalar(255, 0, 0, 255), 3);
     }
 
     public static void DrawCircle(ref Mat src, Point point)
     {
-        Imgproc.circle(src, point, 7, new Scalar(255, 0, 0), -1);
+        Imgproc.circle(src, point, 20, new Scalar(255, 0, 0, 255), -1);
     }
 
     public static Vector2[] PointToVector2(Point[] points)
@@ -62,5 +62,31 @@ public static class MyUtils
             vectors[i] = new Vector2((float)points[i].x, (float)points[i].y);
 
         return vectors;
+    }
+
+    public static Mat Add(Mat src1, Mat src2)
+    {
+        Mat dst = new Mat();
+        Core.add(src1, src2, dst);
+        return dst;
+    }
+
+    public static Mat Subtract(Mat src1, Mat src2)
+    {
+        Mat dst = new Mat();
+        Core.subtract(src1, src2, dst);
+        return dst;
+    }
+
+    public static Mat GetPerspectiveTransform(Mat src, Mat dst)
+    {
+        return Imgproc.getPerspectiveTransform(src, dst);
+    }
+
+    public static Mat WarpPerspective(Mat src, Mat M, Size dsize)
+    {
+        Mat dst = new Mat();
+        Imgproc.warpPerspective(src, dst, M, dsize);
+        return dst;
     }
 }
