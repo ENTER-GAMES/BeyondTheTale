@@ -9,9 +9,9 @@ using UnityEngine;
 [System.Serializable]
 public class CameraBasedPoint
 {
-    [Range(0, 640)]
+    [Range(0, 1920)]
     public double x;
-    [Range(0, 480)]
+    [Range(0, 1080)]
     public double y;
 
     public Point Get()
@@ -59,6 +59,10 @@ public class CameraBasedShadowDetector : ShadowDetector
     private double epsilon = 0.001f;
     [SerializeField]
     private bool useApprox = true;
+    [SerializeField]
+    private bool draw = false;
+    [SerializeField]
+    private bool view = true;
     [SerializeField]
     private CameraBasedPoint[] cameraBasedPoints = new CameraBasedPoint[4];
 
@@ -147,41 +151,48 @@ public class CameraBasedShadowDetector : ShadowDetector
         Core.split(add, split);
         Mat gray = MyUtils.ConvertToGrayscale(add);
         Mat result = MyUtils.Threshold(gray, threshold, 255);
-        Mat hierarchy = new Mat();
-        List<MatOfPoint> contours = new List<MatOfPoint>();
-        MyUtils.FindContours(result, ref contours, ref hierarchy);
 
-        List<Shadow> shadows = new List<Shadow>();
-        foreach (MatOfPoint c in contours)
+        if (draw)
         {
-            double area = Imgproc.contourArea(c);
-            if (area > 1000)
+            Mat hierarchy = new Mat();
+            List<MatOfPoint> contours = new List<MatOfPoint>();
+            MyUtils.FindContours(result, ref contours, ref hierarchy);
+
+            List<Shadow> shadows = new List<Shadow>();
+            foreach (MatOfPoint c in contours)
             {
-                Point[] points = c.toArray();
-                if (useApprox)
+                double area = Imgproc.contourArea(c);
+                if (area > 1000)
                 {
-                    MatOfPoint2f curve = new MatOfPoint2f(c.toArray());
-                    MatOfPoint2f approx = new MatOfPoint2f();
-                    double p = Imgproc.arcLength(curve, true);
-                    Imgproc.approxPolyDP(curve, approx, epsilon * p, true);
+                    Point[] points = c.toArray();
+                    if (useApprox)
+                    {
+                        MatOfPoint2f curve = new MatOfPoint2f(c.toArray());
+                        MatOfPoint2f approx = new MatOfPoint2f();
+                        double p = Imgproc.arcLength(curve, true);
+                        Imgproc.approxPolyDP(curve, approx, epsilon * p, true);
 
-                    points = approx.toArray();
+                        points = approx.toArray();
+                    }
+                    SetOffset(ref points);
+                    Shadow shadow = new Shadow(MyUtils.PointToVector2(points));
+                    shadows.Add(shadow);
                 }
-                SetOffset(ref points);
-                Shadow shadow = new Shadow(MyUtils.PointToVector2(points));
-                shadows.Add(shadow);
             }
+            MeshDrawer.Clear();
+            MeshDrawer.Draw(shadows);
         }
-        MeshDrawer.Clear();
-        MeshDrawer.Draw(shadows);
 
-        Utils.matToTexture2D(src, textureSrc, colors);
-        Utils.matToTexture2D(split[0], textureR, colors);
-        Utils.matToTexture2D(split[1], textureG, colors);
-        Utils.matToTexture2D(split[2], textureB, colors);
-        Utils.matToTexture2D(frame, textureFrame, colors);
-        Utils.matToTexture2D(gray, textureGray, colors);
-        Utils.matToTexture2D(result, textureThr, colors);
+        if (view)
+        {
+            Utils.matToTexture2D(src, textureSrc, colors);
+            Utils.matToTexture2D(split[0], textureR, colors);
+            Utils.matToTexture2D(split[1], textureG, colors);
+            Utils.matToTexture2D(split[2], textureB, colors);
+            Utils.matToTexture2D(frame, textureFrame, colors);
+            Utils.matToTexture2D(gray, textureGray, colors);
+            Utils.matToTexture2D(result, textureThr, colors);
+        }
     }
 
     private void SetOffset(ref Point[] points)
