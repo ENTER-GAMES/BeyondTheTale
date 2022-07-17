@@ -8,8 +8,6 @@ public class SpotLight2DTrigger : MonoBehaviour
 {
     private Light2D light2D;
     [SerializeField]
-    private Transform forwardDirectionTransform;
-    [SerializeField]
     private LayerMask targetLayerMask;
     [SerializeField]
     private float rayDeltaAngle = 5f;
@@ -17,9 +15,26 @@ public class SpotLight2DTrigger : MonoBehaviour
 
     private bool init = false;
 
+    private List<Collider2D> targetCollider2Ds = new List<Collider2D>();
+
+    #region Gizmos
     [Header("@Debug: Draw Gizmos")]
     [SerializeField]
     private bool drawGizmos = false;
+    private List<GizmoInfo> gizmoInfos = new List<GizmoInfo>();
+
+    private class GizmoInfo
+    {
+        public Vector3 endPoint;
+        public bool hit;
+
+        public GizmoInfo(Vector3 endPoint, bool hit)
+        {
+            this.endPoint = endPoint;
+            this.hit = hit;
+        }
+    }
+    #endregion
 
     private void Start()
     {
@@ -45,25 +60,34 @@ public class SpotLight2DTrigger : MonoBehaviour
 
     private void Update()
     {
-        Collider2D collider2D = Raycast();
+        bool hit = Raycast(ref targetCollider2Ds, gizmoInfos);
 
-        if (collider2D == null) return;
+        if (!hit) return;
 
-        if (collider2D.TryGetComponent<ISpotLight2DTarget>(out ISpotLight2DTarget target))
+        foreach (Collider2D col in targetCollider2Ds)
         {
-            target.OnHitBySpotLight2D();
+            // 충돌된 오브젝트가 ISpotLight2DTarget 구현체라면 트리거
+            if (col.TryGetComponent<ISpotLight2DTarget>(out ISpotLight2DTarget target))
+            {
+                target.OnHitBySpotLight2D();
+            }
         }
     }
 
-    private Collider2D Raycast(bool drawGizmos = false)
+    private bool Raycast(ref List<Collider2D> result, List<GizmoInfo> gizmoInfos = null)
     {
+        bool flag = false;  // 충돌 여부
+
+        result.Clear();
+        gizmoInfos?.Clear();
+
         float startAngle = -(light2D.pointLightInnerAngle / 2);
         float rayDistance = light2D.pointLightOuterRadius;
 
         for (int i = 0; i < rayCount; i++)
         {
             // 기준(시작) 각도 (standardAngle)
-            Vector3 directionPoint = forwardDirectionTransform.position;
+            Vector3 directionPoint = transform.position + transform.up;
             Vector2 standardDir = directionPoint - transform.position;
             float standardAngle = Mathf.Atan2(standardDir.y, standardDir.x) * Mathf.Rad2Deg;
             standardAngle = (standardAngle + startAngle + 360) % 360;
@@ -74,38 +98,39 @@ public class SpotLight2DTrigger : MonoBehaviour
             Vector2 rayDir = new Vector2(Mathf.Cos(theta), Mathf.Sin(theta));
             rayDir.Normalize();
 
-            // 충돌 확인
+            // 레이 발사
             RaycastHit2D hit2D = Physics2D.Raycast(transform.position, rayDir, rayDistance, targetLayerMask);
+            Collider2D targetCol = hit2D.collider;
 
             // 충돌했을 경우
-            if (hit2D != null && hit2D.collider != null)
+            if (targetCol != null)
             {
-                if (drawGizmos)
-                {
-                    Gizmos.color = Color.red;
-                    Gizmos.DrawLine(transform.position, hit2D.centroid);
-                }
-                return hit2D.collider;
+                flag = true;
+
+                if (!result.Contains(targetCol))
+                    result.Add(targetCol);
+
+                gizmoInfos?.Add(new GizmoInfo(hit2D.centroid, true));
             }
             // 충돌하지 않았을 경우
             else
             {
-                if (drawGizmos)
-                {
-                    Gizmos.color = Color.blue;
-                    Gizmos.DrawLine(transform.position, transform.position + (Vector3)rayDir * rayDistance);
-                }
+                gizmoInfos?.Add(new GizmoInfo(transform.position + (Vector3)rayDir * rayDistance, false));
             }
         }
 
-        return null;
+        return flag;
     }
 
     private void OnDrawGizmos()
     {
-        if (!drawGizmos || !init) return;
+        if (!drawGizmos) return;
 
-        Raycast(true);
+        foreach (GizmoInfo info in gizmoInfos)
+        {
+            Gizmos.color = info.hit ? Color.red : Color.blue;
+            Gizmos.DrawLine(transform.position, info.endPoint);
+        }
     }
 }
 
