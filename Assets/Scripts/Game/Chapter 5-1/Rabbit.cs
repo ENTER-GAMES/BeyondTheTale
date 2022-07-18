@@ -7,5 +7,10 @@ namespace Chapter_5_1
 {
     public class Rabbit : Character
     {
+        public override void Complete()
+        {
+            // 멈춤
+            Turn(Vector3.zero);
+        }
     }
 }

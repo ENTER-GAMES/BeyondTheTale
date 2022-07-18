@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Chapter_5_1
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    public class Character : MonoBehaviour, IJumpable, ITurnable
+    public class Character : MonoBehaviour, IJumpable, ITurnable, ICompletable
     {
         protected Vector3 spawnPosition;
         [SerializeField]
@@ -21,7 +21,7 @@ namespace Chapter_5_1
         protected new Rigidbody2D rigidbody2D;
         #endregion
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             rigidbody2D = GetComponent<Rigidbody2D>();
             spawnPosition = transform.position;
@@ -61,6 +61,8 @@ namespace Chapter_5_1
         {
             this.moveDirection = moveDirection;
         }
+
+        public virtual void Complete() { }
 
         protected void OnCollisionEnter2D(Collision2D other)
         {
