@@ -11,6 +11,8 @@ namespace Chapter_5_1
         protected override void Awake()
         {
             base.Awake();
+
+            // 처음에는 멈춰있도록 설정
             moveDirection = Vector3.zero;
         }
 
@@ -21,6 +23,7 @@ namespace Chapter_5_1
 
         public void OnHitBySpotLight2D()
         {
+            // 빛에 맞으면 재시작
             Restart();
         }
 

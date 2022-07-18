@@ -23,10 +23,10 @@ public class SpotLight2DTrigger : MonoBehaviour
     private bool drawGizmos = false;
     private List<GizmoInfo> gizmoInfos = new List<GizmoInfo>();
 
-    private class GizmoInfo
+    private struct GizmoInfo
     {
-        public Vector3 endPoint;
-        public bool hit;
+        public Vector3 endPoint;    // Ray가 끝나는 위치
+        public bool hit;            // 물체가 맞았는지 여부
 
         public GizmoInfo(Vector3 endPoint, bool hit)
         {
@@ -36,10 +36,15 @@ public class SpotLight2DTrigger : MonoBehaviour
     }
     #endregion
 
-    private void Start()
+    private void Awake()
     {
         light2D = GetComponent<Light2D>();
+    }
 
+    private void Start()
+    {
+        // Light2D 컴포넌트가 Point(Spot) 타입인지 검사
+        // 아니면 해당 컴포넌트 비활성화
         if (light2D.lightType != Light2D.LightType.Point)
         {
             Debug.LogError($"SpotLight2DTrigger: {this.gameObject.name}.Light2D의 LightType이 Point(Spot)이 아닙니다.");
