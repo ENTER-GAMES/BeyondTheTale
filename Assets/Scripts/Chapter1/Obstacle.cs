@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace BeyondTheTale.Chapter1
 {
@@ -9,7 +8,8 @@ namespace BeyondTheTale.Chapter1
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                transform.parent.position = Vector3.zero;
+                collision.transform.position = Vector3.zero;
             }
         }
     }

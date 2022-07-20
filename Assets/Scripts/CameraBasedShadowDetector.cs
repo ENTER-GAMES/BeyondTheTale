@@ -121,12 +121,34 @@ public class CameraBasedShadowDetector : ShadowDetector
 
     private void Update()
     {
-        Utils.webCamTextureToMat(webCamTexture, frame, colors);
-        Run();
+        if (webCamTexture.isPlaying && webCamTexture.didUpdateThisFrame)
+        {
+            Utils.webCamTextureToMat(webCamTexture, frame, colors);
+            Run();
+        }
     }
 
     private void Run()
     {
+        Mat src = PerspectiveTransform();
+
+        Mat rgb = new Mat(height, width, CvType.CV_8UC4, new Scalar(r, g, b, 0));
+        Mat add = CVUtils.Add(src, rgb);
+        rgb = new Mat(height, width, CvType.CV_8UC4, new Scalar(r * -1, g * -1, b * -1, 0));
+        add = CVUtils.Subtract(add, rgb);
+        List<Mat> split = new List<Mat>();
+        Core.split(add, split);
+        Mat gray = CVUtils.ConvertToGrayscale(add);
+        Mat result = CVUtils.Threshold(gray, threshold, 255);
+
+        DrawMesh(result);
+        ShowDisplay(src, split[0], split[1], split[2], frame, gray, result);
+    }
+
+    private Mat PerspectiveTransform()
+    {
+        DrawPerspectivePoint();
+
         Mat pts1 = new Mat(4, 1, CvType.CV_32FC2);
         Mat pts2 = new Mat(4, 1, CvType.CV_32FC2);
         pts1.put(0, 0, cameraBasedPoints[0].Get().x, cameraBasedPoints[0].Get().y,
@@ -135,60 +157,67 @@ public class CameraBasedShadowDetector : ShadowDetector
                        cameraBasedPoints[3].Get().x, cameraBasedPoints[3].Get().y);
         pts2.put(0, 0, 0.0, 0.0, width, 0.0, 0.0, height, width, height);
 
-        Mat mtrx = MyUtils.GetPerspectiveTransform(pts1, pts2);
-        Mat src = MyUtils.WarpPerspective(frame, mtrx, new Size(width, height));
+        Mat mtrx = CVUtils.GetPerspectiveTransform(pts1, pts2);
+        return CVUtils.WarpPerspective(frame, mtrx, new Size(width, height));
+    }
 
+    private void DrawPerspectivePoint()
+    {
         for (int i = 0; i < cameraBasedPoints.Length; i++)
-        {
-            MyUtils.DrawCircle(ref frame, cameraBasedPoints[i].Get());
-        }
+            CVUtils.DrawCircle(ref frame, cameraBasedPoints[i].Get());
+    }
 
-        Mat rgb = new Mat(height, width, CvType.CV_8UC4, new Scalar(r, g, b, 0));
-        Mat add = MyUtils.Add(src, rgb);
-        rgb = new Mat(height, width, CvType.CV_8UC4, new Scalar(r * -1, g * -1, b * -1, 0));
-        add = MyUtils.Subtract(add, rgb);
-        List<Mat> split = new List<Mat>();
-        Core.split(add, split);
-        Mat gray = MyUtils.ConvertToGrayscale(add);
-        Mat result = MyUtils.Threshold(gray, threshold, 255);
-
+    private void DrawMesh(Mat src)
+    {
         if (draw)
         {
-            Mat hierarchy = new Mat();
-            List<MatOfPoint> contours = new List<MatOfPoint>();
-            MyUtils.FindContours(result, ref contours, ref hierarchy);
+            List<MatOfPoint> contours = CVUtils.FindContours(src);
+            List<Shadow> shadows = FindShadow(contours);
 
-            List<Shadow> shadows = new List<Shadow>();
-            foreach (MatOfPoint c in contours)
-            {
-                double area = Imgproc.contourArea(c);
-                if (area > 1000)
-                {
-                    Point[] points = c.toArray();
-                    if (useApprox)
-                    {
-                        MatOfPoint2f curve = new MatOfPoint2f(c.toArray());
-                        MatOfPoint2f approx = new MatOfPoint2f();
-                        double p = Imgproc.arcLength(curve, true);
-                        Imgproc.approxPolyDP(curve, approx, epsilon * p, true);
-
-                        points = approx.toArray();
-                    }
-                    SetOffset(ref points);
-                    Shadow shadow = new Shadow(MyUtils.PointToVector2(points));
-                    shadows.Add(shadow);
-                }
-            }
             MeshDrawer.Clear();
             MeshDrawer.Draw(shadows);
         }
+    }
 
+    private List<Shadow> FindShadow(List<MatOfPoint> contours)
+    {
+        List<Shadow> shadows = new List<Shadow>();
+        foreach (MatOfPoint c in contours)
+        {
+            double area = Imgproc.contourArea(c);
+            if (area > 1000)
+            {
+                Point[] points = c.toArray();
+                if (useApprox)
+                    points = Approx(points);
+
+                SetOffset(ref points);
+                Shadow shadow = new Shadow(CVUtils.PointToVector2(points));
+                shadows.Add(shadow);
+            }
+        }
+
+        return shadows;
+    }
+
+    private Point[] Approx(Point[] points)
+    {
+        MatOfPoint2f curve = new MatOfPoint2f(points);
+        MatOfPoint2f approx = new MatOfPoint2f();
+        double p = Imgproc.arcLength(curve, true);
+        Imgproc.approxPolyDP(curve, approx, epsilon * p, true);
+
+        return approx.toArray();
+    }
+
+    private void ShowDisplay(Mat src, Mat r, Mat g, Mat b, Mat frame, Mat gray, Mat result)
+    {
         if (view)
         {
             Utils.matToTexture2D(src, textureSrc, colors);
-            Utils.matToTexture2D(split[0], textureR, colors);
-            Utils.matToTexture2D(split[1], textureG, colors);
-            Utils.matToTexture2D(split[2], textureB, colors);
+            Utils.matToTexture2D(r, textureR, colors);
+            Utils.matToTexture2D(g, textureG, colors);
+            Utils.matToTexture2D(b, textureB, colors);
             Utils.matToTexture2D(frame, textureFrame, colors);
             Utils.matToTexture2D(gray, textureGray, colors);
             Utils.matToTexture2D(result, textureThr, colors);
@@ -199,9 +228,12 @@ public class CameraBasedShadowDetector : ShadowDetector
     {
         for (int i = 0; i < points.Length; i++)
         {
-            points[i].x -= width / 2;
-            points[i].y *= -1;
-            points[i].y += height / 2;
+            float x = (float)points[i].x * (Screen.width / width);
+            float y = Screen.height - (float)points[i].y * (Screen.height / height);
+            Vector3 point = new Vector3(x, y, 0);
+            Vector3 pos = Camera.main.ScreenToWorldPoint(point);
+            points[i].x = pos.x;
+            points[i].y = pos.y;
         }
     }
 }

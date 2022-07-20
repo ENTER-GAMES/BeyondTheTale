@@ -3,7 +3,7 @@ using OpenCVForUnity.ImgprocModule;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class MyUtils
+public static class CVUtils
 {
     public static Mat ConvertToGrayscale(Mat src)
     {
@@ -36,6 +36,14 @@ public static class MyUtils
     public static void FindContours(Mat src, ref List<MatOfPoint> contours, ref Mat hierarchy)
     {
         Imgproc.findContours(src, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+    }
+
+    public static List<MatOfPoint> FindContours(Mat src)
+    {
+        Mat hierarchy = new Mat();
+        List<MatOfPoint> contours = new List<MatOfPoint>();
+        Imgproc.findContours(src, contours, hierarchy, Imgproc.RETR_EXTERNAL, Imgproc.CHAIN_APPROX_SIMPLE);
+        return contours;
     }
 
     public static Point FindCenter(MatOfPoint contour)
