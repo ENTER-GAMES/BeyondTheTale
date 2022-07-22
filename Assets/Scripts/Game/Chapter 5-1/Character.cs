@@ -18,6 +18,8 @@ namespace Chapter_5_1
         protected bool isGround = false;                    // 바닥에 닿았는지 여부
 
         protected new Rigidbody2D rigidbody2D;
+        [SerializeField]
+        protected CharacterAnimator characterAnimator;
 
         protected virtual void Awake()
         {
@@ -36,6 +38,8 @@ namespace Chapter_5_1
             float moveSpeed = isJumping ? moveSpeedDuringJump : this.moveSpeed;
             Vector2 moveAmount = moveDirection * moveSpeed;
             rigidbody2D.velocity = new Vector2(moveAmount.x, rigidbody2D.velocity.y);
+
+            characterAnimator?.SetVelocity(rigidbody2D.velocity);
         }
         #endregion
 
@@ -58,6 +62,8 @@ namespace Chapter_5_1
 
             // 점프
             rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+            characterAnimator?.Jump();
         }
         #endregion
 
@@ -81,6 +87,8 @@ namespace Chapter_5_1
             {
                 isGround = true;
                 isJumping = false;
+
+                characterAnimator?.Land();
             }
         }
 
