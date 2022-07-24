@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class ShadowObject : MonoBehaviour
 {
-    private Shadow shadow;
+    protected Shadow shadow;
+    public Shadow Shadow => shadow;
     [SerializeField]
-    private MeshFilter meshFilter;
+    protected MeshFilter meshFilter;
     [SerializeField]
-    private PolygonCollider2D polygonCollider2D;
+    protected PolygonCollider2D polygonCollider2D;
 
     public void Init(Shadow shadow)
     {
