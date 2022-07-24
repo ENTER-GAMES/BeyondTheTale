@@ -9,9 +9,9 @@ using UnityEngine;
 [System.Serializable]
 public class CameraBasedPoint
 {
-    [Range(0, 1920)]
+    [Range(0, 640)]
     public double x;
-    [Range(0, 1080)]
+    [Range(0, 360)]
     public double y;
 
     public Point Get()
@@ -139,7 +139,8 @@ public class CameraBasedShadowDetector : ShadowDetector
         List<Mat> split = new List<Mat>();
         Core.split(add, split);
         Mat gray = CVUtils.ConvertToGrayscale(add);
-        Mat result = CVUtils.Threshold(gray, threshold, 255);
+        Mat blur = CVUtils.GaussianBlur(gray, new Size(5, 5), 0);
+        Mat result = CVUtils.Threshold(blur, threshold, 255);
 
         DrawMesh(result);
         ShowDisplay(src, split[0], split[1], split[2], frame, gray, result);
