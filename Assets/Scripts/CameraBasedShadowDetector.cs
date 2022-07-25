@@ -5,6 +5,7 @@ using OpenCVForUnity.UnityUtils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [System.Serializable]
 public class CameraBasedPoint
@@ -22,6 +23,8 @@ public class CameraBasedPoint
 
 public class CameraBasedShadowDetector : ShadowDetector
 {
+    [SerializeField]
+    public string requestedDeviceName = null;
     [SerializeField]
     private int requestedWidth;
     [SerializeField]
@@ -80,26 +83,97 @@ public class CameraBasedShadowDetector : ShadowDetector
     private int width;
     private int height;
 
+    private bool hasInitDone = false;
+
     private void Start()
     {
-        Init();
+        StartCoroutine(Initialize());
     }
 
-    private void Init()
+    private IEnumerator Initialize()
     {
-        WebCamDevice[] devices = WebCamTexture.devices;
-        webCamDevice = devices[0];
-        webCamTexture = new WebCamTexture(webCamDevice.name, requestedWidth, requestedHeight, requestedFPS);
+        var devices = WebCamTexture.devices;
+        if (!string.IsNullOrEmpty(requestedDeviceName))
+        {
+            int requestedDeviceIndex = -1;
+            if (int.TryParse(requestedDeviceName, out requestedDeviceIndex))
+            {
+                if (requestedDeviceIndex >= 0 && requestedDeviceIndex < devices.Length)
+                {
+                    webCamDevice = devices[requestedDeviceIndex];
+                    webCamTexture = new WebCamTexture(webCamDevice.name, requestedWidth, requestedHeight, requestedFPS);
+                }
+            }
+            else
+            {
+                for (int cameraIndex = 0; cameraIndex < devices.Length; cameraIndex++)
+                {
+                    if (devices[cameraIndex].name == requestedDeviceName)
+                    {
+                        webCamDevice = devices[cameraIndex];
+                        webCamTexture = new WebCamTexture(webCamDevice.name, requestedWidth, requestedHeight, requestedFPS);
+                        break;
+                    }
+                }
+            }
+            if (webCamTexture == null)
+                Debug.Log("Cannot find camera device " + requestedDeviceName + ".");
+        }
+
+        if (webCamTexture == null)
+        {
+            for (int cameraIndex = 0; cameraIndex < devices.Length; cameraIndex++)
+            {
+                if (devices[cameraIndex].kind != WebCamKind.ColorAndDepth)
+                {
+                    webCamDevice = devices[cameraIndex];
+                    webCamTexture = new WebCamTexture(webCamDevice.name, requestedWidth, requestedHeight, requestedFPS);
+                    break;
+                }
+            }
+        }
+
+        if (webCamTexture == null)
+        {
+            if (devices.Length > 0)
+            {
+                webCamDevice = devices[0];
+                webCamTexture = new WebCamTexture(webCamDevice.name, requestedWidth, requestedHeight, requestedFPS);
+            }
+            else
+            {
+                Debug.LogError("Camera device does not exist.");
+                yield break;
+            }
+        }
+
         webCamTexture.Play();
 
+        while (true)
+        {
+            if (webCamTexture.didUpdateThisFrame)
+            {
+                Debug.Log("name:" + webCamTexture.deviceName + " width:" + webCamTexture.width + " height:" + webCamTexture.height + " fps:" + webCamTexture.requestedFPS);
+                Debug.Log("videoRotationAngle:" + webCamTexture.videoRotationAngle + " videoVerticallyMirrored:" + webCamTexture.videoVerticallyMirrored + " isFrongFacing:" + webCamDevice.isFrontFacing);
+
+                hasInitDone = true;
+
+                OnInited();
+
+                break;
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+    }
+
+    private void OnInited()
+    {
         width = webCamTexture.width;
         height = webCamTexture.height;
 
-        OnInit();
-    }
-
-    private void OnInit()
-    {
         colors = new Color32[width * height];
         textureSrc = new Texture2D(width, height, TextureFormat.RGBA32, false);
         textureR = new Texture2D(width, height, TextureFormat.RGBA32, false);
@@ -121,7 +195,7 @@ public class CameraBasedShadowDetector : ShadowDetector
 
     private void Update()
     {
-        if (webCamTexture.isPlaying && webCamTexture.didUpdateThisFrame)
+        if (hasInitDone && webCamTexture.isPlaying && webCamTexture.didUpdateThisFrame)
         {
             Utils.webCamTextureToMat(webCamTexture, frame, colors);
             Run();
