@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Shadow
+  - Ground
+  - Alice
+  - Rabbit
   layers:
   - Default
   - TransparentFX
@@ -36,7 +39,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Shadow Object
   - 
   m_SortingLayers:
   - name: Default
