@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BillRabbit Override Controller
+  m_Controller: {fileID: 9100000, guid: bb082006c59584839a143b036a6086fa, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 941f6668cb3c94968ba4eeaedda3c292, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 42f9f19374d674a75b4dd08bd9572984, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: da93fb821d27e4b4789cbe7d90a170cd, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 398f3d98a7c5844d2a0e766ceb0276a9, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ef1762896de9541069af3e2755ff77b0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c9679a103730c4450928d531f4edf9d5, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 77589693863344517976376bac8c81a0, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d87c8e55294794b37bb2bf3f1b8fcd81, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 3bf5c1863a9ee4e4ebbde9051d1acfda, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2010b5b77b0dc427e86b8b6d2569596c, type: 2}

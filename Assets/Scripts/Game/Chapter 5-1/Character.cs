@@ -20,8 +20,6 @@ namespace Chapter_5_1
         protected bool isJumping = false;                   // 점프 중인지 여부
         [SerializeField]
         protected float jumpDelayTime = 0.25f;              // 점프 앞에 쉬는 시간
-        [SerializeField]
-        private float landDelayTime = 0.75f;                // 착지 후 쉬는 시간
 
         [Header("Components")]
         [SerializeField]
@@ -94,14 +92,20 @@ namespace Chapter_5_1
             rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
 
-        private IEnumerator LandRoutine()
+        private IEnumerator LandingRoutine()
         {
-            if (landDelayTime <= 0) yield break;
+            if (characterAnimator == null) yield break;
+            if (!characterAnimator.IsLanding) yield break;
 
             Vector3 temp = moveDirection;
 
             Turn(Vector3.zero);
-            yield return new WaitForSeconds(landDelayTime);
+
+            while (true)
+            {
+                if (!characterAnimator.IsLanding) break;
+                yield return null;
+            }
             Turn(temp);
         }
         #endregion
@@ -129,9 +133,10 @@ namespace Chapter_5_1
                 isGround = true;
                 isJumping = false;
 
-                StartCoroutine(nameof(LandRoutine));
+                if (characterAnimator == null) return;
 
-                characterAnimator?.Land();
+                characterAnimator.Land();
+                StartCoroutine(nameof(LandingRoutine));    // 애니메이션 끝날 때까지 정지
             }
         }
 

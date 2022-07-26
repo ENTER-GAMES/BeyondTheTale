@@ -10,6 +10,10 @@ public class CharacterAnimator : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
+    [SerializeField]
+    private bool isLanding = false;      // 착지 중인지 여부 (땅에 닿았을 때부터 착지 애니 끝날 때까지 true)
+    public bool IsLanding => isLanding;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -29,12 +33,17 @@ public class CharacterAnimator : MonoBehaviour
 
     public void Jump()
     {
-        animator.SetBool("isJumping", true);
         animator.Play("Jump", -1);
     }
 
     public void Land()
     {
-        animator.SetBool("isJumping", false);
+        isLanding = true;
+        animator.Play("Landing", -1);
+    }
+
+    public void OnFinishedLoading()
+    {
+        isLanding = false;
     }
 }
