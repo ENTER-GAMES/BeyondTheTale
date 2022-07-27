@@ -41,8 +41,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 7b90d530b8cb645169ea8af75468e492, type: 3}
   - {fileID: 21300000, guid: e68fd1d04228a47ddb912d050c4b6db5, type: 3}
   - {fileID: 21300000, guid: fd2e04f0e328c4dddbd36e70088fd350, type: 3}
-  - {fileID: 21300000, guid: b68de911608b41347a8a5b3b79619b2b, type: 3}
-  - {fileID: 21300000, guid: 102fa821a5b03804daaff344131f5bb3, type: 3}
   - {fileID: 21300000, guid: 1f10bf7184cf04889910b63fc5b7ef50, type: 3}
   - {fileID: 21300000, guid: 94b8d8b1fa33f457e946281dcc2e6744, type: 3}
   - {fileID: 21300000, guid: 6c343b02cbb824faab939a9dfeef994f, type: 3}
@@ -60,7 +58,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c1b3b4463e1ee40d4ac2202a2d29d411, type: 3}
   - {fileID: 21300000, guid: 5d9d62669ccdc4bc0b151c132af92a00, type: 3}
   - {fileID: 21300000, guid: 6ee1bd1753604455cbef06a82bf944bc, type: 3}
-  - {fileID: 21300000, guid: 95204867484062f478e7233330a32692, type: 3}
   - {fileID: 21300000, guid: bc42228742ad44da5ac400b7f34f117b, type: 3}
   - {fileID: 21300000, guid: 70de88a7747dd4000a99da871acdc8bb, type: 3}
   - {fileID: 21300000, guid: e61a82c76c6374462b3d8cde4bd094bb, type: 3}
@@ -70,7 +67,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d0ba0f18cbb7446979cb57b6fee90261, type: 3}
   - {fileID: 21300000, guid: 1db071a856e734efdbf8c55c0e8a3874, type: 3}
   - {fileID: 21300000, guid: 876f33d824fbc4ab49ecb2ab708050d6, type: 3}
-  - {fileID: 21300000, guid: f95566d83b23f8b4aadf0c264ab9e3cd, type: 3}
   - {fileID: 21300000, guid: 83bbc6d8b79b548fabc79e0841f25e31, type: 3}
   - {fileID: 21300000, guid: be186dd8ae3744fb9990574856898cfe, type: 3}
   - {fileID: 21300000, guid: 46a46e295b91d41748afaa942b261dd5, type: 3}
@@ -110,8 +106,6 @@ SpriteAtlas:
   - Alice_Fall_0003
   - Alice_Fall_0007
   - Alice_Landing_0004
-  - Image_Origin
-  - Image_Perspective
   - Alice_Idle_0019
   - Alice_Landing_0005
   - Alice_Run_0007
@@ -129,7 +123,6 @@ SpriteAtlas:
   - Alice_Landing_0002
   - Alice_Idle_0007
   - Alice_Run_0002
-  - Image_Shadow_Bright
   - Alice_Idle_0016
   - Alice_Run_0004
   - Alice_Idle_0018
@@ -139,7 +132,6 @@ SpriteAtlas:
   - Alice_Idle_0010
   - Alice_Run_0001
   - Alice_Jump_0005
-  - Image_Shadow
   - Alice_Jump_0000
   - Alice_Jump_0010
   - Alice_Landing_0003
