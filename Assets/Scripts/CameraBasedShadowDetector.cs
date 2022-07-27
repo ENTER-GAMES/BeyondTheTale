@@ -222,8 +222,6 @@ public class CameraBasedShadowDetector : ShadowDetector
 
     private Mat PerspectiveTransform()
     {
-        DrawPerspectivePoint();
-
         Mat pts1 = new Mat(4, 1, CvType.CV_32FC2);
         Mat pts2 = new Mat(4, 1, CvType.CV_32FC2);
         pts1.put(0, 0, cameraBasedPoints[0].Get().x, cameraBasedPoints[0].Get().y,
@@ -289,6 +287,8 @@ public class CameraBasedShadowDetector : ShadowDetector
     {
         if (view)
         {
+            DrawPerspectivePoint();
+
             Utils.matToTexture2D(src, textureSrc, colors);
             Utils.matToTexture2D(r, textureR, colors);
             Utils.matToTexture2D(g, textureG, colors);

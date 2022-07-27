@@ -288,7 +288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -2254,6 +2253,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
+      propertyPath: epsilon
+      value: 0.0035000001080334187
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
+      propertyPath: threshold
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
+      propertyPath: cameraBasedPoints.Array.data[0].x
+      value: 228
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
+      propertyPath: cameraBasedPoints.Array.data[0].y
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
+      propertyPath: cameraBasedPoints.Array.data[1].x
+      value: 339
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
+      propertyPath: cameraBasedPoints.Array.data[1].y
+      value: 145
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
+      propertyPath: cameraBasedPoints.Array.data[2].x
+      value: 228
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
+      propertyPath: cameraBasedPoints.Array.data[2].y
+      value: 332
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
+      propertyPath: cameraBasedPoints.Array.data[3].x
+      value: 337
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
+      propertyPath: cameraBasedPoints.Array.data[3].y
+      value: 338
+      objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952673, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: m_RootOrder
       value: 3
