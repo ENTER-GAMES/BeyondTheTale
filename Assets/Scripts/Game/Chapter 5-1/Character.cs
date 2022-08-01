@@ -38,7 +38,7 @@ namespace Chapter_5_1
         }
 
         #region Update
-        protected void Update()
+        protected virtual void Update()
         {
             Move();
         }

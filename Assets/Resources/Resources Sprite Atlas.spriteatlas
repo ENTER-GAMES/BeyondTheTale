@@ -44,6 +44,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ee7623403c0f04d33a2160c29e484294, type: 3}
   - {fileID: 21300000, guid: 92fe69403b64e424990604f97e55ce17, type: 3}
   - {fileID: 21300000, guid: 2b7df850e601a4cb78d3b6f1462e80b6, type: 3}
+  - {fileID: 21300000, guid: 68d4d190b8e5b48a3b4cbc26396f1c9c, type: 3}
   - {fileID: 21300000, guid: 6867feb04118349a2a3e1b0d73ce57e3, type: 3}
   - {fileID: 21300000, guid: 942a06c0779de414ca4c1b8d4cfdcf8e, type: 3}
   - {fileID: 21300000, guid: e68fd1d04228a47ddb912d050c4b6db5, type: 3}
@@ -62,6 +63,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 629247e11a8384419a6f6168c94b9501, type: 3}
   - {fileID: 21300000, guid: 460a03026aa3046b2afba4b9c5a3e33b, type: 3}
   - {fileID: 21300000, guid: 6c343b02cbb824faab939a9dfeef994f, type: 3}
+  - {fileID: 21300000, guid: e676bc12bd3e74fd7be32925c54b8b7d, type: 3}
+  - {fileID: 21300000, guid: 547bb03289e8948b984c9bc4152b8cd5, type: 3}
   - {fileID: 21300000, guid: ff50ef42434054008a68eead82c8f79c, type: 3}
   - {fileID: 21300000, guid: f40b69528914b4f8cb9ab58cd3f17c05, type: 3}
   - {fileID: 21300000, guid: 5f196962df79b4e90a88d8d09ba82655, type: 3}
@@ -69,6 +72,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 246849922830c479188a5be4494feb89, type: 3}
   - {fileID: 21300000, guid: 02e0caa21b8a64fb9a8e6a1fa4738e3f, type: 3}
   - {fileID: 21300000, guid: 111171b21832549d3b84843087e64434, type: 3}
+  - {fileID: 21300000, guid: c6ec33b28ac6b4878a9d74d482da724d, type: 3}
   - {fileID: 21300000, guid: 4f9018c26947f4d87a7976f1dea944e8, type: 3}
   - {fileID: 21300000, guid: 92a186d23b9ce4fc0b434788b5a505c4, type: 3}
   - {fileID: 21300000, guid: 6f2a1cd2db0a8465f8b2785eeac64139, type: 3}
@@ -123,6 +127,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 2336b636a3d2e4ab7ba1c0cde103140f, type: 3}
   - {fileID: 21300000, guid: ab4ff1466724247bc81dd849cbf6ca2d, type: 3}
   - {fileID: 21300000, guid: c1b3b4463e1ee40d4ac2202a2d29d411, type: 3}
+  - {fileID: 21300000, guid: cbcd4d469feaa4c078f39e977807306f, type: 3}
   - {fileID: 21300000, guid: 5d9d62669ccdc4bc0b151c132af92a00, type: 3}
   - {fileID: 21300000, guid: deed736617ebe418bb0eddcb4e3dc96c, type: 3}
   - {fileID: 21300000, guid: 1b2ac0761973e485f8ad97e6363a0705, type: 3}
@@ -153,6 +158,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 384db5f7064b94e51950b5da34ef61ef, type: 3}
   - {fileID: 21300000, guid: 414ce9f71fb0942479566ecb1ed7f665, type: 3}
   - {fileID: 21300000, guid: 8e4a8ef74aa434bbabe893789d30f958, type: 3}
+  - {fileID: 21300000, guid: de11dff77192d42bb9ec59ee263f4891, type: 3}
   - {fileID: 21300000, guid: 10b4f0081157a4ca4b896e845b9d7271, type: 3}
   - {fileID: 21300000, guid: 2fbac608d5c654bbd8d688b19e0600a0, type: 3}
   - {fileID: 21300000, guid: e596b7186d34b4a6895fda93319b3f83, type: 3}
@@ -207,12 +213,14 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 32ec479a27b6a4a9ab5ed3af5b45b164, type: 3}
   - {fileID: 21300000, guid: 1987dd9a9bbac4197820b29654bea23a, type: 3}
   - {fileID: 21300000, guid: 48f8f5aa33f124c2ea15c8ca87b040e8, type: 3}
+  - {fileID: 21300000, guid: 1071f7aa7a6904637963d8e3a7fa8ff4, type: 3}
   - {fileID: 21300000, guid: 62c569aaf32fb49eb8650dd679d8ba63, type: 3}
   - {fileID: 21300000, guid: e1f493ba4c97e4ef298f1b9abce7183d, type: 3}
   - {fileID: 21300000, guid: 8a9c5fba25ef04be1ad1308c03341a92, type: 3}
   - {fileID: 21300000, guid: 51e4b3dafa0764045a25c5efcdb92060, type: 3}
   - {fileID: 21300000, guid: 92d9f6ea51fcf41398b28884602da997, type: 3}
   - {fileID: 21300000, guid: 5527adfa6a03f4cea8afe441edb4f64f, type: 3}
+  - {fileID: 21300000, guid: b525252bc45e24c0a9669808f438d2f9, type: 3}
   - {fileID: 21300000, guid: 91c5ad3b390f64e1e9055cd967482a0e, type: 3}
   - {fileID: 21300000, guid: 61b3e04b0b4d746c1b7c995437ccd45f, type: 3}
   - {fileID: 21300000, guid: e3dc625b896ae4327bfe84e01af275e0, type: 3}
@@ -225,6 +233,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c795c0db42b7a4b0e8ba65a3a665aa28, type: 3}
   - {fileID: 21300000, guid: 8fffd2eb744544c7c89622fdb448c2d8, type: 3}
   - {fileID: 21300000, guid: 821360fb522ad49c6b32211e8b8457b0, type: 3}
+  - {fileID: 21300000, guid: 7098cb3c452ac4e64a6fa7fda29807f1, type: 3}
   - {fileID: 21300000, guid: 34c4f24cfd407413692b48d7447d4dde, type: 3}
   - {fileID: 21300000, guid: 15a2c06cc870a410ca86d40590dc77e5, type: 3}
   - {fileID: 21300000, guid: 3471797cf9a874a4cbb6af56d084c98c, type: 3}
@@ -238,6 +247,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 59a095ec4bcfc40199ef0a699d8feedb, type: 3}
   - {fileID: 21300000, guid: d57367fca2bc64f6f8822c994b03f918, type: 3}
   - {fileID: 21300000, guid: d91399fc3f7254bbc94780e64bed5757, type: 3}
+  - {fileID: 21300000, guid: bd6f670d8446e45fc83a9dc4820a0d35, type: 3}
   - {fileID: 21300000, guid: 33c7512da412344bc9ccbfe17a55ad34, type: 3}
   - {fileID: 21300000, guid: ece7862df93b744c0b28f7520099e658, type: 3}
   - {fileID: 21300000, guid: 20d6aa2d0a47b4ad8824cbc5b2f65458, type: 3}
@@ -291,6 +301,7 @@ SpriteAtlas:
   - Alice_FALL_0001
   - Alice_FALL_0015
   - Alice_FALL_0009
+  - Seeker2_Body
   - BillRabbit_Jump_0003
   - BillRabbit_Idle_0018
   - Alice_Fall_0007
@@ -309,6 +320,8 @@ SpriteAtlas:
   - BillRabbit_Move_0031
   - BillRabbit_Idle_0029
   - Alice_Run_0007
+  - Seeker_Flash
+  - Tree_0000
   - BillRabbit_Landing_0002
   - BillRabbit_Idle_0002
   - BillRabbit_Landing_0000
@@ -316,6 +329,7 @@ SpriteAtlas:
   - Alice_Idle_0011
   - BillRabbit_Move_0022
   - Alice_FALL_0011
+  - Seeker2_Right
   - BillRabbit_Idle_0067
   - BillRabbit_Idle_0017
   - BillRabbit_Move_0025
@@ -370,6 +384,7 @@ SpriteAtlas:
   - BillRabbit_Idle_0009
   - BillRabbit_Jump_0016
   - Alice_Landing_0002
+  - Seeker
   - Alice_Idle_0007
   - Alice_Fall_0019
   - BillRabbit_Idle_0045
@@ -400,6 +415,7 @@ SpriteAtlas:
   - Alice_Fall_0002
   - Alice_FALL_0021
   - Alice_Idle_0020
+  - Seeker_Left
   - Alice_Fall_0015
   - Alice_FALL_0006
   - BillRabbit_Move_0004
@@ -454,12 +470,14 @@ SpriteAtlas:
   - BillRabbit_Jump_0018
   - Alice_Jump_0011
   - BillRabbit_Jump_0002
+  - Seeker_Body
   - Alice_Idle_0012
   - Alice_Jump_0008
   - BillRabbit_Move_0008
   - Alice_Run_0003
   - Alice_FALL_0022
   - Alice_Fall_0018
+  - 5-1_Background
   - BillRabbit_Move_0016
   - BillRabbit_Idle_0057
   - Alice_Jump_0004
@@ -472,6 +490,7 @@ SpriteAtlas:
   - BillRabbit_Jump_0013
   - Alice_Fall_0014
   - Alice_Fall_0000
+  - Seeker2_Left
   - BillRabbit_Idle_0070
   - BillRabbit_Idle_0051
   - BillRabbit_Move_0023
@@ -485,6 +504,7 @@ SpriteAtlas:
   - Alice_Landing_0000
   - Alice_Idle_0015
   - Alice_Idle_0004
+  - Seeker_Right
   - Alice_FALL_0007
   - Alice_Jump_0006
   - Alice_Idle_0021
