@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - Alice
   - Rabbit
+  - LiquidParticle
+  - ShadowObject
+  - Table
   layers:
   - Default
   - TransparentFX
@@ -36,8 +39,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Pass Liquid
+  - Liquid
   - Shadow Object
   - 
   m_SortingLayers:
