@@ -81,16 +81,19 @@ public class MatchShapes : MonoBehaviour
 
     private void Match()
     {
-        List<MatOfPoint> src_contours = CVUtils.FindContours(dst);
-
+        Mat src_bin = CVUtils.Threshold(dst, 128, 255);
+        List<MatOfPoint> src_contours = CVUtils.FindContours(src_bin);
+        double minDist = double.MaxValue;
         foreach (MatOfPoint pts in src_contours)
         {
             if (Imgproc.contourArea(pts) < 1000)
                 continue;
-
-            double dist = Imgproc.matchShapes(obj_pts, pts, 2, 0);
-            Print(dist.ToString());
+            double dist = Imgproc.matchShapes(obj_pts, pts, Imgproc.CONTOURS_MATCH_I3, 0);
+            if (dist < minDist)
+                minDist = dist;
+            Debug.Log(dist);
         }
+        Print(minDist.ToString());
     }
 
     private void Print(string str)

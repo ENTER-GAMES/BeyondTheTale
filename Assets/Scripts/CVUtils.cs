@@ -54,7 +54,7 @@ public static class CVUtils
 
     public static void DrawContours(ref Mat src, List<MatOfPoint> contours, int i)
     {
-        Imgproc.drawContours(src, contours, i, new Scalar(255, 0, 0, 255), 3);
+        Imgproc.drawContours(src, contours, i, new Scalar(100, 100, 100, 255), 3);
     }
 
     public static void DrawContours(ref Mat src, List<MatOfPoint> contours)

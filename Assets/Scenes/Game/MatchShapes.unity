@@ -1647,7 +1647,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: threshold
-      value: 128
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: useApprox
@@ -1655,35 +1655,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: cameraBasedPoints.Array.data[0].x
-      value: 280
+      value: 386
       objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: cameraBasedPoints.Array.data[0].y
-      value: 125
+      value: 145
       objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: cameraBasedPoints.Array.data[1].x
-      value: 360
+      value: 522
       objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: cameraBasedPoints.Array.data[1].y
-      value: 130
+      value: 149
       objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: cameraBasedPoints.Array.data[2].x
-      value: 278
+      value: 385
       objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: cameraBasedPoints.Array.data[2].y
-      value: 210
+      value: 268
       objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: cameraBasedPoints.Array.data[3].x
-      value: 360
+      value: 522
       objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: cameraBasedPoints.Array.data[3].y
-      value: 215
+      value: 272
       objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952673, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: m_RootOrder
