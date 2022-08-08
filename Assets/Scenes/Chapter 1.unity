@@ -637,7 +637,7 @@ GameObject:
   - component: {fileID: 487638823}
   - component: {fileID: 487638822}
   m_Layer: 0
-  m_Name: Background_1_bak (1)
+  m_Name: Background_1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -684,7 +684,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Sprite: {fileID: 21300000, guid: e0c9c65b3b5fdf94492f28cf072fa7ef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68414320bd4c9124fa1f787bfa3e7f59, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1742,7 +1742,7 @@ GameObject:
   - component: {fileID: 1577121514}
   - component: {fileID: 1577121513}
   m_Layer: 0
-  m_Name: Background_1_bak
+  m_Name: Background_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1789,7 +1789,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Sprite: {fileID: 21300000, guid: e0c9c65b3b5fdf94492f28cf072fa7ef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68414320bd4c9124fa1f787bfa3e7f59, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1813,7 +1813,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2138810653}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1665414760
 GameObject:
@@ -2145,7 +2145,7 @@ GameObject:
   - component: {fileID: 1918563333}
   - component: {fileID: 1918563334}
   m_Layer: 0
-  m_Name: Background_1_bak (2)
+  m_Name: Background_1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2207,7 +2207,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -3
-  m_Sprite: {fileID: 21300000, guid: e0c9c65b3b5fdf94492f28cf072fa7ef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68414320bd4c9124fa1f787bfa3e7f59, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2474,7 +2474,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2138810653}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2138810652
 GameObject:
@@ -2517,8 +2517,8 @@ Transform:
   - {fileID: 1665414761}
   - {fileID: 1382260629}
   - {fileID: 732031927}
-  - {fileID: 1577121514}
   - {fileID: 2126760537}
+  - {fileID: 1577121514}
   - {fileID: 487638823}
   - {fileID: 1918563333}
   m_Father: {fileID: 0}
