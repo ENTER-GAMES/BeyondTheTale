@@ -52,6 +52,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9c369514823c345e0aee7b8187310ae5, type: 3}
   - {fileID: 21300000, guid: 7a9770d454ff1414fa98b1d399e21206, type: 3}
   - {fileID: 21300000, guid: ade8b3f4b21894dee975179432c50a9c, type: 3}
+  - {fileID: 21300000, guid: 8a504b0594e4eda4b935b2d377b03385, type: 3}
   - {fileID: 21300000, guid: dc330315b41734b259e01c3e5c582e41, type: 3}
   - {fileID: 21300000, guid: 0b7f9445db2864194a08a897b5457980, type: 3}
   - {fileID: 21300000, guid: d4a1de85f3d701540b31c278b2e0aafd, type: 3}
@@ -89,6 +90,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d91399fc3f7254bbc94780e64bed5757, type: 3}
   - {fileID: 21300000, guid: ece7862df93b744c0b28f7520099e658, type: 3}
   - {fileID: 21300000, guid: 20d6aa2d0a47b4ad8824cbc5b2f65458, type: 3}
+  - {fileID: 21300000, guid: bbf5ad2d673e19042bed38df5340ffc4, type: 3}
   - {fileID: 21300000, guid: f13c1f5d436fd44eb899fc6a783f0902, type: 3}
   - {fileID: 21300000, guid: 737f678d2e53242089710c61e982d333, type: 3}
   - {fileID: 21300000, guid: 232571bd5edbf46afa7ccf0d440efaa0, type: 3}
@@ -117,6 +119,7 @@ SpriteAtlas:
   - Alice_Idle_0005
   - Alice_Jump_0012
   - Alice_Idle_0006
+  - Background2
   - Alice_Jump_0013
   - Alice_Jump_0002
   - test
@@ -154,6 +157,7 @@ SpriteAtlas:
   - Alice_Idle_0004
   - Alice_Jump_0006
   - Alice_Idle_0021
+  - Background
   - Alice_Idle_0003
   - Alice_Idle_0022
   - Alice_Jump_0003
