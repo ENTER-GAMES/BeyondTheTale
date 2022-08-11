@@ -6,7 +6,7 @@ public class LiquidParticle : MonoBehaviour
 {
     private void Update()
     {
-        if (transform.position.x < -9.5 || transform.position.x > 9.5 || transform.position.y < -6)
+        if (transform.position.x < -9.5 || transform.position.x > 9.5 || transform.position.y < -6 || transform.position.y > 6)
             gameObject.SetActive(false);
     }
 
