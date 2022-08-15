@@ -79,6 +79,8 @@ public class PageTrigger : MonoBehaviour
         // 반대 방향으로 targetPageIndex가 변경될 경우, 본 코루틴이 멈추게 됩니다.
         // 단, 페이지 넘기기가 모두 끝나고 멈춥니다.
 
+        HideAllPages();
+
         while (true)
         {
             // 다음 페이지
@@ -116,7 +118,14 @@ public class PageTrigger : MonoBehaviour
                 if (continueFlag)
                     continue;
                 else
+                {
+                    // 만약 현재 서있는 목표 페이지에 도달해서 끝나는 것이라면
+                    // 해당 페이지 출력
+                    if (currentPageIndex == targetPageIndex)
+                        DisplayPage(currentPageIndex);
+
                     yield break;
+                }
             }
 
             yield return null;
@@ -154,6 +163,22 @@ public class PageTrigger : MonoBehaviour
     private float GetRayGap()
     {
         return boxCollider2D.bounds.size.x / (pageCount * rayCountPerPage - 1);
+    }
+
+    private void DisplayPage(int targetPageIndex)
+    {
+        HideAllPages();
+
+        // 목표 페이지만 디스플레이
+        pages[targetPageIndex]?.DisplayPage();
+    }
+
+    private void HideAllPages()
+    {
+        // 출력되고 있는 모든 페이지 숨김
+        foreach (Page page in pages)
+            if (page.isDisplay) page.HidePage();
+
     }
 
     private void OnDrawGizmos()
