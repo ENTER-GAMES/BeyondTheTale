@@ -8,6 +8,9 @@ TagManager:
   - Ground
   - Alice
   - Rabbit
+  - LiquidParticle
+  - ShadowObject
+  - Table
   layers:
   - Default
   - TransparentFX
@@ -37,11 +40,14 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - Pass Liquid
+  - Liquid
   - Shadow Object
   - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Liquid
+    uniqueID: 1266753469
     locked: 0

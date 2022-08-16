@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Mad Rabbit Override Controller
+  m_Controller: {fileID: 9100000, guid: 9adb070ecdf544d64909f4cb7d52b21b, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 7b98c831a4bfd4e5b9e550e7ea520125, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 63d0d4b7eb8194918947c738beff648b, type: 2}
