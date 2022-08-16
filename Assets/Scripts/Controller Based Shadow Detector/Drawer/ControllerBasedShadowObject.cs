@@ -11,8 +11,6 @@ public class ControllerBasedShadowObject : ShadowObject
     private Material defaultMaterial;
     [SerializeField]
     private Material selectMaterial;
-    [SerializeField]
-    private MeshRenderer meshRenderer;
 
     public void Select()
     {
