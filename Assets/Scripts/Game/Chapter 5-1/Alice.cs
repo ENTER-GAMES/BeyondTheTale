@@ -10,6 +10,10 @@ namespace Chapter_5_1
     {
         private bool isHit = false;             // 피격 상태 중 여부
 
+        [Header("Audio")]
+        [SerializeField]
+        private AudioClip hitAudioClip;
+
         protected override void Awake()
         {
             base.Awake();
@@ -41,6 +45,9 @@ namespace Chapter_5_1
 
             // 2초 뒤에 리스타트
             Invoke(nameof(Restart), 2);
+
+            // 오디오 재생
+            sfxAudioSource?.PlayOneShot(hitAudioClip);
         }
 
         private void Restart()

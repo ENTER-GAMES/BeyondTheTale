@@ -26,6 +26,14 @@ namespace Chapter_5_1
         protected CharacterAnimator characterAnimator;
         protected new Rigidbody2D rigidbody2D;
 
+        [Header("Audio")]
+        [SerializeField]
+        protected AudioClip jumpAudioClip;
+        [SerializeField]
+        protected AudioSource sfxAudioSource;
+        [SerializeField]
+        protected AudioSource moveAudioSource;
+
         [Header("@Debug")]
         [SerializeField]
         protected bool isGround = false;                    // 바닥에 닿았는지 여부
@@ -49,16 +57,32 @@ namespace Chapter_5_1
             Vector2 moveAmount = moveDirection * moveSpeed;
             rigidbody2D.velocity = new Vector2(moveAmount.x, rigidbody2D.velocity.y);
 
+            // 애니메이션 업데이트
             characterAnimator?.SetVelocity(rigidbody2D.velocity);
+
+            // 뛰는(걷는) 오디오 재생
+            UpdateMoveAudio();
+        }
+
+        protected void UpdateMoveAudio()
+        {
+            if (moveAudioSource == null) return;
+
+            bool isMoving = rigidbody2D.velocity.x != 0;
+
+            if ((isJumping || (!isJumping && !isMoving)) && moveAudioSource.isPlaying)
+                moveAudioSource.Stop();
+            else if (!isJumping && isMoving && !moveAudioSource.isPlaying)
+                moveAudioSource.Play();
         }
         #endregion
 
         #region Jump
-        public void Jump() => Jump(jumpForce);
+        public virtual void Jump() => Jump(jumpForce);
 
-        public void Jump(float jumpForce) => Jump(jumpForce, moveSpeed);
+        public virtual void Jump(float jumpForce) => Jump(jumpForce, moveSpeed);
 
-        public void Jump(float jumpForce, float moveSpeedDuringJump)
+        public virtual void Jump(float jumpForce, float moveSpeedDuringJump)
         {
             // 땅에 닿지 않았거나, 점프 중이면 리턴
             if (!isGround || isJumping) return;
@@ -90,6 +114,9 @@ namespace Chapter_5_1
 
             // 점프
             rigidbody2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+            // 오디오 재생
+            sfxAudioSource?.PlayOneShot(jumpAudioClip);
         }
 
         private IEnumerator LandingRoutine()
