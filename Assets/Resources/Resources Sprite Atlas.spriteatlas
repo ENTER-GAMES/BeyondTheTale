@@ -39,6 +39,8 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: cc0bc9002314a4f24aa40a1ed2617a6c, type: 3}
+  - {fileID: 21300000, guid: 41f04a104a952334db6038232235e49d, type: 3}
+  - {fileID: 21300000, guid: 68414320bd4c9124fa1f787bfa3e7f59, type: 3}
   - {fileID: 21300000, guid: 339005203ca2c42c29b3b3b1571c22dc, type: 3}
   - {fileID: 21300000, guid: b76bb62019c4548d6b5dfbb0f85e48aa, type: 3}
   - {fileID: 21300000, guid: 65fb9430c3014ad40aaa3c464c4af029, type: 3}
@@ -109,6 +111,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5658cd22d5a6c4b16b4f121a82bcac23, type: 3}
   - {fileID: 21300000, guid: 547bb03289e8948b984c9bc4152b8cd5, type: 3}
   - {fileID: 21300000, guid: adb32c32df3024c47a8c5070999312e7, type: 3}
+  - {fileID: 21300000, guid: aced52421d78fb6449b3a5f5b085de28, type: 3}
   - {fileID: 21300000, guid: 8b6f2542ba3914052b2ace90c96ab6d4, type: 3}
   - {fileID: 21300000, guid: ff50ef42434054008a68eead82c8f79c, type: 3}
   - {fileID: 21300000, guid: 08c286527fde540a39950bccb40fe061, type: 3}
@@ -281,6 +284,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: fc4234872bee343a9a69f02b83031106, type: 3}
   - {fileID: 21300000, guid: d0baa097b533147038963d25e292ca31, type: 3}
   - {fileID: 21300000, guid: fedb6397769f84f7cb72a9f4114fcafd, type: 3}
+  - {fileID: 21300000, guid: 4bed2497ce808fb419b1bf1da7bf773d, type: 3}
   - {fileID: 21300000, guid: 3e89f0a786ce64cf19657f43d98d4dd5, type: 3}
   - {fileID: 21300000, guid: b94606a72f15645b895d75271e312dda, type: 3}
   - {fileID: 21300000, guid: 70de88a7747dd4000a99da871acdc8bb, type: 3}
@@ -300,6 +304,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: de11dff77192d42bb9ec59ee263f4891, type: 3}
   - {fileID: 21300000, guid: 10b4f0081157a4ca4b896e845b9d7271, type: 3}
   - {fileID: 21300000, guid: 2fbac608d5c654bbd8d688b19e0600a0, type: 3}
+  - {fileID: 21300000, guid: e40766186220ce74ebedff329bbfe9b7, type: 3}
   - {fileID: 21300000, guid: e596b7186d34b4a6895fda93319b3f83, type: 3}
   - {fileID: 21300000, guid: c2f93c18b73ba4e669b8c16bc38e4ad9, type: 3}
   - {fileID: 21300000, guid: b6158c18575574cd59217faea5485f3e, type: 3}
@@ -419,6 +424,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 61b3e04b0b4d746c1b7c995437ccd45f, type: 3}
   - {fileID: 21300000, guid: 36502b4b0a6784c4cb74643b93bab6db, type: 3}
   - {fileID: 21300000, guid: e3dc625b896ae4327bfe84e01af275e0, type: 3}
+  - {fileID: 21300000, guid: e0c9c65b3b5fdf94492f28cf072fa7ef, type: 3}
   - {fileID: 21300000, guid: 86ffb16b0aa2d4dd095d42a6dfad7293, type: 3}
   - {fileID: 21300000, guid: 78cb736bf4aae4b7fab957426480dac4, type: 3}
   - {fileID: 21300000, guid: 85b5b86bc0efd4cbf991259feeb57f16, type: 3}
@@ -562,6 +568,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e3093b8f93eae429f9a040ae6660c8c9, type: 3}
   - {fileID: 21300000, guid: b17d9b8f9ba1b4079b318c9ae9581a41, type: 3}
   - {fileID: 21300000, guid: 34f4179f918f0441eb991d8042900363, type: 3}
+  - {fileID: 21300000, guid: ce46bf9f05217964cb3dfbd60628f498, type: 3}
   - {fileID: 21300000, guid: 5cc956af6bc3d413d9b331f09a661b7b, type: 3}
   - {fileID: 21300000, guid: 9f75a4cf26e634d44a1eed6ec6784f6e, type: 3}
   - {fileID: 21300000, guid: e7bd2acf36dae4633af3f9c63df86602, type: 3}
@@ -570,6 +577,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 92581def839704124a6be28c45c48f14, type: 3}
   m_PackedSpriteNamesToIndex:
   - MadRabbit_0070
+  - Background_1_Floor
+  - Background_1
   - Book_Open_0028
   - BillRabbit_Idle_0062
   - HintCard_Clover
@@ -640,6 +649,7 @@ SpriteAtlas:
   - Book
   - Tree_0000
   - MadHatter_TeaParty_0011
+  - Obstacle_0002
   - Book_Open_0000
   - BillRabbit_Landing_0002
   - MadRabbit_0067
@@ -812,6 +822,7 @@ SpriteAtlas:
   - Alice_FALL_0000
   - MadHatter_TeaParty_0017
   - BillRabbit_Idle_0059
+  - Bed
   - BillRabbit_Idle_0035
   - Cup_Front_P
   - Alice_Run_0004
@@ -831,6 +842,7 @@ SpriteAtlas:
   - Seeker_Left
   - Alice_Fall_0015
   - Alice_FALL_0006
+  - Obstacle_0001
   - BillRabbit_Move_0004
   - BillRabbit_Jump_0017
   - Book_Page_0066
@@ -950,6 +962,7 @@ SpriteAtlas:
   - BillRabbit_Idle_0057
   - Book_Page_0041
   - Alice_Jump_0004
+  - Background_1_bak
   - Book_Page_0012
   - Alice_Idle_0000
   - Book_Page_0039
@@ -1093,6 +1106,7 @@ SpriteAtlas:
   - BillRabbit_Idle_0069
   - Alice_Idle_0014
   - BillRabbit_Idle_0039
+  - Obstacle_0000
   - MadRabbit_0023
   - Alice_Run_0000
   - MadRabbit_0001

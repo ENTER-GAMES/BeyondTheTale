@@ -20,7 +20,7 @@ public class MeshDrawer : MonoBehaviour
         shadowObjects.Clear();
     }
 
-    private void CreateObject(Shadow shadow)
+    protected void CreateObject(Shadow shadow)
     {
         if (shadow.points.Length < 3)
             return;

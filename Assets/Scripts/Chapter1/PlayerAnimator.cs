@@ -4,8 +4,14 @@ namespace BeyondTheTale.Chapter1
 {
     public class PlayerAnimator : MonoBehaviour
     {
-        [SerializeField]
         private SpriteRenderer spriteRenderer;
+        private Animator animator;
+
+        private void Awake()
+        {
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            animator = GetComponentInChildren<Animator>();
+        }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
@@ -35,6 +41,21 @@ namespace BeyondTheTale.Chapter1
                 spriteRenderer.flipX = true;
             else
                 spriteRenderer.flipX = false;
+        }
+
+        public void OnHit()
+        {
+            animator.Play("Hit");
+        }
+
+        public void OnLanding()
+        {
+            animator.Play("Landing");
+        }
+
+        public void PlayFallAnim()
+        {
+            animator.Play("Fall");
         }
     }
 }

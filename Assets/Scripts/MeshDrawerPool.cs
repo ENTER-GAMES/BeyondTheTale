@@ -32,16 +32,6 @@ public class MeshDrawerPool : MeshDrawer
         shadowObjects.Clear();
     }
 
-    private void CreateObject(Shadow shadow)
-    {
-        if (shadow.points.Length < 3)
-            return;
-
-        ShadowObject clone = Instantiate(shadowObjectPrefab);
-        clone.Init(shadow);
-        shadowObjects.Add(clone);
-    }
-
     private void InitObject(ShadowObject shadowObject, Shadow shadow)
     {
         if (shadow.points.Length < 3)

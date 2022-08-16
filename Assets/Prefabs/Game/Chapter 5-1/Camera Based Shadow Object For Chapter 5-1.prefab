@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshFilter: {fileID: 1663077842957930128}
   polygonCollider2D: {fileID: 6141813761310551897}
+  meshRenderer: {fileID: 1162996472647198691}
 --- !u!23 &1162996472647198691
 MeshRenderer:
   m_ObjectHideFlags: 0

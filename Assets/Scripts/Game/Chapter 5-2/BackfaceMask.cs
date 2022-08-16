@@ -15,7 +15,7 @@ namespace Chapter_5_2
         [SerializeField]
         private Texture2D textureFront;
         [SerializeField]
-        private Renderer renderer;
+        private new Renderer renderer;
         [SerializeField]
         private CameraBasedShadowDetector detector;
 

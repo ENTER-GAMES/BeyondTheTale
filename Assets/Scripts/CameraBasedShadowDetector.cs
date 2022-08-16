@@ -298,6 +298,8 @@ public class CameraBasedShadowDetector : ShadowDetector
     {
         if (view)
         {
+            DrawPerspectivePoint();
+
             Utils.matToTexture2D(src, textureSrc, colors);
             Utils.matToTexture2D(r, textureR, colors);
             Utils.matToTexture2D(g, textureG, colors);

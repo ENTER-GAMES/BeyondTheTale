@@ -4,20 +4,18 @@ namespace BeyondTheTale.Chapter1
 {
     public class TargetPoint : MonoBehaviour
     {
-        [SerializeField]
-        private GameObject text;
+        private SceneDirector sceneDirector;
 
-        private void Start()
+        private void Awake()
         {
-            text.SetActive(false);
+            sceneDirector = FindObjectOfType<SceneDirector>();
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.CompareTag("Player"))
             {
-                Time.timeScale = 0;
-                text.SetActive(true);
+                sceneDirector.OnLanding();
             }
         }
     }

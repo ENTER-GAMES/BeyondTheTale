@@ -1,0 +1,9 @@
+[BGM]
+저작권 정보표시: 저작물명,저작자명,출처,이용조건
+스탠딩 온더 마운틴 탑(Standing on the mountain top),임샛별,한국저작권위원회,CC BY
+[Sound Effect]
+landing -착지
+hit - 피격
+falling - 떨어질때 배경음 뒤에 잔잔하게 깔리면 좋지 않을까 해서 넣어봤어요
+
+저작권 프리 -> 따로 기재 안해도 괜찮아요

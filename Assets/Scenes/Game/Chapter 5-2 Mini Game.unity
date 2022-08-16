@@ -3336,7 +3336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: threshold
-      value: 80
+      value: 46
       objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: MeshDrawer
