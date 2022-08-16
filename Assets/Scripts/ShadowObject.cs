@@ -10,6 +10,7 @@ public class ShadowObject : MonoBehaviour
     protected MeshFilter meshFilter;
     [SerializeField]
     protected PolygonCollider2D polygonCollider2D;
+    public Bounds bounds => polygonCollider2D.bounds;
 
     public void Init(Shadow shadow)
     {
