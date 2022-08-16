@@ -63,7 +63,9 @@ public class CameraBasedShadowDetector : ShadowDetector
     [SerializeField]
     private bool useApprox = true;
     [SerializeField]
-    private bool draw = false;
+    private bool drawMesh = false;
+    [SerializeField]
+    private bool drawPoint = false;
     [SerializeField]
     private bool view = true;
     [SerializeField]
@@ -82,6 +84,8 @@ public class CameraBasedShadowDetector : ShadowDetector
     private Mat frame;
     private int width;
     private int height;
+    private List<MatOfPoint> contours;
+    private Mat result;
 
     private bool hasInitDone = false;
 
@@ -156,9 +160,11 @@ public class CameraBasedShadowDetector : ShadowDetector
                 Debug.Log("name:" + webCamTexture.deviceName + " width:" + webCamTexture.width + " height:" + webCamTexture.height + " fps:" + webCamTexture.requestedFPS);
                 Debug.Log("videoRotationAngle:" + webCamTexture.videoRotationAngle + " videoVerticallyMirrored:" + webCamTexture.videoVerticallyMirrored + " isFrongFacing:" + webCamDevice.isFrontFacing);
 
-                hasInitDone = true;
-
                 OnInited();
+
+                yield return null;
+
+                hasInitDone = true;
 
                 break;
             }
@@ -183,7 +189,8 @@ public class CameraBasedShadowDetector : ShadowDetector
         textureGray = new Texture2D(width, height, TextureFormat.RGBA32, false);
         textureThr = new Texture2D(width, height, TextureFormat.RGBA32, false);
         frame = new Mat(height, width, CvType.CV_8UC4, new Scalar(0, 0, 0, 255));
-        
+        result = new Mat(height, width, CvType.CV_8UC4, new Scalar(0, 0, 0, 255));
+
         renderer.material.mainTexture = textureSrc;
         rendererR.material.mainTexture = textureR;
         rendererG.material.mainTexture = textureG;
@@ -212,18 +219,17 @@ public class CameraBasedShadowDetector : ShadowDetector
         add = CVUtils.Subtract(add, rgb);
         List<Mat> split = new List<Mat>();
         Core.split(add, split);
-        Mat gray = CVUtils.ConvertToGrayscale(add);
+        Mat gray = CVUtils.CvtColor(add, Imgproc.COLOR_BGR2GRAY);
         Mat blur = CVUtils.GaussianBlur(gray, new Size(5, 5), 0);
-        Mat result = CVUtils.Threshold(blur, threshold, 255);
+        result = CVUtils.Threshold(blur, threshold, 255);
 
         DrawMesh(result);
+        DrawPerspectivePoint();
         ShowDisplay(src, split[0], split[1], split[2], frame, gray, result);
     }
 
     private Mat PerspectiveTransform()
     {
-        DrawPerspectivePoint();
-
         Mat pts1 = new Mat(4, 1, CvType.CV_32FC2);
         Mat pts2 = new Mat(4, 1, CvType.CV_32FC2);
         pts1.put(0, 0, cameraBasedPoints[0].Get().x, cameraBasedPoints[0].Get().y,
@@ -238,17 +244,20 @@ public class CameraBasedShadowDetector : ShadowDetector
 
     private void DrawPerspectivePoint()
     {
-        for (int i = 0; i < cameraBasedPoints.Length; i++)
-            CVUtils.DrawCircle(ref frame, cameraBasedPoints[i].Get());
+        if (drawPoint)
+        {
+            for (int i = 0; i < cameraBasedPoints.Length; i++)
+                CVUtils.DrawCircle(ref frame, cameraBasedPoints[i].Get());
+        }
     }
 
     private void DrawMesh(Mat src)
     {
-        if (draw)
-        {
-            List<MatOfPoint> contours = CVUtils.FindContours(src);
-            List<Shadow> shadows = FindShadow(contours);
+        contours = CVUtils.FindContours(src);
+        List<Shadow> shadows = FindShadow(contours);
 
+        if (drawMesh)
+        {
             MeshDrawer.Clear();
             MeshDrawer.Draw(shadows);
         }
@@ -310,5 +319,10 @@ public class CameraBasedShadowDetector : ShadowDetector
             points[i].x = pos.x;
             points[i].y = pos.y;
         }
+    }
+
+    public Mat GetResult()
+    {
+        return result;
     }
 }

@@ -5,10 +5,10 @@ using UnityEngine;
 
 public static class CVUtils
 {
-    public static Mat ConvertToGrayscale(Mat src)
+    public static Mat CvtColor(Mat src, int code)
     {
         Mat dst = new Mat();
-        Imgproc.cvtColor(src, dst, Imgproc.COLOR_BGR2GRAY);
+        Imgproc.cvtColor(src, dst, code);
         return dst;
     }
 
@@ -54,12 +54,20 @@ public static class CVUtils
 
     public static void DrawContours(ref Mat src, List<MatOfPoint> contours, int i)
     {
-        Imgproc.drawContours(src, contours, i, new Scalar(255, 0, 0, 255), 3);
+        Imgproc.drawContours(src, contours, i, new Scalar(100, 100, 100, 255), 3);
+    }
+
+    public static void DrawContours(ref Mat src, List<MatOfPoint> contours)
+    {
+        for (int i = 0; i < contours.Count; i++)
+        {
+            Imgproc.drawContours(src, contours, i, new Scalar(255, 0, 0, 255), 3);
+        }
     }
 
     public static void DrawCircle(ref Mat src, Point point)
     {
-        Imgproc.circle(src, point, 20, new Scalar(255, 0, 0, 255), -1);
+        Imgproc.circle(src, point, 10, new Scalar(255, 0, 0, 255), -1);
     }
 
     public static Vector2[] PointToVector2(Point[] points)

@@ -11,11 +11,14 @@ public class ShadowObject : MonoBehaviour
     [SerializeField]
     protected PolygonCollider2D polygonCollider2D;
     public Bounds bounds => polygonCollider2D.bounds;
+    [SerializeField]
+    protected MeshRenderer meshRenderer;
 
     public void Init(Shadow shadow)
     {
         this.shadow = shadow;
         DrawMesh();
+        Activate();
     }
 
     private void DrawMesh()
@@ -25,5 +28,15 @@ public class ShadowObject : MonoBehaviour
         meshFilter.mesh = mesh;
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
+    }
+
+    public void Deactivate()
+    {
+        meshRenderer.enabled = false;
+    }
+
+    public void Activate()
+    {
+        meshRenderer.enabled = true;
     }
 }
