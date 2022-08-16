@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace BeyondTheTale.Chapter1
 {
@@ -18,6 +19,13 @@ namespace BeyondTheTale.Chapter1
         [SerializeField]
         private GameObject text;
 
+        [SerializeField]
+        private UnityEvent onStart = new UnityEvent();
+        [SerializeField]
+        private UnityEvent onHit = new UnityEvent();
+        [SerializeField]
+        private UnityEvent onLanding = new UnityEvent();
+
         private Vector3 playerPos;
         private Vector3 cameraPos;
         private Vector3 obstaclePos;
@@ -26,6 +34,7 @@ namespace BeyondTheTale.Chapter1
 
         private void Start()
         {
+            onStart.Invoke();
             playerPos = player.position;
             cameraPos = camera.position;
             obstaclePos = obstacle.position;
@@ -49,6 +58,7 @@ namespace BeyondTheTale.Chapter1
 
         private void Restart()
         {
+            onStart.Invoke();
             player.position = playerPos;
             camera.position = cameraPos;
             obstacle.position = obstaclePos;
@@ -60,6 +70,7 @@ namespace BeyondTheTale.Chapter1
 
         public void OnHit()
         {
+            onHit.Invoke();
             playerAnimator.OnHit();
             obstacleScroller.IsStop(true);
             Invoke(nameof(Restart), 0.8f);
@@ -67,6 +78,7 @@ namespace BeyondTheTale.Chapter1
 
         public void OnLanding()
         {
+            onLanding.Invoke();
             playerAnimator.OnLanding();
             obstacleScroller.IsStop(true);
             text.SetActive(true);
