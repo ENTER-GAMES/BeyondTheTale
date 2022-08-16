@@ -279,6 +279,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 8e3efc671b6874811b7f9477d1ca1001, type: 3}
   - {fileID: 21300000, guid: 00fbe077910034778b8721916a86394f, type: 3}
   - {fileID: 21300000, guid: 38ff76778abb442a49831deeeb306b31, type: 3}
+  - {fileID: 21300000, guid: 16dd0b7738f1bd8408b2487c99e53831, type: 3}
   - {fileID: 21300000, guid: 25da0c7778d364794b493b1daa03e7ff, type: 3}
   - {fileID: 21300000, guid: bc42228742ad44da5ac400b7f34f117b, type: 3}
   - {fileID: 21300000, guid: fc4234872bee343a9a69f02b83031106, type: 3}
@@ -450,6 +451,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 7098cb3c452ac4e64a6fa7fda29807f1, type: 3}
   - {fileID: 21300000, guid: c532d14cf83cc439ea19752d362cfecd, type: 3}
   - {fileID: 21300000, guid: 34c4f24cfd407413692b48d7447d4dde, type: 3}
+  - {fileID: 21300000, guid: c098475caed68d74a8f06d8be014afe3, type: 3}
   - {fileID: 21300000, guid: 8edd595c66ac6454ca50dc93517ef924, type: 3}
   - {fileID: 21300000, guid: a5163c5c18b734bb68389845878d88c9, type: 3}
   - {fileID: 21300000, guid: 15a2c06cc870a410ca86d40590dc77e5, type: 3}
@@ -817,6 +819,7 @@ SpriteAtlas:
   - Book_Page_0057
   - BillRabbit_Move_0003
   - Cutscene_4_Teapot
+  - Elephant_Src
   - BillRabbit_Landing_0006
   - Alice_Idle_0016
   - Alice_FALL_0000
@@ -988,6 +991,7 @@ SpriteAtlas:
   - Seeker2_Left
   - Book_Open_0017
   - BillRabbit_Idle_0070
+  - Elephant_Obj
   - Dial_Line2
   - MadRabbit_0011
   - BillRabbit_Idle_0051
