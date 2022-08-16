@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 17f5c495f400b824d9409773ee9f022f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -129,3 +129,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshFilter: {fileID: 6827494100347199788}
   polygonCollider2D: {fileID: 7295531152922050340}
+  meshRenderer: {fileID: 458842461854023047}

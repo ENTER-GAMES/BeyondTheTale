@@ -4,16 +4,16 @@ using UnityEngine;
 public class MeshDrawer : MonoBehaviour
 {
     [SerializeField]
-    private ShadowObject shadowObjectPrefab;
-    private List<ShadowObject> shadowObjects = new List<ShadowObject>();
+    protected ShadowObject shadowObjectPrefab;
+    protected List<ShadowObject> shadowObjects = new List<ShadowObject>();
 
-    public void Draw(List<Shadow> shadows)
+    public virtual void Draw(List<Shadow> shadows)
     {
         foreach (Shadow shadow in shadows)
             CreateObject(shadow);
     }
 
-    public void Clear()
+    public virtual void Clear()
     {
         foreach (ShadowObject so in shadowObjects)
             Destroy(so.gameObject);

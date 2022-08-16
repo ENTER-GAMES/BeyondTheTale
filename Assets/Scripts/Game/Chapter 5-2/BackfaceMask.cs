@@ -11,16 +11,16 @@ namespace Chapter_5_2
     public class BackfaceMask : MonoBehaviour
     {
         [SerializeField]
-        private Texture2D texture1;
+        private Texture2D textureBack;
         [SerializeField]
-        private Texture2D texture2;
+        private Texture2D textureFront;
         [SerializeField]
         private Renderer renderer;
         [SerializeField]
         private CameraBasedShadowDetector detector;
 
-        private Mat src1;
-        private Mat src2;
+        private Mat matBack;
+        private Mat matFront;
         private Mat dst;
         private Texture2D tex;
 
@@ -29,14 +29,14 @@ namespace Chapter_5_2
 
         private void Start()
         {
-            width = texture1.width;
-            height = texture1.height;
+            width = textureBack.width;
+            height = textureBack.height;
 
-            src1 = new Mat(height, width, CvType.CV_8UC4, new Scalar(255, 255, 255, 255));
-            src2 = new Mat(height, width, CvType.CV_8UC4, new Scalar(255, 255, 255, 255));
+            matBack = new Mat(height, width, CvType.CV_8UC4, new Scalar(255, 255, 255, 255));
+            matFront = new Mat(height, width, CvType.CV_8UC4, new Scalar(255, 255, 255, 255));
             dst = new Mat(height, width, CvType.CV_8UC4, new Scalar(255, 255, 255, 255));
-            Utils.texture2DToMat(texture1, src1, false, 0);
-            Utils.texture2DToMat(texture2, src2, false, 0);
+            Utils.texture2DToMat(textureBack, matBack, false, 0);
+            Utils.texture2DToMat(textureFront, matFront, false, 0);
 
             tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
             renderer.material.mainTexture = tex;
@@ -44,9 +44,9 @@ namespace Chapter_5_2
 
         private void Update()
         {
-            dst = src2.clone();
+            dst = matBack.clone();
             Mat mask = GetMatFromCamera();
-            src1.copyTo(dst, mask);
+            matFront.copyTo(dst, mask);
             Utils.matToTexture2D(dst, tex, false, 0, false);
         }
 

@@ -160,9 +160,11 @@ public class CameraBasedShadowDetector : ShadowDetector
                 Debug.Log("name:" + webCamTexture.deviceName + " width:" + webCamTexture.width + " height:" + webCamTexture.height + " fps:" + webCamTexture.requestedFPS);
                 Debug.Log("videoRotationAngle:" + webCamTexture.videoRotationAngle + " videoVerticallyMirrored:" + webCamTexture.videoVerticallyMirrored + " isFrongFacing:" + webCamDevice.isFrontFacing);
 
-                hasInitDone = true;
-
                 OnInited();
+
+                yield return null;
+
+                hasInitDone = true;
 
                 break;
             }
