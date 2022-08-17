@@ -45,6 +45,9 @@ TagManager:
   - Shadow Object
   - 
   m_SortingLayers:
+  - name: Light Object
+    uniqueID: 2510324869
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

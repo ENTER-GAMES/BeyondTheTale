@@ -45,7 +45,10 @@ public class Book : MonoBehaviour
         }
 
         if (targetSceneName.Length > 0)
+        {
+            FindObjectOfType<CameraBasedShadowDetector>()?.DestroyWebcamTexture();
             SceneManager.LoadScene(targetSceneName);
+        }
     }
 
     public void ZoomOut()

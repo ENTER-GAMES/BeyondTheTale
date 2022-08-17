@@ -58,8 +58,14 @@ public class CameraBasedShadowDetector : ShadowDetector
     [Range(0, 255)]
     private int threshold = 20;
     [SerializeField]
-    [Range(0.001f, 0.01f)]
+    [Range(0.001f, 0.1f)]
     private double epsilon = 0.001f;
+    [SerializeField]
+    [Range(1, 21)]
+    private int gaussian = 1;
+    [SerializeField]
+    [Range(0, 100000)]
+    private int contourMinArea = 0;
     [SerializeField]
     private bool useApprox = true;
     [SerializeField]
@@ -220,7 +226,9 @@ public class CameraBasedShadowDetector : ShadowDetector
         List<Mat> split = new List<Mat>();
         Core.split(add, split);
         Mat gray = CVUtils.CvtColor(add, Imgproc.COLOR_BGR2GRAY);
-        Mat blur = CVUtils.GaussianBlur(gray, new Size(5, 5), 0);
+        if (gaussian % 2 == 0)
+            gaussian = Mathf.Clamp(gaussian - 1, 1, 11);
+        Mat blur = CVUtils.GaussianBlur(gray, new Size(gaussian, gaussian), 0);
         result = CVUtils.Threshold(blur, threshold, 255);
 
         DrawMesh(result);
@@ -269,7 +277,7 @@ public class CameraBasedShadowDetector : ShadowDetector
         foreach (MatOfPoint c in contours)
         {
             double area = Imgproc.contourArea(c);
-            if (area > 1000)
+            if (area > contourMinArea)
             {
                 Point[] points = c.toArray();
                 if (useApprox)
@@ -324,5 +332,11 @@ public class CameraBasedShadowDetector : ShadowDetector
     public Mat GetResult()
     {
         return result;
+    }
+
+    public void DestroyWebcamTexture()
+    {
+        webCamTexture.Stop();
+        WebCamTexture.Destroy(webCamTexture);
     }
 }
