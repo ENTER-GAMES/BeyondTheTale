@@ -117,6 +117,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 08c286527fde540a39950bccb40fe061, type: 3}
   - {fileID: 21300000, guid: f40b69528914b4f8cb9ab58cd3f17c05, type: 3}
   - {fileID: 21300000, guid: 708add525f6554a8cb060617190738db, type: 3}
+  - {fileID: 21300000, guid: faa08f521c8fc4feab2f65870f66a4b3, type: 3}
   - {fileID: 21300000, guid: fa851562a91eb47fd8b38aa69e5fa17b, type: 3}
   - {fileID: 21300000, guid: 5f196962df79b4e90a88d8d09ba82655, type: 3}
   - {fileID: 21300000, guid: 6ab21b62512684e57a151a302508e3dc, type: 3}
@@ -134,6 +135,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 6a8f08d20bb4b4ba3861309dc45ba993, type: 3}
   - {fileID: 21300000, guid: 6f2a1cd2db0a8465f8b2785eeac64139, type: 3}
   - {fileID: 21300000, guid: a2dcb1f2a282c4d57aa78296138fac6d, type: 3}
+  - {fileID: 21300000, guid: 9ad759f2b3c8d4e3ca1825804bb0bd62, type: 3}
   - {fileID: 21300000, guid: 37b52803ec3d34d828bda8c60a9e34e8, type: 3}
   - {fileID: 21300000, guid: b8deb113cdc7547ba83dde16bc92c5ae, type: 3}
   - {fileID: 21300000, guid: 55c9f8133de424db3aefc74d9485ea65, type: 3}
@@ -415,6 +417,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: bba88dda9dd7a4b03bb78a03ad969577, type: 3}
   - {fileID: 21300000, guid: 05cbbdda4898d436dab9d2542b5ae806, type: 3}
   - {fileID: 21300000, guid: 92d9f6ea51fcf41398b28884602da997, type: 3}
+  - {fileID: 21300000, guid: db686bea881ab4f0db6ea862820b3eea, type: 3}
   - {fileID: 21300000, guid: 86c1efeaafa734a3a8be98751996c04a, type: 3}
   - {fileID: 21300000, guid: 8aae61fa2b3ff475ea13fb32d75be119, type: 3}
   - {fileID: 21300000, guid: 227af8fa33e754bfd916ce51f0a61ca5, type: 3}
@@ -659,6 +662,7 @@ SpriteAtlas:
   - MadRabbit_0067
   - BillRabbit_Idle_0002
   - MadRabbit_0061
+  - Cutscene_5-2_Prev
   - Book_Open_0052
   - BillRabbit_Landing_0000
   - BillRabbit_Move_0005
@@ -676,6 +680,7 @@ SpriteAtlas:
   - MadRabbit_0030
   - BillRabbit_Move_0025
   - Book_Open_0070
+  - Cutscene_Trial_Prev
   - BillRabbit_Idle_0071
   - MadHatter_TeaParty_0003
   - MadRabbit_0020
@@ -957,6 +962,7 @@ SpriteAtlas:
   - Book_Open_0049
   - Book_Page_0058
   - Alice_FALL_0022
+  - Carpet
   - Cutscene_1
   - MadRabbit_0036
   - Book_Open_0016

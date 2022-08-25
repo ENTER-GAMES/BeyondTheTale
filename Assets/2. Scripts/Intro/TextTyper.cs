@@ -20,15 +20,16 @@ public class TextTyper : MonoBehaviour
         message = textMeshPro.text;
     }
 
-    private void OnEnable()
-    {
-        textMeshPro.text = "";
-    }
-
     public void Type()
     {
         StopAllCoroutines();
         StartCoroutine(ExplainRoutine());
+    }
+
+    public void RemoveAllText()
+    {
+        StopAllCoroutines();
+        textMeshPro.text = "";
     }
 
     private IEnumerator ExplainRoutine()
