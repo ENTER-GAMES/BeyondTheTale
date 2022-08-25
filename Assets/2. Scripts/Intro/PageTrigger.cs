@@ -44,6 +44,9 @@ public class PageTrigger : MonoBehaviour
 
     private IEnumerator TriggerRoutine()
     {
+        // * 계속 돌고있는 코루틴
+        // 그림자 들어오면, 목표 페이지 인덱스를 업데이트 해줌
+
         WaitForSeconds wait = new WaitForSeconds(1f / 60f);
 
         while (true)
@@ -58,6 +61,9 @@ public class PageTrigger : MonoBehaviour
 
     private IEnumerator TurnRoutine()
     {
+        // * 계속 돌고있는 코루틴
+        // 현재 페이지 인덱스랑 목표 페이지 인덱스가 다르면, 그 쪽 방향으로 책을 넘겨줌
+
         WaitForSeconds wait = new WaitForSeconds(1f / 60f);
 
         while (true)
@@ -79,6 +85,7 @@ public class PageTrigger : MonoBehaviour
         // 반대 방향으로 targetPageIndex가 변경될 경우, 본 코루틴이 멈추게 됩니다.
         // 단, 페이지 넘기기가 모두 끝나고 멈춥니다.
 
+        // 넘기기 시작하면 모든 페이지를 숨긴다.
         HideAllPages();
 
         while (true)
@@ -167,6 +174,7 @@ public class PageTrigger : MonoBehaviour
 
     private void DisplayPage(int targetPageIndex)
     {
+        // 모든 페이지 숨기고
         HideAllPages();
 
         // 목표 페이지만 디스플레이
@@ -177,7 +185,7 @@ public class PageTrigger : MonoBehaviour
     {
         // 출력되고 있는 모든 페이지 숨김
         foreach (Page page in pages)
-            if (page.isDisplay) page.HidePage();
+            page?.HidePage();
 
     }
 

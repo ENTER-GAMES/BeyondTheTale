@@ -491,7 +491,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4743794866105430498, guid: 024547b541dfc4b73a8aa5af385e1e1c, type: 3}
       propertyPath: m_Color.g
-      value: 0.6938923
+      value: 0.61752665
+      objectReference: {fileID: 0}
+    - target: {fileID: 4743794866105430498, guid: 024547b541dfc4b73a8aa5af385e1e1c, type: 3}
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4743794866105430498, guid: 024547b541dfc4b73a8aa5af385e1e1c, type: 3}
+      propertyPath: m_BlendStyleIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4743794866105430498, guid: 024547b541dfc4b73a8aa5af385e1e1c, type: 3}
       propertyPath: m_PointLightInnerRadius

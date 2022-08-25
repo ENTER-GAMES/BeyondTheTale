@@ -12,11 +12,11 @@ public class Page : MonoBehaviour
     [SerializeField]
     private PageElement[] pageElements;
     [SerializeField]
-    private int leftSideZIndex;
+    private int leftSideZIndex;     // 왼쪽에 갔을 때 z index
     [SerializeField]
-    private int rightSideZIndex;
+    private int rightSideZIndex;    // 오른쪽에 갔을 때 z index
     [SerializeField]
-    private float delayTime;
+    private float delayTime;        // 책을 넘길 수 있는 상태가 되는 시간
 
     public bool isEnd { get; private set; }
     public bool isDisplay { get; private set; }
@@ -68,6 +68,10 @@ public class Page : MonoBehaviour
 
     public IEnumerator TurnRoutine(int direction)
     {
+        // 책 넘기는 루틴
+        // 애니메이션 재생 후
+        // 다음 페이지가 넘어갈 수 있도록, delayTime이 지난 후에 코루틴 끝남
+
         string animationName = direction >= 0 ? "Next" : "Previous";
         animator.Play(animationName, -1);
 
@@ -78,17 +82,19 @@ public class Page : MonoBehaviour
 
     public void DisplayPage()
     {
-        foreach (PageElement pageElement in pageElements)
-            pageElement.gameObject.SetActive(true);
-
         isDisplay = true;
+        SetActiveAllPageElements(true);
     }
 
     public void HidePage()
     {
-        foreach (PageElement pageElement in pageElements)
-            pageElement.gameObject.SetActive(false);
-
         isDisplay = false;
+        SetActiveAllPageElements(false);
+    }
+
+    private void SetActiveAllPageElements(bool value)
+    {
+        foreach (PageElement pageElement in pageElements)
+            pageElement.gameObject.SetActive(value);
     }
 }
