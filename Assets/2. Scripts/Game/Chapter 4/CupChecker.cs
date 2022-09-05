@@ -13,32 +13,21 @@ public class CupChecker : MonoBehaviour
     [SerializeField]
     private bool isSuccess = false;
 
-    public bool IsSuccess() => isSuccess;
+    [Header("Tea")]
+    [SerializeField]
+    private Sprite[] teaSprites;
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
 
-    private void FixedUpdate()
-    {
-        isSuccess = currentCount >= successCount;
-        currentCount = 0;
-    }
+    public bool IsSuccess() => currentCount >= successCount;
 
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag(targetTag))
+        {
             currentCount++;
+            spriteRenderer.sprite = teaSprites[(int)Mathf.Lerp(0, teaSprites.Length - 1, (float)currentCount / successCount)];
+            other.gameObject.SetActive(false);
+        }
     }
-
-    // private void Update()
-    // {
-
-    // }
-
-    // private void OnTriggerEnter2D(Collider2D other)
-    // {
-    // }
-
-    // private void OnTriggerExit2D(Collider2D other)
-    // {
-    //     if (other.CompareTag(targetTag))
-    //         currentCount--;
-    // }
 }
