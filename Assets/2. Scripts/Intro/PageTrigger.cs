@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class PageTrigger : MonoBehaviour
@@ -15,6 +16,10 @@ public class PageTrigger : MonoBehaviour
     private float rayHeight;
     [SerializeField]
     private float pagingDelayTime;
+
+    [Header("Feedback")]
+    [SerializeField]
+    private Light2D[] feedbackLights;
 
     [Header("Target")]
     [SerializeField]
@@ -56,7 +61,15 @@ public class PageTrigger : MonoBehaviour
         {
             int target = FindTargetPage();
             if (target >= 0)
+            {
                 targetPageIndex = target;
+
+                // 피드백 불빛 활성화
+                foreach (Light2D light in feedbackLights)
+                    light.intensity = 10;
+
+                feedbackLights[target].intensity = 60;
+            }
 
             yield return wait;
         }
