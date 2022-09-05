@@ -38,6 +38,9 @@ public class PageTrigger : MonoBehaviour
 
     private void Start()
     {
+        transform.localScale = Vector3.one;
+        boxCollider2D.offset = Vector2.zero;
+
         StartCoroutine(TriggerRoutine());
         StartCoroutine(TurnRoutine());
     }
@@ -147,8 +150,8 @@ public class PageTrigger : MonoBehaviour
 
         for (int i = 0; i < rayCount; i++)
         {
-            Vector3 point = startPoint + (Vector3.right * gap * i);
-            RaycastHit2D hit = Physics2D.Raycast(point, Vector3.up, rayHeight, targetLayerMask);
+            Vector3 point = startPoint + (transform.right * gap * i);
+            RaycastHit2D hit = Physics2D.Raycast(point, transform.up, rayHeight, targetLayerMask);
 
             if (hit.collider == null) continue;
 
@@ -160,16 +163,17 @@ public class PageTrigger : MonoBehaviour
 
     private Vector3 GetStartRayPoint()
     {
-        Vector3 minPoint = boxCollider2D.bounds.min;
-        float height = boxCollider2D.bounds.size.y;
-        Vector3 startPoint = new Vector3(minPoint.x, minPoint.y + height);
+        Vector3 size = boxCollider2D.size;
+        Vector3 center = transform.position;
+
+        Vector3 startPoint = center + (-transform.right * (size.x / 2)) + (transform.up * (size.y / 2));
 
         return startPoint;
     }
 
     private float GetRayGap()
     {
-        return boxCollider2D.bounds.size.x / (pageCount * rayCountPerPage - 1);
+        return boxCollider2D.size.x / (pageCount * rayCountPerPage - 1);
     }
 
     private void DisplayPage(int targetPageIndex)
@@ -199,7 +203,7 @@ public class PageTrigger : MonoBehaviour
 
         for (int i = 0; i < rayCount; i++)
         {
-            Vector3 point = startPoint + (Vector3.right * gap * i);
+            Vector3 point = startPoint + (transform.right * gap * i);
 
             if (currentPageIndex == (int)(i / rayCountPerPage))
                 Gizmos.color = Color.red;
@@ -208,7 +212,7 @@ public class PageTrigger : MonoBehaviour
             else
                 Gizmos.color = Color.yellow;
 
-            Gizmos.DrawLine(point, point + (Vector3.up * rayHeight));
+            Gizmos.DrawLine(point, point + (transform.up * rayHeight));
         }
     }
 }
