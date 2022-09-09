@@ -5,20 +5,25 @@ using UnityEngine.Events;
 
 public class Pin : MonoBehaviour
 {
-    [SerializeField]
     private int[] targetIndexs;         // key: 다이얼 인덱스, value: 다이얼 내의 타겟 인덱스
     private List<bool> results = new List<bool>();
 
     public UnityEvent onComplete = new UnityEvent();
+    private bool hasInitDone = false;
 
-    private void Awake()
+    public void Init(int[] targetIndexs)
     {
-        for (int i = 0; i < targetIndexs.Length; i++)
+        this.targetIndexs = targetIndexs;
+        for (int i = 0; i < this.targetIndexs.Length; i++)
             results.Add(false);
+
+        hasInitDone = true;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (!hasInitDone) return;
+
         if (!other.TryGetComponent<DialCode>(out DialCode dialCode)) return;
 
         int dialIndex = dialCode.DialIndex;

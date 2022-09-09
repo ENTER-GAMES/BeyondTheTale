@@ -351,6 +351,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 08a073c8ce49c4299a0879d8470c5e0e, type: 3}
   - {fileID: 21300000, guid: ff5954c86cc964cd198b695cfa70be7c, type: 3}
   - {fileID: 21300000, guid: 231c55c8177274559b640f7f835383e2, type: 3}
+  - {fileID: 21300000, guid: 4043b2d891fd0084fa15a1c347273d9d, type: 3}
   - {fileID: 21300000, guid: 876f33d824fbc4ab49ecb2ab708050d6, type: 3}
   - {fileID: 21300000, guid: 83bbc6d8b79b548fabc79e0841f25e31, type: 3}
   - {fileID: 21300000, guid: be186dd8ae3744fb9990574856898cfe, type: 3}
@@ -919,6 +920,7 @@ SpriteAtlas:
   - Book_Page_0050
   - MadHatter_TeaParty_0000
   - Book_Open_0037
+  - Card_Empty
   - Alice_Jump_0005
   - Alice_Jump_0000
   - Alice_Jump_0010

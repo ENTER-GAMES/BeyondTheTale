@@ -5,6 +5,7 @@ using OpenCVForUnity.UnityUtils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 
 [System.Serializable]
@@ -94,6 +95,8 @@ public class CameraBasedShadowDetector : ShadowDetector
     private Mat result;
 
     private bool hasInitDone = false;
+    private bool didUpdateFirstFrame = false;
+    public UnityEvent onFirstFrameUpdate = new UnityEvent();
 
     private void Start()
     {
@@ -212,6 +215,12 @@ public class CameraBasedShadowDetector : ShadowDetector
         {
             Utils.webCamTextureToMat(webCamTexture, frame, colors);
             Run();
+
+            if (!didUpdateFirstFrame)
+            {
+                didUpdateFirstFrame = true;
+                onFirstFrameUpdate.Invoke();
+            }
         }
     }
 

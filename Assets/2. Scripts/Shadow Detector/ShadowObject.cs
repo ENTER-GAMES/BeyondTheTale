@@ -17,14 +17,16 @@ public class ShadowObject : MonoBehaviour
     public void Init(Shadow shadow)
     {
         this.shadow = shadow;
-        DrawMesh();
         Activate();
+        DrawMesh();
     }
 
     private void DrawMesh()
     {
         polygonCollider2D.points = shadow.points;
         Mesh mesh = polygonCollider2D.CreateMesh(false, false);
+        if (mesh == null)
+            return;
         meshFilter.mesh = mesh;
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
@@ -33,10 +35,12 @@ public class ShadowObject : MonoBehaviour
     public void Deactivate()
     {
         meshRenderer.enabled = false;
+        polygonCollider2D.enabled = false;
     }
 
     public void Activate()
     {
         meshRenderer.enabled = true;
+        polygonCollider2D.enabled = true;
     }
 }

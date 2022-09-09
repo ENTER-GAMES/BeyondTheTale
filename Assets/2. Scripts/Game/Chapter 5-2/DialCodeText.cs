@@ -1,16 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DialCodeText : MonoBehaviour
 {
-    [SerializeField]
     private Transform targetTransform;
+
+    public void Init(Transform target)
+    {
+        targetTransform = target;
+        gameObject.SetActive(true);
+    }
 
     private void LateUpdate()
     {
+        if (!targetTransform)
+            return;
+
         transform.SetPositionAndRotation(
-            Camera.main.WorldToScreenPoint(targetTransform.position),
+            targetTransform.position,
             targetTransform.rotation
         );
     }
