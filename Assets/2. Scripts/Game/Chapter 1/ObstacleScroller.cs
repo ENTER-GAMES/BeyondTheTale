@@ -15,9 +15,14 @@ namespace BeyondTheTale.Chapter1
             transform.Translate(Vector3.up * speed * Time.deltaTime);
         }
 
-        public void IsStop(bool value)
+        public void Stop(bool value)
         {
             isStop = value;
+        }
+
+        public float GetSpeed()
+        {
+            return speed;
         }
     }
 }
