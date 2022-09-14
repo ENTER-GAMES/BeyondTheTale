@@ -22,6 +22,12 @@ public class Dial : MonoBehaviour
     [SerializeField]
     private new Collider2D collider;
 
+    [Header("Audio")]
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip audioClipRotateDial;
+
     private bool hasInitDone = false;
 
     public void Init()
@@ -59,8 +65,11 @@ public class Dial : MonoBehaviour
         while (true)
         {
             if (!isLocked)
+            {
                 transform.Rotate(0, 0, rotateSpeed * flipX);
-                //transform.Rotate(0, 0, rotateSpeed * flipX * Time.deltaTime);
+                audioSource.PlayOneShot(audioClipRotateDial);
+            }
+            //transform.Rotate(0, 0, rotateSpeed * flipX * Time.deltaTime);
 
             yield return new WaitForSeconds(rotateDelay);
         }

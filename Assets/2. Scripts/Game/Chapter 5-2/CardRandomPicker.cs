@@ -44,6 +44,7 @@ public class CardRandomPicker : MonoBehaviour
     {
         int randomIndex = Random.Range(0, cardListClone.Count);
         GameObject card = cardListClone[randomIndex];
+        card.GetComponent<Card>()?.SetIsTarget(true);
         cardListClone.RemoveAt(randomIndex);
         card.gameObject.SetActive(true);
         return card;
