@@ -634,6 +634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MeshDrawer: {fileID: 4102060819167329718}
+  requestedDeviceName: 
   requestedWidth: 640
   requestedHeight: 360
   requestedFPS: 30
@@ -644,23 +645,26 @@ MonoBehaviour:
   rendererAdd: {fileID: 204045015}
   rendererGray: {fileID: 1636309040}
   rendererThr: {fileID: 887154292}
-  r: 0
-  g: 0
-  b: 0
-  threshold: 162
-  epsilon: 0.004509999882429838
-  useApprox: 1
-  draw: 1
+  r: 25
+  g: -255
+  b: -255
+  threshold: 28
+  epsilon: 0.010900000110268593
+  gaussian: 21
+  contourMinArea: 10016
+  useApprox: 0
+  drawMesh: 1
+  drawPoint: 1
   view: 1
   cameraBasedPoints:
-  - x: 78
-    y: 26
-  - x: 521
-    y: 26
-  - x: 75
-    y: 282
-  - x: 566
-    y: 281
+  - x: 148
+    y: 20
+  - x: 359
+    y: 55
+  - x: 162
+    y: 348
+  - x: 351
+    y: 211
 --- !u!114 &4102060819167329718
 MonoBehaviour:
   m_ObjectHideFlags: 0

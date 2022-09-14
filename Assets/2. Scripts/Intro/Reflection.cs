@@ -28,8 +28,6 @@ public class Reflection : MonoBehaviour
         targetCutscene.transform.position = newPos;
 
         spriteRenderer.enabled = true;
-
-        // StartCoroutine(ReflectionRoutine());
     }
 
     private IEnumerator ReflectionRoutine()
@@ -52,11 +50,6 @@ public class Reflection : MonoBehaviour
 
             yield return null;
         }
-    }
-
-    private void OnEnable()
-    {
-        StopReflection();
     }
 
     public void StopReflection()

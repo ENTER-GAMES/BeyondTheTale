@@ -21,33 +21,40 @@ namespace Chapter_5_2
 
         private Mat matBack;
         private Mat matFront;
-        private Mat dst;
         private Texture2D tex;
 
         private int width;
         private int height;
 
-        private void Start()
+        private bool hasInitDone = false;
+
+        public void Init()
         {
             width = textureBack.width;
             height = textureBack.height;
 
             matBack = new Mat(height, width, CvType.CV_8UC4, new Scalar(255, 255, 255, 255));
             matFront = new Mat(height, width, CvType.CV_8UC4, new Scalar(255, 255, 255, 255));
-            dst = new Mat(height, width, CvType.CV_8UC4, new Scalar(255, 255, 255, 255));
             Utils.texture2DToMat(textureBack, matBack, false, 0);
             Utils.texture2DToMat(textureFront, matFront, false, 0);
 
             tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
             renderer.material.mainTexture = tex;
+
+            hasInitDone = true;
         }
 
         private void Update()
         {
-            dst = matBack.clone();
+            if (!hasInitDone) return;
+
+            Mat src = matBack.clone();
             Mat mask = GetMatFromCamera();
-            matFront.copyTo(dst, mask);
-            Utils.matToTexture2D(dst, tex, false, 0, false);
+            Mat mask_inv = mask.clone();
+            Core.bitwise_not(mask, mask_inv);
+            Mat result = new Mat(height, width, CvType.CV_8UC4, new Scalar(255, 255, 255, 0));
+            Core.bitwise_and(src, src, result, mask_inv);
+            Utils.matToTexture2D(result, tex, false, 0, false);
         }
 
         private Mat GetMatFromCamera()

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace BeyondTheTale.Chapter1
 {
@@ -9,11 +10,15 @@ namespace BeyondTheTale.Chapter1
         [SerializeField]
         private Transform player;
         [SerializeField]
-        private new Transform camera;
+        private Transform rabbit;
         [SerializeField]
-        private Transform obstacle;
+        private Transform bed;
         [SerializeField]
-        private Vector3 endPos;
+        private Vector3 playerEndPos;
+        [SerializeField]
+        private Vector3 rabbitEndPos;
+        [SerializeField]
+        private ObstacleScroller obstacleScroller;
         [SerializeField]
         private float time;
         [SerializeField]
@@ -22,35 +27,37 @@ namespace BeyondTheTale.Chapter1
         [SerializeField]
         private UnityEvent onStart = new UnityEvent();
         [SerializeField]
+        private UnityEvent onMoveEnd = new UnityEvent();
+        [SerializeField]
         private UnityEvent onHit = new UnityEvent();
         [SerializeField]
         private UnityEvent onLanding = new UnityEvent();
 
         private Vector3 playerPos;
-        private Vector3 cameraPos;
         private Vector3 obstaclePos;
         private PlayerAnimator playerAnimator;
-        private ObstacleScroller obstacleScroller; 
+        private bool playerMove = false;
 
-        private void Start()
+        private void Awake()
         {
-            onStart.Invoke();
-            playerPos = player.position;
-            cameraPos = camera.position;
-            obstaclePos = obstacle.position;
             playerAnimator = player.GetComponent<PlayerAnimator>();
-            obstacleScroller = obstacle.GetComponent<ObstacleScroller>();
-
-            StartCoroutine(MoveRoutine());
         }
 
-        private IEnumerator MoveRoutine()
+        private IEnumerator Start()
+        {
+            onStart.Invoke();
+            yield return StartCoroutine(MoveRoutine(rabbit, rabbit.position, rabbitEndPos, time));
+            yield return StartCoroutine(MoveRoutine(player, player.position, playerEndPos, time));
+            onMoveEnd.Invoke();
+        }
+
+        private IEnumerator MoveRoutine(Transform target, Vector3 start, Vector3 end, float t)
         {
             float percent = 0;
             while (percent <= 1)
             {
-                percent += Time.deltaTime / time;
-                player.position = Vector3.Lerp(playerPos, endPos, percent);
+                percent += Time.deltaTime / t;
+                target.position = Vector3.Lerp(start, end, percent);
 
                 yield return null;
             }
@@ -58,30 +65,43 @@ namespace BeyondTheTale.Chapter1
 
         private void Restart()
         {
-            onStart.Invoke();
-            player.position = playerPos;
-            camera.position = cameraPos;
-            obstacle.position = obstaclePos;
-            obstacleScroller.IsStop(false);
-            playerAnimator.PlayFallAnim();
-
-            StartCoroutine(MoveRoutine());
+            FindObjectOfType<CameraBasedShadowDetector>()?.DestroyWebcamTexture();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public void OnHit()
         {
             onHit.Invoke();
             playerAnimator.OnHit();
-            obstacleScroller.IsStop(true);
+            obstacleScroller.Stop(true);
             Invoke(nameof(Restart), 0.8f);
         }
 
         public void OnLanding()
         {
             onLanding.Invoke();
+            MovePlayer(false);
             playerAnimator.OnLanding();
-            obstacleScroller.IsStop(true);
+            obstacleScroller.Stop(true);
             text.SetActive(true);
+        }
+
+        public void MovePlayer(bool value)
+        {
+            playerMove = value;
+        }
+
+        private void Update()
+        {
+            if (playerMove)
+                player.Translate(Vector3.down * obstacleScroller.GetSpeed() * Time.deltaTime);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawSphere(playerEndPos, 0.2f);
+            Gizmos.DrawSphere(rabbitEndPos, 0.2f);
         }
     }
 }
