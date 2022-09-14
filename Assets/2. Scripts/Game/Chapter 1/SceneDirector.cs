@@ -21,8 +21,6 @@ namespace BeyondTheTale.Chapter1
         private ObstacleScroller obstacleScroller;
         [SerializeField]
         private float time;
-        [SerializeField]
-        private GameObject text;
 
         [SerializeField]
         private UnityEvent onStart = new UnityEvent();
@@ -83,7 +81,6 @@ namespace BeyondTheTale.Chapter1
             MovePlayer(false);
             playerAnimator.OnLanding();
             obstacleScroller.Stop(true);
-            text.SetActive(true);
         }
 
         public void MovePlayer(bool value)
