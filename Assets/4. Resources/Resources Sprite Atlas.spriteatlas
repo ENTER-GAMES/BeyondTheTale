@@ -175,7 +175,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: fabc09230bc1b4959a6abc1d8f1b74fc, type: 3}
   - {fileID: 21300000, guid: 319b0b23f8442e440bf6191bc0813aba, type: 3}
   - {fileID: 21300000, guid: 6446d2339ec094be4a19cd81ccd06d39, type: 3}
-  - {fileID: 21300000, guid: 9aa8a3339abbfbd44b257c9b22035a60, type: 3}
+  - {fileID: 21300000, guid: a9bfa433ae0f148b5939ae8efc05dab0, type: 3}
   - {fileID: 21300000, guid: 29162733efc484ae8a64c749150ccc8c, type: 3}
   - {fileID: 21300000, guid: 57912a332794440dd8466dd6d7c1cb55, type: 3}
   - {fileID: 21300000, guid: 945f4b33577182f4ba44601b0ffa7af4, type: 3}
@@ -918,7 +918,7 @@ SpriteAtlas:
   - MadRabbit_0002
   - Dial_Line2_Shadow
   - BillRabbit_Idle_0044
-  - BillRabbit_Falling_monocle_0044
+  - Cutscene_Trial
   - BillRabbit_Jump_0006
   - BillRabbit_Idle_0063
   - BillRabbit_Falling_monocle_0030

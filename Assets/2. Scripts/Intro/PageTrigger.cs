@@ -20,6 +20,10 @@ public class PageTrigger : MonoBehaviour
     [Header("Feedback")]
     [SerializeField]
     private Light2D[] feedbackLights;
+    [SerializeField]
+    private float defaultIntensity = 10;
+    [SerializeField]
+    private float activeIntensity = 30;
 
     [Header("Target")]
     [SerializeField]
@@ -66,9 +70,9 @@ public class PageTrigger : MonoBehaviour
 
                 // 피드백 불빛 활성화
                 foreach (Light2D light in feedbackLights)
-                    light.intensity = 10;
+                    light.intensity = defaultIntensity;
 
-                feedbackLights[target].intensity = 60;
+                feedbackLights[target].intensity = activeIntensity;
             }
 
             yield return wait;
