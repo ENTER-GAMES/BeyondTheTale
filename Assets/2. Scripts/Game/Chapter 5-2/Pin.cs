@@ -38,6 +38,18 @@ public class Pin : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (!hasInitDone) return;
+
+        if (!other.TryGetComponent<DialCode>(out DialCode dialCode)) return;
+
+        int dialIndex = dialCode.DialIndex;
+        if (dialIndex >= targetIndexs.Length) return;
+
+        results[dialIndex] = false;
+    }
+
     private bool CheckComplete()
     {
         foreach (bool result in results)
