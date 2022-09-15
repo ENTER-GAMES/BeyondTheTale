@@ -11,11 +11,14 @@ public class Dial : MonoBehaviour
     [SerializeField]
     private float rotateSpeed;
     [SerializeField]
+    private float rotateTime;
+    [SerializeField]
     private float rotateDelay;
     private bool isRotating = false;
 
     private bool isLocked = false;
     private bool flip = false;
+    private bool breakRotateRotine = false;
 
     [SerializeField]
     private float radius;
@@ -46,6 +49,7 @@ public class Dial : MonoBehaviour
     {
         if (isRotating) return;
 
+        breakRotateRotine = false;
         StartCoroutine(nameof(RotateRoutine));
         isRotating = true;
     }
@@ -54,8 +58,9 @@ public class Dial : MonoBehaviour
     {
         if (!isRotating) return;
 
-        StopAllCoroutines();
-        isRotating = false;
+        // StopAllCoroutines();     // 중간에 끊으면 각 안맞음
+        // isRotating = false;
+        breakRotateRotine = true;
         flip = !flip;
     }
 
@@ -66,25 +71,29 @@ public class Dial : MonoBehaviour
         {
             if (!isLocked)
             {
-                transform.Rotate(0, 0, rotateSpeed * flipX);
+                float timer = 0;
+                float percent = 0;
                 audioSource.PlayOneShot(audioClipRotateDial);
+
+                while (percent < 1)
+                {
+                    float timeAmount = (timer + Time.deltaTime >= rotateTime) ? rotateTime - timer : Time.deltaTime;
+                    timer += timeAmount;
+                    percent = timer / rotateTime;
+
+                    transform.Rotate(0, 0, Mathf.Lerp(0, rotateSpeed * flipX, timeAmount / rotateTime));
+                    yield return null;
+                }
             }
-            //transform.Rotate(0, 0, rotateSpeed * flipX * Time.deltaTime);
 
-            yield return new WaitForSeconds(rotateDelay);
+            if (breakRotateRotine)
+            {
+                isRotating = false;
+                yield break;
+            }
+            else
+                yield return new WaitForSeconds(rotateDelay);
         }
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        //if (other.CompareTag("Shadow"))
-        //    onStayShadow.Invoke();
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        //if (other.CompareTag("Shadow"))
-        //    onExitShadow.Invoke();
     }
 
     private void Update()

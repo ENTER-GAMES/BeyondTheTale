@@ -11,6 +11,7 @@ TagManager:
   - LiquidParticle
   - ShadowObject
   - Table
+  - Movable Ground
   layers:
   - Default
   - TransparentFX

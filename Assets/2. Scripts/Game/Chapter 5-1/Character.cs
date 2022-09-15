@@ -7,7 +7,9 @@ namespace Chapter_5_1
     [RequireComponent(typeof(Rigidbody2D))]
     public class Character : MonoBehaviour, IJumpable, ITurnable, ICompletable
     {
+        protected Transform originParentTransform;          // 초기 부모 트랜스폼
         protected Vector3 spawnPosition;                    // 스폰 위치 (처음 위치)
+
         [Header("Move")]
         [SerializeField]
         protected float moveSpeed = 1f;                     // 이동 속도
@@ -41,14 +43,21 @@ namespace Chapter_5_1
 
         protected virtual void Awake()
         {
+            originParentTransform = transform.parent;
+
             rigidbody2D = GetComponent<Rigidbody2D>();
-            spawnPosition = transform.position;
+            SpawnPositionIsCurrentPosition();
         }
 
         #region Update
         protected virtual void Update()
         {
             Move();
+        }
+
+        public void SpawnPositionIsCurrentPosition()
+        {
+            spawnPosition = transform.position;
         }
 
         protected void Move()
@@ -95,6 +104,7 @@ namespace Chapter_5_1
             // 상태 업데이트
             isGround = false;
             isJumping = true;
+            transform.parent = originParentTransform;
 
             // 점프 중 이동속도 설정
             this.moveSpeedDuringJump = moveSpeedDuringJump;
@@ -107,7 +117,7 @@ namespace Chapter_5_1
             {
                 Vector3 temp = moveDirection;
 
-                Turn(Vector3.zero);
+                Stop();
                 yield return new WaitForSeconds(jumpDelayTime);
                 Turn(temp);
             }
@@ -126,7 +136,7 @@ namespace Chapter_5_1
 
             Vector3 temp = moveDirection;
 
-            Turn(Vector3.zero);
+            Stop();
 
             while (true)
             {
@@ -138,6 +148,8 @@ namespace Chapter_5_1
         #endregion
 
         #region Turn
+        public void Stop() => Turn(Vector3.zero);
+
         public void Turn() => Turn(moveDirection * -1);  // 반대 방향으로 설정
 
         public void Turn(Vector3 moveDirection)
@@ -155,10 +167,15 @@ namespace Chapter_5_1
         {
             if (isGround) return;
 
-            if (other.gameObject.CompareTag("Ground"))
+            if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Movable Ground"))
             {
                 isGround = true;
                 isJumping = false;
+
+                if (other.gameObject.CompareTag("Movable Ground"))
+                {
+                    transform.parent = other.transform;
+                }
 
                 if (characterAnimator == null) return;
 
@@ -169,8 +186,8 @@ namespace Chapter_5_1
 
         protected void OnCollisionExit2D(Collision2D other)
         {
-            if (other.gameObject.CompareTag("Ground"))
-                isGround = false;
+            // if (other.gameObject.CompareTag("Ground"))
+            // isGround = false;
         }
         #endregion
     }

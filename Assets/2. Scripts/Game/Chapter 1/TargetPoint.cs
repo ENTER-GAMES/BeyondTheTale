@@ -6,9 +6,13 @@ namespace BeyondTheTale.Chapter1
     {
         private SceneDirector sceneDirector;
 
+        private Animator animator;
+
         private void Awake()
         {
             sceneDirector = FindObjectOfType<SceneDirector>();
+
+            animator = GetComponent<Animator>();
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -16,7 +20,14 @@ namespace BeyondTheTale.Chapter1
             if (collision.gameObject.CompareTag("Player"))
             {
                 sceneDirector.OnLanding();
+
+                PressedBed();
             }
+        }
+
+        public void PressedBed()
+        {
+            animator.Play("Pressed", -1);
         }
     }
 }

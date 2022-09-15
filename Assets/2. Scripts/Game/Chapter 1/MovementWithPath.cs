@@ -65,5 +65,19 @@ namespace BeyondTheTale.Chapter1
             else
                 transform.localScale = originScale;
         }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+
+            Transform prevPoint = null;
+            foreach (Transform curPoint in waypoints)
+            {
+                if (prevPoint != null)
+                    Gizmos.DrawLine(prevPoint.position, curPoint.position);
+
+                prevPoint = curPoint;
+            }
+        }
     }
 }
