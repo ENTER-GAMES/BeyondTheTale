@@ -24,59 +24,33 @@ public class CameraBasedPoint
 
 public class CameraBasedShadowDetector : ShadowDetector
 {
-    [SerializeField]
-    public string requestedDeviceName = null;
-    [SerializeField]
-    private int requestedWidth;
-    [SerializeField]
-    private int requestedHeight;
-    [SerializeField]
-    private int requestedFPS;
-    [SerializeField]
-    private new Renderer renderer;
-    [SerializeField]
-    private Renderer rendererR;
-    [SerializeField]
-    private Renderer rendererG;
-    [SerializeField]
-    private Renderer rendererB;
-    [SerializeField]
-    private Renderer rendererAdd;
-    [SerializeField]
-    private Renderer rendererGray;
-    [SerializeField]
-    private Renderer rendererThr;
-    [SerializeField]
-    [Range(-255, 255)]
-    private int r = 0;
-    [SerializeField]
-    [Range(-255, 255)]
-    private int g = 0;
-    [SerializeField]
-    [Range(-255, 255)]
-    private int b = 0;
-    [SerializeField]
-    [Range(0, 255)]
-    private int threshold = 20;
-    [SerializeField]
-    [Range(0.001f, 0.1f)]
-    private double epsilon = 0.001f;
-    [SerializeField]
-    [Range(1, 21)]
-    private int gaussian = 1;
-    [SerializeField]
-    [Range(0, 100000)]
-    private int contourMinArea = 0;
-    [SerializeField]
-    private bool useApprox = true;
+    [Header("Device Settings")]
+    [SerializeField] public string requestedDeviceName = null;
+    [SerializeField] private int requestedWidth;
+    [SerializeField] private int requestedHeight;
+    [SerializeField] private int requestedFPS;
+
+    [Header("Renderers")]
+    [SerializeField] private new Renderer renderer;
+    [SerializeField] private Renderer rendererR;
+    [SerializeField] private Renderer rendererG;
+    [SerializeField] private Renderer rendererB;
+    [SerializeField] private Renderer rendererAdd;
+    [SerializeField] private Renderer rendererGray;
+    [SerializeField] private Renderer rendererThr;
+
+    [Header("Toggles")]
     [SerializeField]
     private bool drawMesh = false;
     [SerializeField]
     private bool drawPoint = false;
     [SerializeField]
     private bool view = true;
-    [SerializeField]
-    private CameraBasedPoint[] cameraBasedPoints = new CameraBasedPoint[4];
+
+    private CameraBasedShadowDetectorSetting settings;
+
+    [Header("Debug")]
+    [SerializeField] private int cameraPointRadius = 10;
 
     private Texture2D textureSrc;
     private Texture2D textureR;
@@ -85,18 +59,29 @@ public class CameraBasedShadowDetector : ShadowDetector
     private Texture2D textureFrame;
     private Texture2D textureGray;
     private Texture2D textureThr;
+
     private WebCamTexture webCamTexture;
     private WebCamDevice webCamDevice;
     private Color32[] colors;
     private Mat frame;
-    private int width;
-    private int height;
     private List<MatOfPoint> contours;
     private Mat result;
 
+    public int width { get; private set; }
+    public int height { get; private set; }
+
     private bool hasInitDone = false;
+    public bool HasInitDone => hasInitDone;
     private bool didUpdateFirstFrame = false;
+
+    [Header("Events")]
+    public UnityEvent onInitDone = new UnityEvent();
     public UnityEvent onFirstFrameUpdate = new UnityEvent();
+
+    private void Awake()
+    {
+        settings = FindObjectOfType<CameraBasedShadowDetectorSetting>();
+    }
 
     private void Start()
     {
@@ -174,6 +159,7 @@ public class CameraBasedShadowDetector : ShadowDetector
                 yield return null;
 
                 hasInitDone = true;
+                onInitDone.Invoke();
 
                 break;
             }
@@ -224,21 +210,22 @@ public class CameraBasedShadowDetector : ShadowDetector
         }
     }
 
+
     private void Run()
     {
         Mat src = PerspectiveTransform();
 
-        Mat rgb = new Mat(height, width, CvType.CV_8UC4, new Scalar(r, g, b, 0));
+        Mat rgb = new Mat(height, width, CvType.CV_8UC4, new Scalar(settings.GetR(), settings.GetG(), settings.GetB(), 0));
         Mat add = CVUtils.Add(src, rgb);
-        rgb = new Mat(height, width, CvType.CV_8UC4, new Scalar(r * -1, g * -1, b * -1, 0));
+        rgb = new Mat(height, width, CvType.CV_8UC4, new Scalar(settings.GetR() * -1, settings.GetG() * -1, settings.GetB() * -1, 0));
         add = CVUtils.Subtract(add, rgb);
         List<Mat> split = new List<Mat>();
         Core.split(add, split);
         Mat gray = CVUtils.CvtColor(add, Imgproc.COLOR_BGR2GRAY);
-        if (gaussian % 2 == 0)
-            gaussian = Mathf.Clamp(gaussian - 1, 1, 11);
-        Mat blur = CVUtils.GaussianBlur(gray, new Size(gaussian, gaussian), 0);
-        result = CVUtils.Threshold(blur, threshold, 255);
+        if (settings.GetGaussian() % 2 == 0)
+            settings.SetGaussian(Mathf.Clamp(settings.GetGaussian() - 1, 1, 11));
+        Mat blur = CVUtils.GaussianBlur(gray, new Size(settings.GetGaussian(), settings.GetGaussian()), 0);
+        result = CVUtils.Threshold(blur, settings.GetThreshold(), 255);
 
         DrawMesh(result);
         DrawPerspectivePoint();
@@ -249,22 +236,29 @@ public class CameraBasedShadowDetector : ShadowDetector
     {
         Mat pts1 = new Mat(4, 1, CvType.CV_32FC2);
         Mat pts2 = new Mat(4, 1, CvType.CV_32FC2);
-        pts1.put(0, 0, cameraBasedPoints[0].Get().x, cameraBasedPoints[0].Get().y,
-                       cameraBasedPoints[1].Get().x, cameraBasedPoints[1].Get().y,
-                       cameraBasedPoints[2].Get().x, cameraBasedPoints[2].Get().y,
-                       cameraBasedPoints[3].Get().x, cameraBasedPoints[3].Get().y);
+        pts1.put(0, 0, settings.GetCameraBasedPoint(0).x, settings.GetCameraBasedPoint(0).y,
+                       settings.GetCameraBasedPoint(1).x, settings.GetCameraBasedPoint(1).y,
+                       settings.GetCameraBasedPoint(2).x, settings.GetCameraBasedPoint(2).y,
+                       settings.GetCameraBasedPoint(3).x, settings.GetCameraBasedPoint(3).y);
         pts2.put(0, 0, 0.0, 0.0, width, 0.0, 0.0, height, width, height);
 
         Mat mtrx = CVUtils.GetPerspectiveTransform(pts1, pts2);
         return CVUtils.WarpPerspective(frame, mtrx, new Size(width, height));
     }
 
-    private void DrawPerspectivePoint()
+    public void DrawPerspectivePoint()
     {
         if (drawPoint)
         {
-            for (int i = 0; i < cameraBasedPoints.Length; i++)
-                CVUtils.DrawCircle(ref frame, cameraBasedPoints[i].Get());
+            Scalar red = new Scalar(255, 0, 0, 255);
+            Scalar yellow = new Scalar(255, 255, 0, 255);
+            for (int i = 0; i < settings.GetCameraBasedPointLength(); i++)
+            {
+                if (settings.IsSettingMode && i == settings.CameraPointSettingCount)
+                    CVUtils.DrawCircle(ref frame, settings.GetCameraBasedPoint(i), cameraPointRadius, red);
+                else
+                    CVUtils.DrawCircle(ref frame, settings.GetCameraBasedPoint(i), cameraPointRadius, yellow);
+            }
         }
     }
 
@@ -286,10 +280,10 @@ public class CameraBasedShadowDetector : ShadowDetector
         foreach (MatOfPoint c in contours)
         {
             double area = Imgproc.contourArea(c);
-            if (area > contourMinArea)
+            if (area > settings.GetContourMinArea())
             {
                 Point[] points = c.toArray();
-                if (useApprox)
+                if (settings.GetUseApprox())
                     points = Approx(points);
 
                 SetOffset(ref points);
@@ -306,7 +300,7 @@ public class CameraBasedShadowDetector : ShadowDetector
         MatOfPoint2f curve = new MatOfPoint2f(points);
         MatOfPoint2f approx = new MatOfPoint2f();
         double p = Imgproc.arcLength(curve, true);
-        Imgproc.approxPolyDP(curve, approx, epsilon * p, true);
+        Imgproc.approxPolyDP(curve, approx, settings.GetEpsilon() * p, true);
 
         return approx.toArray();
     }
@@ -347,5 +341,15 @@ public class CameraBasedShadowDetector : ShadowDetector
     {
         webCamTexture.Stop();
         WebCamTexture.Destroy(webCamTexture);
+    }
+
+    public Texture GetSrcTexture()
+    {
+        return textureSrc;
+    }
+
+    public Texture GetFrameTexture()
+    {
+        return textureFrame;
     }
 }

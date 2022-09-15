@@ -65,9 +65,9 @@ public static class CVUtils
         }
     }
 
-    public static void DrawCircle(ref Mat src, Point point)
+    public static void DrawCircle(ref Mat src, Point point, int radius, Scalar color)
     {
-        Imgproc.circle(src, point, 10, new Scalar(255, 0, 0, 255), -1);
+        Imgproc.circle(src, point, radius, color, -1);
     }
 
     public static Vector2[] PointToVector2(Point[] points)
