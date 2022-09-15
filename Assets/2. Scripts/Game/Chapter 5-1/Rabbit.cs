@@ -10,7 +10,7 @@ namespace Chapter_5_1
         public override void Complete()
         {
             // 멈춤
-            Turn(Vector3.zero);
+            // Turn(Vector3.zero);
         }
     }
 }
