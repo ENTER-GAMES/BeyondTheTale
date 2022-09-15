@@ -38,27 +38,8 @@ public class CameraBasedShadowDetector : ShadowDetector
     [SerializeField] private Renderer rendererAdd;
     [SerializeField] private Renderer rendererGray;
     [SerializeField] private Renderer rendererThr;
-    public Renderer rendererFrame;
-
-    [Header("Detector Settings")]
-    [Range(-255, 255)]
-    [SerializeField] private int r = 0;
-    [Range(-255, 255)]
-    [SerializeField] private int g = 0;
-    [Range(-255, 255)]
-    [SerializeField] private int b = 0;
-    [Range(0, 255)]
-    [SerializeField] private int threshold = 20;
-    [Range(0.001f, 0.1f)]
-    [SerializeField] private double epsilon = 0.001f;
-    [Range(1, 21)]
-    [SerializeField] private int gaussian = 1;
-    [Range(0, 100000)]
-    [SerializeField] private int contourMinArea = 0;
 
     [Header("Toggles")]
-    [SerializeField]
-    private bool useApprox = true;
     [SerializeField]
     private bool drawMesh = false;
     [SerializeField]
@@ -66,8 +47,7 @@ public class CameraBasedShadowDetector : ShadowDetector
     [SerializeField]
     private bool view = true;
 
-    [Header("Components")]
-    [SerializeField] private CameraBasedShadowDetectorSetting settings; 
+    private CameraBasedShadowDetectorSetting settings;
 
     [Header("Debug")]
     [SerializeField] private int cameraPointRadius = 10;
@@ -97,6 +77,11 @@ public class CameraBasedShadowDetector : ShadowDetector
     [Header("Events")]
     public UnityEvent onInitDone = new UnityEvent();
     public UnityEvent onFirstFrameUpdate = new UnityEvent();
+
+    private void Awake()
+    {
+        settings = FindObjectOfType<CameraBasedShadowDetectorSetting>();
+    }
 
     private void Start()
     {
@@ -208,8 +193,6 @@ public class CameraBasedShadowDetector : ShadowDetector
         rendererAdd.material.mainTexture = textureFrame;
         rendererGray.material.mainTexture = textureGray;
         rendererThr.material.mainTexture = textureThr;
-        rendererFrame.material.mainTexture = textureFrame;
-        rendererFrame.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -232,17 +215,17 @@ public class CameraBasedShadowDetector : ShadowDetector
     {
         Mat src = PerspectiveTransform();
 
-        Mat rgb = new Mat(height, width, CvType.CV_8UC4, new Scalar(r, g, b, 0));
+        Mat rgb = new Mat(height, width, CvType.CV_8UC4, new Scalar(settings.GetR(), settings.GetG(), settings.GetB(), 0));
         Mat add = CVUtils.Add(src, rgb);
-        rgb = new Mat(height, width, CvType.CV_8UC4, new Scalar(r * -1, g * -1, b * -1, 0));
+        rgb = new Mat(height, width, CvType.CV_8UC4, new Scalar(settings.GetR() * -1, settings.GetG() * -1, settings.GetB() * -1, 0));
         add = CVUtils.Subtract(add, rgb);
         List<Mat> split = new List<Mat>();
         Core.split(add, split);
         Mat gray = CVUtils.CvtColor(add, Imgproc.COLOR_BGR2GRAY);
-        if (gaussian % 2 == 0)
-            gaussian = Mathf.Clamp(gaussian - 1, 1, 11);
-        Mat blur = CVUtils.GaussianBlur(gray, new Size(gaussian, gaussian), 0);
-        result = CVUtils.Threshold(blur, threshold, 255);
+        if (settings.GetGaussian() % 2 == 0)
+            settings.SetGaussian(Mathf.Clamp(settings.GetGaussian() - 1, 1, 11));
+        Mat blur = CVUtils.GaussianBlur(gray, new Size(settings.GetGaussian(), settings.GetGaussian()), 0);
+        result = CVUtils.Threshold(blur, settings.GetThreshold(), 255);
 
         DrawMesh(result);
         DrawPerspectivePoint();
@@ -297,10 +280,10 @@ public class CameraBasedShadowDetector : ShadowDetector
         foreach (MatOfPoint c in contours)
         {
             double area = Imgproc.contourArea(c);
-            if (area > contourMinArea)
+            if (area > settings.GetContourMinArea())
             {
                 Point[] points = c.toArray();
-                if (useApprox)
+                if (settings.GetUseApprox())
                     points = Approx(points);
 
                 SetOffset(ref points);
@@ -317,7 +300,7 @@ public class CameraBasedShadowDetector : ShadowDetector
         MatOfPoint2f curve = new MatOfPoint2f(points);
         MatOfPoint2f approx = new MatOfPoint2f();
         double p = Imgproc.arcLength(curve, true);
-        Imgproc.approxPolyDP(curve, approx, epsilon * p, true);
+        Imgproc.approxPolyDP(curve, approx, settings.GetEpsilon() * p, true);
 
         return approx.toArray();
     }
@@ -358,5 +341,15 @@ public class CameraBasedShadowDetector : ShadowDetector
     {
         webCamTexture.Stop();
         WebCamTexture.Destroy(webCamTexture);
+    }
+
+    public Texture GetSrcTexture()
+    {
+        return textureSrc;
+    }
+
+    public Texture GetFrameTexture()
+    {
+        return textureFrame;
     }
 }
