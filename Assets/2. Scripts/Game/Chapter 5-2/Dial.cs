@@ -73,16 +73,46 @@ public class Dial : MonoBehaviour
             {
                 float timer = 0;
                 float percent = 0;
+
+                // 초기 각도
+                Quaternion originRotation = transform.rotation;
+
+                // 사운드 재생
                 audioSource.PlayOneShot(audioClipRotateDial);
 
+                // 회전 시작
                 while (percent < 1)
                 {
-                    float timeAmount = (timer + Time.deltaTime >= rotateTime) ? rotateTime - timer : Time.deltaTime;
-                    timer += timeAmount;
-                    percent = timer / rotateTime;
+                    // 회전 중에 회전 루틴이 종료되어야 하고, 50%이상 넘어가지 않았으면
+                    // 다시 뒤로(원상태로) 이동 후
+                    // 회전 종료(break)
+                    if (breakRotateRotine && percent < 0.5f)
+                    {
+                        Quaternion curRotation = transform.rotation;
+                        float time = 0.3f;  // 0.3초간 뒤로감
+                        timer = 0;
+                        percent = 0;
 
-                    transform.Rotate(0, 0, Mathf.Lerp(0, rotateSpeed * flipX, timeAmount / rotateTime));
-                    yield return null;
+                        while (percent < 1)
+                        {
+                            timer += Time.deltaTime;
+                            percent = timer / time;
+                            transform.rotation = Quaternion.Lerp(curRotation, originRotation, percent);
+                            yield return null;
+                        }
+
+                        transform.rotation = originRotation;
+                        break;
+                    }
+                    else
+                    {
+                        float timeAmount = (timer + Time.deltaTime >= rotateTime) ? rotateTime - timer : Time.deltaTime;
+                        timer += timeAmount;
+                        percent = timer / rotateTime;
+
+                        transform.Rotate(0, 0, Mathf.Lerp(0, rotateSpeed * flipX, timeAmount / rotateTime));
+                        yield return null;
+                    }
                 }
             }
 

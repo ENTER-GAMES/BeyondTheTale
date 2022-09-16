@@ -301,6 +301,14 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
         PlayerPrefs.SetInt("gaussian", settings.gaussian);
         PlayerPrefs.SetInt("contourMinArea", settings.contourMinArea);
         PlayerPrefs.SetInt("useApprox", System.Convert.ToInt16(settings.useApprox));
+        PlayerPrefs.SetFloat("cameraBasedPoint1X", (float)cameraBasedPoints[0].x);
+        PlayerPrefs.SetFloat("cameraBasedPoint1Y", (float)cameraBasedPoints[0].y);
+        PlayerPrefs.SetFloat("cameraBasedPoint2X", (float)cameraBasedPoints[1].x);
+        PlayerPrefs.SetFloat("cameraBasedPoint2Y", (float)cameraBasedPoints[1].y);
+        PlayerPrefs.SetFloat("cameraBasedPoint3X", (float)cameraBasedPoints[2].x);
+        PlayerPrefs.SetFloat("cameraBasedPoint3Y", (float)cameraBasedPoints[2].y);
+        PlayerPrefs.SetFloat("cameraBasedPoint4X", (float)cameraBasedPoints[3].x);
+        PlayerPrefs.SetFloat("cameraBasedPoint4Y", (float)cameraBasedPoints[3].y);
     }
 
     private void Load()
@@ -313,6 +321,14 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
         settings.gaussian = PlayerPrefs.GetInt("gaussian");
         settings.contourMinArea = PlayerPrefs.GetInt("contourMinArea");
         settings.useApprox = System.Convert.ToBoolean(PlayerPrefs.GetInt("useApprox"));
+        cameraBasedPoints[0].x = PlayerPrefs.GetFloat("cameraBasedPoint1X");
+        cameraBasedPoints[0].y = PlayerPrefs.GetFloat("cameraBasedPoint1Y");
+        cameraBasedPoints[1].x = PlayerPrefs.GetFloat("cameraBasedPoint2X");
+        cameraBasedPoints[1].y = PlayerPrefs.GetFloat("cameraBasedPoint2Y");
+        cameraBasedPoints[2].x = PlayerPrefs.GetFloat("cameraBasedPoint3X");
+        cameraBasedPoints[2].y = PlayerPrefs.GetFloat("cameraBasedPoint3Y");
+        cameraBasedPoints[3].x = PlayerPrefs.GetFloat("cameraBasedPoint4X");
+        cameraBasedPoints[3].y = PlayerPrefs.GetFloat("cameraBasedPoint4Y");
     }
 
     private void OnApplicationQuit()

@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+    private void Awake()
+    {
+        Screen.SetResolution(1920, 1080, true);
+    }
+
     public void LoadIntroScene(float delay)
     {
         Invoke(nameof(PrivateLoadIntroScene), delay);
