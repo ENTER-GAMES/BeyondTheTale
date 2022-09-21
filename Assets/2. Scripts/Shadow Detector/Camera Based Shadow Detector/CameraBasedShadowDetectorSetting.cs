@@ -81,6 +81,7 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
     private bool isSettingMode = false;
     public bool IsSettingMode => isSettingMode;
     private bool isPointActive = false;
+    private bool hasInitDone = false;
 
     private int screenWidthRatio;
     private int screenHeightRatio;
@@ -106,6 +107,8 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
         meshOriginColor = meshMaterial.color;
 
         UpdateUI();
+
+        hasInitDone = true;
     }
 
     private void UpdateUI()
@@ -271,13 +274,14 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
     private void OpenUI()
     {
         settings.CopyTo(settingsTemp);
-        meshOriginColor = meshMaterial.color;
+        //meshOriginColor = meshMaterial.color;
         meshMaterial.color = meshSettingsColor;
     }
 
     private void CloseUI()
     {
-        meshMaterial.color = meshOriginColor;
+        if (hasInitDone)
+            meshMaterial.color = meshOriginColor;
     }
 
     public void Cancel()
