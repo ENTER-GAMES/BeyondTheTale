@@ -50,8 +50,8 @@ public class CodingStandard : MonoBehaviour
         if (!isBoolean)
             Start();
 
-        // null 체크는 명시
-        if (componentA == null)
+        // null 체크는 명시 없이 //2022.09.28 박근영 수정
+        if (componentA)
         {
 
         }
