@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using OpenCVForUnity.CoreModule;
 using OpenCVForUnity.ImgprocModule;
@@ -24,7 +25,10 @@ public class CameraSettings
     public int gaussian = 1;
     [Range(0, 100000)]
     public int contourMinArea = 0;
-    public bool useApprox = true;
+    public bool useApprox = false;
+    public bool viewShadow = false;
+    [Range(1, 10)]
+    public int pointRadius = 1;
 
     public void CopyTo(CameraSettings settings)
     {
@@ -36,6 +40,8 @@ public class CameraSettings
         settings.gaussian = gaussian;
         settings.contourMinArea = contourMinArea;
         settings.useApprox = useApprox;
+        settings.viewShadow = viewShadow;
+        settings.pointRadius = pointRadius;
     }
 }
 
@@ -65,6 +71,8 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
     [SerializeField] private Slider sliderContourMinArea;
     [SerializeField] private Toggle toggleUseApprox;
     [SerializeField] private Toggle toggleScreen;
+    [SerializeField] private Toggle toggleViewShadow;
+    [SerializeField] private Slider sliderPointRadius;
     [SerializeField] private TextMeshProUGUI textR;
     [SerializeField] private TextMeshProUGUI textG;
     [SerializeField] private TextMeshProUGUI textB;
@@ -72,16 +80,19 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textEpsilon;
     [SerializeField] private TextMeshProUGUI textGaussian;
     [SerializeField] private TextMeshProUGUI textContourMinArea;
+    [SerializeField] private TextMeshProUGUI textPointRadius;
 
     [Header("Mesh")]
     [SerializeField] private Material meshMaterial;
-    [SerializeField] private Color meshSettingsColor;
-    private Color meshOriginColor;
+    [SerializeField] private Color shadowSettingsColor;
+    [SerializeField] private Color shadowViewColor;
+    [SerializeField] private Color shadowHideColor;
 
     private bool isSettingMode = false;
     public bool IsSettingMode => isSettingMode;
     private bool isPointActive = false;
     private bool hasInitDone = false;
+    private bool isUIOpen = false;
 
     private int screenWidthRatio;
     private int screenHeightRatio;
@@ -104,7 +115,6 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
 
         Load();
         settings.CopyTo(settingsTemp);
-        meshOriginColor = meshMaterial.color;
 
         UpdateUI();
 
@@ -121,6 +131,8 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
         sliderGaussian.value = settings.gaussian;
         sliderContourMinArea.value = settings.contourMinArea;
         toggleUseApprox.isOn = settings.useApprox;
+        toggleViewShadow.isOn = settings.viewShadow;
+        sliderPointRadius.value = settings.pointRadius;
         textR.text = settings.r.ToString();
         textG.text = settings.g.ToString();
         textB.text = settings.b.ToString();
@@ -128,6 +140,7 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
         textEpsilon.text = settings.epsilon.ToString("0.000");
         textGaussian.text = settings.gaussian.ToString();
         textContourMinArea.text = settings.contourMinArea.ToString();
+        textPointRadius.text = settings.pointRadius.ToString();
     }
 
     private void Update()
@@ -138,7 +151,7 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
         if (rawImage.texture == null)
             rawImage.texture = FindObjectOfType<CameraBasedShadowDetector>().GetFrameTexture();
 
-        if (isSettingMode)
+        if (uiManager.IsUIOpen && isSettingMode)
         {
             Vector2 mousePos = GetMousePosition();
 
@@ -270,18 +283,26 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
     public void SetContourMinArea(float value) { settings.contourMinArea = (int)value; UpdateUI(); }
     public bool GetUseApprox() { return settings.useApprox; }
     public void SetUseApprox(bool value) { settings.useApprox = value; UpdateUI(); }
+    public bool GetViewShadow() { return settings.viewShadow; }
+    public void SetViewShadow(bool value) { settings.viewShadow = value; UpdateUI(); }
+    public int GetPointRadius() { return settings.pointRadius; }
+    public void SetPointRadius(float value) { settings.pointRadius = (int)value; UpdateUI(); }
 
     private void OpenUI()
     {
         settings.CopyTo(settingsTemp);
-        //meshOriginColor = meshMaterial.color;
-        meshMaterial.color = meshSettingsColor;
+        meshMaterial.color = shadowSettingsColor;
     }
 
     private void CloseUI()
     {
         if (hasInitDone)
-            meshMaterial.color = meshOriginColor;
+        {
+            if (toggleViewShadow.isOn)
+                meshMaterial.color = shadowViewColor;
+            else
+                meshMaterial.color = shadowHideColor;
+        }
     }
 
     public void Cancel()
@@ -305,6 +326,8 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
         PlayerPrefs.SetInt("gaussian", settings.gaussian);
         PlayerPrefs.SetInt("contourMinArea", settings.contourMinArea);
         PlayerPrefs.SetInt("useApprox", System.Convert.ToInt16(settings.useApprox));
+        PlayerPrefs.SetInt("viewShadow", System.Convert.ToInt16(settings.viewShadow));
+        PlayerPrefs.SetInt("pointRadius", settings.pointRadius);
         PlayerPrefs.SetFloat("cameraBasedPoint1X", (float)cameraBasedPoints[0].x);
         PlayerPrefs.SetFloat("cameraBasedPoint1Y", (float)cameraBasedPoints[0].y);
         PlayerPrefs.SetFloat("cameraBasedPoint2X", (float)cameraBasedPoints[1].x);
@@ -325,6 +348,8 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
         settings.gaussian = PlayerPrefs.GetInt("gaussian");
         settings.contourMinArea = PlayerPrefs.GetInt("contourMinArea");
         settings.useApprox = System.Convert.ToBoolean(PlayerPrefs.GetInt("useApprox"));
+        settings.viewShadow = System.Convert.ToBoolean(PlayerPrefs.GetInt("viewShadow"));
+        settings.pointRadius = PlayerPrefs.GetInt("pointRadius");
         cameraBasedPoints[0].x = PlayerPrefs.GetFloat("cameraBasedPoint1X");
         cameraBasedPoints[0].y = PlayerPrefs.GetFloat("cameraBasedPoint1Y");
         cameraBasedPoints[1].x = PlayerPrefs.GetFloat("cameraBasedPoint2X");
@@ -333,10 +358,5 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
         cameraBasedPoints[2].y = PlayerPrefs.GetFloat("cameraBasedPoint3Y");
         cameraBasedPoints[3].x = PlayerPrefs.GetFloat("cameraBasedPoint4X");
         cameraBasedPoints[3].y = PlayerPrefs.GetFloat("cameraBasedPoint4Y");
-    }
-
-    private void OnApplicationQuit()
-    {
-        meshMaterial.color = meshOriginColor;
     }
 }

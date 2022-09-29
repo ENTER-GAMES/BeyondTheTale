@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
     private CameraBasedShadowDetectorSetting settings;
 
     private bool isUIOpen = false;
+    public bool IsUIOpen => isUIOpen;
 
     private void Awake()
     {

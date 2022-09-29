@@ -49,9 +49,6 @@ public class CameraBasedShadowDetector : ShadowDetector
 
     private CameraBasedShadowDetectorSetting settings;
 
-    [Header("Debug")]
-    [SerializeField] private int cameraPointRadius = 10;
-
     private Texture2D textureSrc;
     private Texture2D textureR;
     private Texture2D textureG;
@@ -174,6 +171,7 @@ public class CameraBasedShadowDetector : ShadowDetector
     {
         width = webCamTexture.width;
         height = webCamTexture.height;
+        Debug.Log($"width : {width}, height : {height}, ScreenWidth : {Screen.width}, ScreenHeight : {Screen.height}");
 
         colors = new Color32[width * height];
         textureSrc = new Texture2D(width, height, TextureFormat.RGBA32, false);
@@ -255,9 +253,9 @@ public class CameraBasedShadowDetector : ShadowDetector
             for (int i = 0; i < settings.GetCameraBasedPointLength(); i++)
             {
                 if (settings.IsSettingMode && i == settings.CameraPointSettingCount)
-                    CVUtils.DrawCircle(ref frame, settings.GetCameraBasedPoint(i), cameraPointRadius, red);
+                    CVUtils.DrawCircle(ref frame, settings.GetCameraBasedPoint(i), settings.GetPointRadius(), red);
                 else
-                    CVUtils.DrawCircle(ref frame, settings.GetCameraBasedPoint(i), cameraPointRadius, yellow);
+                    CVUtils.DrawCircle(ref frame, settings.GetCameraBasedPoint(i), settings.GetPointRadius(), yellow);
             }
         }
     }

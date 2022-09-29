@@ -637,7 +637,7 @@ MonoBehaviour:
   requestedDeviceName: 
   requestedWidth: 640
   requestedHeight: 360
-  requestedFPS: 30
+  requestedFPS: 60
   renderer: {fileID: 997320168}
   rendererR: {fileID: 2085216115}
   rendererG: {fileID: 1570893194}
@@ -645,26 +645,15 @@ MonoBehaviour:
   rendererAdd: {fileID: 204045015}
   rendererGray: {fileID: 1636309040}
   rendererThr: {fileID: 887154292}
-  r: 25
-  g: -255
-  b: -255
-  threshold: 28
-  epsilon: 0.010900000110268593
-  gaussian: 21
-  contourMinArea: 10016
-  useApprox: 0
   drawMesh: 1
   drawPoint: 1
   view: 1
-  cameraBasedPoints:
-  - x: 148
-    y: 20
-  - x: 359
-    y: 55
-  - x: 162
-    y: 348
-  - x: 351
-    y: 211
+  onInitDone:
+    m_PersistentCalls:
+      m_Calls: []
+  onFirstFrameUpdate:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4102060819167329718
 MonoBehaviour:
   m_ObjectHideFlags: 0
