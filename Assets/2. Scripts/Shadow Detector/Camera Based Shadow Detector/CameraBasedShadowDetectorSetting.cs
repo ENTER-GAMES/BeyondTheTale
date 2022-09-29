@@ -115,6 +115,7 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
 
         Load();
         settings.CopyTo(settingsTemp);
+        SetMeshColor();
 
         UpdateUI();
 
@@ -145,14 +146,14 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
 
     private void Update()
     {
-        if (!detector.HasInitDone)
+        if (!hasInitDone)
             return;
-
-        if (rawImage.texture == null)
-            rawImage.texture = FindObjectOfType<CameraBasedShadowDetector>().GetFrameTexture();
 
         if (uiManager.IsUIOpen && isSettingMode)
         {
+            if (rawImage.texture == null)
+                rawImage.texture = detector.GetFrameTexture();
+
             Vector2 mousePos = GetMousePosition();
 
             if (Input.GetMouseButtonDown(0))
@@ -296,13 +297,15 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
 
     private void CloseUI()
     {
-        if (hasInitDone)
-        {
-            if (toggleViewShadow.isOn)
-                meshMaterial.color = shadowViewColor;
-            else
-                meshMaterial.color = shadowHideColor;
-        }
+        SetMeshColor();
+    }
+
+    private void SetMeshColor()
+    {
+        if (settings.viewShadow)
+            meshMaterial.color = shadowViewColor;
+        else
+            meshMaterial.color = shadowHideColor;
     }
 
     public void Cancel()
@@ -318,13 +321,14 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
 
     private void Save()
     {
-        PlayerPrefs.SetInt("r", settings.r);
-        PlayerPrefs.SetInt("g", settings.g);
-        PlayerPrefs.SetInt("b", settings.b);
-        PlayerPrefs.SetInt("threshold", settings.threshold);
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        PlayerPrefs.SetInt($"{currentSceneName}_r", settings.r);
+        PlayerPrefs.SetInt($"{currentSceneName}_g", settings.g);
+        PlayerPrefs.SetInt($"{currentSceneName}_b", settings.b);
+        PlayerPrefs.SetInt($"{currentSceneName}_threshold", settings.threshold);
         PlayerPrefs.SetFloat("epsilon", (float)settings.epsilon);
         PlayerPrefs.SetInt("gaussian", settings.gaussian);
-        PlayerPrefs.SetInt("contourMinArea", settings.contourMinArea);
+        PlayerPrefs.SetInt($"{currentSceneName}_contourMinArea", settings.contourMinArea);
         PlayerPrefs.SetInt("useApprox", System.Convert.ToInt16(settings.useApprox));
         PlayerPrefs.SetInt("viewShadow", System.Convert.ToInt16(settings.viewShadow));
         PlayerPrefs.SetInt("pointRadius", settings.pointRadius);
@@ -340,13 +344,14 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
 
     private void Load()
     {
-        settings.r = PlayerPrefs.GetInt("r");
-        settings.g = PlayerPrefs.GetInt("g");
-        settings.b = PlayerPrefs.GetInt("b");
-        settings.threshold = PlayerPrefs.GetInt("threshold");
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        settings.r = PlayerPrefs.GetInt($"{currentSceneName}_r");
+        settings.g = PlayerPrefs.GetInt($"{currentSceneName}_g");
+        settings.b = PlayerPrefs.GetInt($"{currentSceneName}_b");
+        settings.threshold = PlayerPrefs.GetInt($"{currentSceneName}_threshold");
         settings.epsilon = PlayerPrefs.GetFloat("epsilon");
         settings.gaussian = PlayerPrefs.GetInt("gaussian");
-        settings.contourMinArea = PlayerPrefs.GetInt("contourMinArea");
+        settings.contourMinArea = PlayerPrefs.GetInt($"{currentSceneName}_contourMinArea");
         settings.useApprox = System.Convert.ToBoolean(PlayerPrefs.GetInt("useApprox"));
         settings.viewShadow = System.Convert.ToBoolean(PlayerPrefs.GetInt("viewShadow"));
         settings.pointRadius = PlayerPrefs.GetInt("pointRadius");
