@@ -92,7 +92,6 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
     public bool IsSettingMode => isSettingMode;
     private bool isPointActive = false;
     private bool hasInitDone = false;
-    private bool isUIOpen = false;
 
     private int screenWidthRatio;
     private int screenHeightRatio;

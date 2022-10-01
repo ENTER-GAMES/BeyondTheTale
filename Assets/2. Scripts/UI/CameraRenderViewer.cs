@@ -9,6 +9,6 @@ public class CameraRenderViewer : MonoBehaviour
     private void Update()
     {
         if (rawImage.texture == null)
-            rawImage.texture = FindObjectOfType<CameraBasedShadowDetector>().GetSrcTexture();
+            rawImage.texture = FindObjectOfType<CameraBasedShadowDetector>().GetPOVTexture();
     }
 }
