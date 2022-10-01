@@ -169,6 +169,8 @@ namespace Chapter_5_1
 
             if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Movable Ground"))
             {
+                bool isLanding = isJumping;
+
                 isGround = true;
                 isJumping = false;
 
@@ -178,6 +180,7 @@ namespace Chapter_5_1
                 }
 
                 if (characterAnimator == null) return;
+                if (!isLanding) return;
 
                 characterAnimator.Land();
                 StartCoroutine(nameof(LandingRoutine));    // 애니메이션 끝날 때까지 정지

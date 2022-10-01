@@ -35,6 +35,8 @@ namespace Chapter_5_1
 
             if (Input.GetKeyDown(KeyCode.R))
                 OnHitBySpotLight2D();
+            if (Input.GetKeyDown(KeyCode.M))
+                StartMove();
         }
 
         public void StartMove()
@@ -51,6 +53,7 @@ namespace Chapter_5_1
         {
             if (isHit) return;
             isHit = true;
+            isJumping = false;      // 점프를 취소해줘야 리스폰해도 착지 애니메이션이 나오지 않음
 
             // 부모 트랜스폼 초기값으로 변경
             transform.parent = originParentTransform;
@@ -79,6 +82,9 @@ namespace Chapter_5_1
         {
             isHit = false;
 
+            // 초기 위치로 이동
+            transform.position = spawnPosition;
+
             // 애니메이션 초기화
             characterAnimator.Restart();
 
@@ -87,9 +93,6 @@ namespace Chapter_5_1
 
             // 콜라이더 활성화
             collider2D.enabled = true;
-
-            // 초기 위치로 이동
-            transform.position = spawnPosition;
 
             // 오른쪽으로 이동 시작
             Invoke(nameof(StartMove), 1);
