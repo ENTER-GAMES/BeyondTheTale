@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3c5a033487048154e9ea05ace9eda84b
+guid: 638f702877bf64ce688a12c31e703089
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -42,13 +42,13 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 7
-  spritePivot: {x: 0.5, y: 0}
-  spritePixelsToUnits: 108
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 82, y: 52, z: 23, w: 256}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -104,43 +104,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 2stage_background_mushroom_1
+      name: Flower_Petal_0003_0
       rect:
         serializedVersion: 2
-        x: 1074
-        y: 0
-        width: 804
-        height: 1079
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 91
+        y: 51
+        width: 90
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e0208d9a566d7459ab56cb9c38ef3037
-      internalID: 78000426
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 2stage_background_mushroom_0
-      rect:
-        serializedVersion: 2
-        x: 78
-        y: 0
-        width: 653
-        height: 981
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d6960b9b0a3984ae38633c8e28ae930c
-      internalID: 306325276
+      spriteID: 2d662f790547e41de82288cfc5ada70c
+      internalID: -1929809072
       vertices: []
       indices: 
       edges: []
@@ -156,8 +135,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      2stage_background_mushroom_1: 78000426
-      2stage_background_mushroom_0: 306325276
+      Flower_Petal_0003_0: -1929809072
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -13,6 +13,12 @@ public class Cat : MonoBehaviour
     [SerializeField]
     private Vector2 colliderSize;
 
+    [Header("Effect")]
+    [SerializeField]
+    private Transform effectPosition;
+    [SerializeField]
+    private GameObject effectPrefab;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -38,7 +44,8 @@ public class Cat : MonoBehaviour
 
     public void OnHit()
     {
-        catManager.OnHit();
+        catManager.OnHitCat();
+        Instantiate(effectPrefab, transform.position, Quaternion.identity);
     }
 
     public void OnScream()
