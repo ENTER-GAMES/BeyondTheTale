@@ -149,6 +149,16 @@ public class CameraBasedShadowDetectorSetting : MonoBehaviour
         if (!hasInitDone)
             return;
 
+        // 그림자 메쉬 확인
+        if (!uiManager.IsUIOpen && !isSettingMode)
+        {
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                SetViewShadow(!settings.viewShadow);
+                SetMeshColor();
+            }
+        }
+
         if (uiManager.IsUIOpen && isSettingMode)
         {
             if (rawImage.texture == null)
