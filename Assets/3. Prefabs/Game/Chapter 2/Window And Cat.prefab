@@ -98,7 +98,7 @@ GameObject:
   m_Layer: 0
   m_Name: Window And Cat
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -153,7 +153,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTimeMin: 1
   startTimeMax: 5
-  colliderSize: {x: 1.8, y: 1.9}
+  colliderSize: {x: 1.38, y: 1.45}
+  effectPosition: {fileID: 763358413114819305}
+  effectPrefab: {fileID: 4138774155921374413, guid: 8515114cbacb4436fbfac1698548806a, type: 3}
 --- !u!1 &763358413608595847
 GameObject:
   m_ObjectHideFlags: 0
