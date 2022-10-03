@@ -48,46 +48,31 @@ MonoBehaviour:
   explains:
   - targetSceneName: Intro
     explainTexts:
-    - displayTime: 1
-      explainText: "\uC88C\uC6B0\uB85C \uC6C0\uC9C1\uC5EC\uC11C \uD398\uC774\uC9C0\uB97C
-        \uB118\uACA8\uBCF4\uC790"
-    - displayTime: 1
-      explainText: "\uAC00\uB9CC\uD788 \uC11C\uC788\uC73C\uBA74 \uC774\uC57C\uAE30
-        \uC18D\uC73C\uB85C \uB4E4\uC5B4\uAC08 \uC218 \uC788\uC5B4"
+    - displayTime: 2
+      explainText: "\uAC78\uC74C\uC744 \uC62E\uACA8 \uCC45\uC7A5\uC744 \uB118\uACA8\uBCF4\uC790!"
   - targetSceneName: Chapter 1
     explainTexts:
-    - displayTime: 1
-      explainText: "\uB5A8\uC5B4\uC9C0\uB294 \uC568\uB9AC\uC2A4\uAC00 \uC7A5\uC560\uBB3C\uC5D0
-        \uBD80\uB52A\uD788\uBA74 \uC548\uB3FC"
-    - displayTime: 1
-      explainText: "\uBC00\uACE0 \uB2F9\uACA8\uC11C \uBB34\uC0AC\uD788 \uCC29\uC9C0\uD558\uB3C4\uB85D
-        \uB3C4\uC640\uC8FC\uC790"
+    - displayTime: 2
+      explainText: "\uADF8\uB9BC\uC790\uB85C \uC568\uB9AC\uC2A4\uAC00 \uD53C\uD558\uB3C4\uB85D
+        \uD558\uC790!"
   - targetSceneName: Chapter 2
-    explainTexts: []
+    explainTexts:
+    - displayTime: 2
+      explainText: "\uACE0\uC591\uC774\uAC00 \uC18C\uB9AC\uCE58\uAE30 \uC804\uC5D0
+        \uCC3D\uBB38\uC744 \uB2EB\uC790!"
   - targetSceneName: Chapter 4
     explainTexts:
-    - displayTime: 1
-      explainText: "\uD1A0\uB07C\uC640 \uBAA8\uC790\uC7A5\uC218\uC5D0\uAC8C \uCC28\uB97C
-        \uB530\uB77C\uC8FC\uC790"
-    - displayTime: 1
-      explainText: "\uB2E4\uACFC\uD68C\uAC00 \uB108\uBB34 \uC2E0\uB098!"
+    - displayTime: 2
+      explainText: "\uCC28\uB97C \uCC3B\uC794\uC5D0 \uC62E\uACA8\uB2F4\uC790!"
   - targetSceneName: Chapter 5-1
     explainTexts:
-    - displayTime: 1
-      explainText: "\uC568\uB9AC\uC2A4\uAC00 \uCE74\uB4DC\uBCD1\uC0AC\uC5D0\uAC8C
-        \uCAD3\uAE30\uACE0 \uC788\uC5B4"
-    - displayTime: 1
-      explainText: "\uCE74\uB4DC\uBCD1\uC0AC\uC758 \uC190\uC804\uB4F1 \uBE5B\uC744
-        \uB9C9\uC544"
-    - displayTime: 1
-      explainText: "\uC568\uB9AC\uC2A4\uAC00 \uBB34\uC0AC\uD788 \uB3C4\uB9DD\uCE58\uB3C4\uB85D
-        \uB3C4\uC640\uC8FC\uC790!"
+    - displayTime: 2
+      explainText: "\uBCD1\uC0AC\uC758 \uBE5B\uC744 \uAC00\uB824 \uC568\uB9AC\uC2A4\uC758
+        \uD0C8\uCD9C\uC744 \uB3D5\uC790!"
   - targetSceneName: Chapter 5-2
     explainTexts:
-    - displayTime: 1
-      explainText: "\uB2E4\uC774\uC5BC\uC744 \uC5B4\uB5BB\uAC8C \uC5F4 \uC218 \uC788\uC744\uAE4C?"
-    - displayTime: 1
-      explainText: "\uC190\uBC14\uB2E5\uC744 \uBD10\uBCF4\uC790!"
+    - displayTime: 2
+      explainText: "\uBE44\uBC00 \uBB38\uC758 \uBC88\uD638\uB97C \uC5BB\uC5B4 \uD0C8\uCD9C\uD558\uC790!"
   charDelayTime: 0.3
 --- !u!1 &4315899552732794574
 GameObject:
