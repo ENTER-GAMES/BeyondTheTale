@@ -42,6 +42,11 @@ public class Cat : MonoBehaviour
             animator.SetBool("hit", true);
     }
 
+    public void OnDoorOpen()
+    {
+        catManager.OnDoorOpen();
+    }
+
     public void OnHit()
     {
         catManager.OnHitCat();

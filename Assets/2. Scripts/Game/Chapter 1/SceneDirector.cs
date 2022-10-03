@@ -30,6 +30,10 @@ namespace BeyondTheTale.Chapter1
         private UnityEvent onHit = new UnityEvent();
         [SerializeField]
         private UnityEvent onLanding = new UnityEvent();
+        [SerializeField]
+        private UnityEvent onGameOver = new UnityEvent();
+        [SerializeField]
+        private UnityEvent onGameClear = new UnityEvent();
 
         private Vector3 playerPos;
         private Vector3 obstaclePos;
@@ -72,7 +76,7 @@ namespace BeyondTheTale.Chapter1
             onHit.Invoke();
             playerAnimator.OnHit();
             obstacleScroller.Stop(true);
-            Invoke(nameof(Restart), 0.8f);
+            Invoke(nameof(OnGameOver), 0.8f);
         }
 
         public void OnLanding()
@@ -81,6 +85,13 @@ namespace BeyondTheTale.Chapter1
             MovePlayer(false);
             playerAnimator.OnLanding();
             obstacleScroller.Stop(true);
+            onGameClear.Invoke();
+        }
+
+        public void OnGameOver()
+        {
+            onGameOver.Invoke();
+            Invoke(nameof(Restart), 3f);
         }
 
         public void MovePlayer(bool value)
