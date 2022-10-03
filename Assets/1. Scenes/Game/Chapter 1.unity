@@ -5116,5 +5116,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7894303990787784665, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
+      propertyPath: MeshDrawer
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4102060819167329718, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}

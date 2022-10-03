@@ -61,6 +61,7 @@ namespace Chapter_5_2
         {
             Mat frame = detector.GetResult();
             Imgproc.resize(frame, frame, new Size(width, height));
+            Core.flip(frame, frame, 0);
             return frame;
         }
     }

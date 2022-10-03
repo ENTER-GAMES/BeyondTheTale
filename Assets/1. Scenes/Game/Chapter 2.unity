@@ -1875,24 +1875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fd367f2529901841b4ae6964b66fee8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1364201601 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6969525928876952679, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
-  m_PrefabInstance: {fileID: 2145601581}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1364201602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1364201601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08dcfb251e538364bab30ecbfbdf2e31, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shadowObjectPrefab: {fileID: 6199725716445464178, guid: 16c34e960e474a7439bac4754987e215, type: 3}
 --- !u!114 &1568330063 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 763358413227151328, guid: 143b7af33e328b6499f3409acd139bf4, type: 3}
@@ -2059,7 +2041,7 @@ PrefabInstance:
     - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: MeshDrawer
       value: 
-      objectReference: {fileID: 1364201602}
+      objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952672, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: contourMinArea
       value: 0

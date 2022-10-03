@@ -22,7 +22,7 @@ public class SceneChanger : MonoBehaviour
 
     private void PrivateLoadIntroScene()
     {
-        detector?.DestroyWebcamTexture();
+        detector?.Dispose();
         SceneManager.LoadScene("Intro");
     }
 
@@ -32,32 +32,32 @@ public class SceneChanger : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha0))
             {
-                detector?.DestroyWebcamTexture();
+                detector?.Dispose();
                 SceneManager.LoadScene("Intro");
             }
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                detector?.DestroyWebcamTexture();
+                detector?.Dispose();
                 SceneManager.LoadScene("Chapter 1");
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                detector?.DestroyWebcamTexture();
+                detector?.Dispose();
                 SceneManager.LoadScene("Chapter 2");
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                detector?.DestroyWebcamTexture();
+                detector?.Dispose();
                 SceneManager.LoadScene("Chapter 4");
             }
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                detector?.DestroyWebcamTexture();
+                detector?.Dispose();
                 SceneManager.LoadScene("Chapter 5-1");
             }
             if (Input.GetKeyDown(KeyCode.Alpha5))
             {
-                detector?.DestroyWebcamTexture();
+                detector?.Dispose();
                 SceneManager.LoadScene("Chapter 5-2");
             }
         }

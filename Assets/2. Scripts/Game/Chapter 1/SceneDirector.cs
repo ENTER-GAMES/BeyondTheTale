@@ -63,7 +63,7 @@ namespace BeyondTheTale.Chapter1
 
         private void Restart()
         {
-            FindObjectOfType<CameraBasedShadowDetector>()?.DestroyWebcamTexture();
+            FindObjectOfType<CameraBasedShadowDetector>()?.Dispose();
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
