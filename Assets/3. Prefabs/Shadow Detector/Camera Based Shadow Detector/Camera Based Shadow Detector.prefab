@@ -820,7 +820,7 @@ MonoBehaviour:
   rendererApprox: {fileID: 4286150747997456416}
   drawMesh: 1
   drawPoint: 1
-  viewFrame: 0
+  viewFrame: 1
   viewPOV: 0
   viewR: 0
   viewG: 0
@@ -836,6 +836,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   onFirstFrameUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  onSecondFrameUpdate:
     m_PersistentCalls:
       m_Calls: []
   onDispose:

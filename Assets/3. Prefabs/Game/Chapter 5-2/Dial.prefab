@@ -79,6 +79,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   rotateSpeed: 20
+  rotateTime: 0
   rotateDelay: 0
   radius: 0
   collider: {fileID: 0}
@@ -133,7 +134,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -2511189330909556423, guid: f05b40db3100aae4e9803886de8b1c0c, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.261
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0

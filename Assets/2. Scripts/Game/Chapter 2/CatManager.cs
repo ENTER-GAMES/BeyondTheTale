@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class CatManager : MonoBehaviour
 {
     public UnityEvent onDoorOpen = new UnityEvent();
+    public UnityEvent onHitCat = new UnityEvent();
     public UnityEvent<int> onScream = new UnityEvent<int>();
     public UnityEvent onGameClear = new UnityEvent();
     public UnityEvent onGameOver = new UnityEvent();
@@ -88,6 +89,7 @@ public class CatManager : MonoBehaviour
     public void OnHitCat()
     {
         hitCount++;
+        onHitCat.Invoke();
     }
 
     public void OnScream()
