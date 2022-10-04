@@ -19,11 +19,11 @@ public class PageTrigger : MonoBehaviour
 
     [Header("Feedback")]
     [SerializeField]
-    private Light2D[] feedbackLights;
-    [SerializeField]
-    private float defaultIntensity = 10;
-    [SerializeField]
-    private float activeIntensity = 30;
+    private GameObject[] feedbackLights;
+    // [SerializeField]
+    // private float defaultIntensity = 10;
+    // [SerializeField]
+    // private float activeIntensity = 30;
 
     [Header("Target")]
     [SerializeField]
@@ -64,15 +64,15 @@ public class PageTrigger : MonoBehaviour
         while (true)
         {
             int target = FindTargetPage();
-            if (target >= 0)
+            if (target >= 0 && targetPageIndex != target)
             {
                 targetPageIndex = target;
 
                 // 피드백 불빛 활성화
-                foreach (Light2D light in feedbackLights)
-                    light.intensity = defaultIntensity;
+                foreach (GameObject light in feedbackLights)
+                    light.SetActive(false);
 
-                feedbackLights[target].intensity = activeIntensity;
+                feedbackLights[target].SetActive(true);
             }
 
             yield return wait;
