@@ -17,6 +17,7 @@ public class Dial : MonoBehaviour
     private bool isRotating = false;
 
     private bool isLocked = false;
+    private bool isClear = false;
     private bool flip = false;
 
     [SerializeField]
@@ -40,6 +41,11 @@ public class Dial : MonoBehaviour
         StartCoroutine(RotateRoutine());
     }
 
+    public void Clear()
+    {
+        isClear = true;
+    }
+
     public void Lock(bool value)
     {
         if (isLocked == value) return;
@@ -52,6 +58,9 @@ public class Dial : MonoBehaviour
         float flipX = flip ? -1 : 1;
         while (true)
         {
+            if (isClear)
+                yield break;
+
             // 잠겨있지 않고, 그림자가 들어와 있으면
             if (!isLocked && isStayShadow)
             {
