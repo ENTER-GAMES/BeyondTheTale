@@ -252,7 +252,7 @@ public class CameraBasedShadowDetector : ShadowDetector
 
     private void ShowDisplay()
     {
-        if (viewFrame)
+        if (viewFrame || settings.IsSettingMode)
             Utils.matToTexture2D(frame, textureFrame, colors);
 
         if (viewPOV)
