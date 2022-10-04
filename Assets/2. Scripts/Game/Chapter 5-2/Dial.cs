@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class Dial : MonoBehaviour
 {
-    public UnityEvent onStayShadow = new UnityEvent();
-    public UnityEvent onExitShadow = new UnityEvent();
+    [SerializeField]
+    private Dial[] childrenDials;
 
     [SerializeField]
     private float rotateSpeed;
@@ -18,12 +18,12 @@ public class Dial : MonoBehaviour
 
     private bool isLocked = false;
     private bool flip = false;
-    private bool breakRotateRotine = false;
 
     [SerializeField]
     private float radius;
     [SerializeField]
     private new Collider2D collider;
+    private bool isStayShadow = false;
 
     [Header("Audio")]
     [SerializeField]
@@ -36,6 +36,8 @@ public class Dial : MonoBehaviour
     public void Init()
     {
         hasInitDone = true;
+
+        StartCoroutine(RotateRoutine());
     }
 
     public void Lock(bool value)
@@ -45,32 +47,20 @@ public class Dial : MonoBehaviour
         isLocked = value;
     }
 
-    public void StartRotate()
-    {
-        if (isRotating) return;
-
-        breakRotateRotine = false;
-        StartCoroutine(nameof(RotateRoutine));
-        isRotating = true;
-    }
-
-    public void StopRotate()
-    {
-        if (!isRotating) return;
-
-        // StopAllCoroutines();     // 중간에 끊으면 각 안맞음
-        // isRotating = false;
-        breakRotateRotine = true;
-        flip = !flip;
-    }
-
     private IEnumerator RotateRoutine()
     {
         float flipX = flip ? -1 : 1;
         while (true)
         {
-            if (!isLocked)
+            // 잠겨있지 않고, 그림자가 들어와 있으면
+            if (!isLocked && isStayShadow)
             {
+                // 돌고 있지 않았었으면 (새롭게 돌기 시작하면)
+                // 회전 방향 변경
+                if (!isRotating)
+                    flipX *= -1;
+
+                // 변수 초기화
                 float timer = 0;
                 float percent = 0;
 
@@ -86,7 +76,7 @@ public class Dial : MonoBehaviour
                     // 회전 중에 회전 루틴이 종료되어야 하고, 50%이상 넘어가지 않았으면
                     // 다시 뒤로(원상태로) 이동 후
                     // 회전 종료(break)
-                    if (breakRotateRotine && percent < 0.5f)
+                    if ((isLocked || !isStayShadow) && percent < 0.5f)
                     {
                         Quaternion curRotation = transform.rotation;
                         float time = 0.3f;  // 0.3초간 뒤로감
@@ -102,8 +92,11 @@ public class Dial : MonoBehaviour
                         }
 
                         transform.rotation = originRotation;
+                        isRotating = false;
+
                         break;
                     }
+
                     else
                     {
                         float timeAmount = (timer + Time.deltaTime >= rotateTime) ? rotateTime - timer : Time.deltaTime;
@@ -111,17 +104,20 @@ public class Dial : MonoBehaviour
                         percent = timer / rotateTime;
 
                         transform.Rotate(0, 0, Mathf.Lerp(0, rotateSpeed * flipX, timeAmount / rotateTime));
+                        isRotating = true;
+
                         yield return null;
                     }
                 }
             }
-
-            if (breakRotateRotine)
-            {
-                isRotating = false;
-                yield break;
-            }
+            // 돌면 안될 때 (잠겨있거나 그림자가 없을 때)
             else
+            {
+                yield return null;
+                isRotating = false;
+            }
+
+            if (isRotating)
                 yield return new WaitForSeconds(rotateDelay);
         }
     }
@@ -129,13 +125,22 @@ public class Dial : MonoBehaviour
     private void Update()
     {
         if (!hasInitDone) return;
-        if (isLocked) return;
 
         collider = Physics2D.OverlapCircle(transform.position, radius, LayerMask.GetMask("Shadow Object"));
         if (collider != null)
-            onStayShadow.Invoke();
+        {
+            foreach (Dial dial in childrenDials)
+                dial.Lock(true);
+
+            isStayShadow = true;
+        }
         else
-            onExitShadow.Invoke();
+        {
+            foreach (Dial dial in childrenDials)
+                dial.Lock(false);
+
+            isStayShadow = false;
+        }
     }
 
     private void OnDrawGizmosSelected()

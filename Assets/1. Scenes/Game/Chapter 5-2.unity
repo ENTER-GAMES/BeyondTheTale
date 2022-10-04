@@ -713,6 +713,10 @@ PrefabInstance:
       value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: textInfo
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: rotateTime
       value: 0.4
       objectReference: {fileID: 0}
@@ -723,6 +727,14 @@ PrefabInstance:
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: rotateSpeed
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5515860252489260517, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: m_IsActive
@@ -8024,6 +8036,10 @@ PrefabInstance:
       value: 2.2
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: textInfo
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: rotateTime
       value: 0.4
       objectReference: {fileID: 0}
@@ -8036,15 +8052,31 @@ PrefabInstance:
       value: -45
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: childrenDials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: childrenDials.Array.data[0]
+      value: 
+      objectReference: {fileID: 285005686}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
@@ -8052,7 +8084,15 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 285005686}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 285005686}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 285005686}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
@@ -8068,7 +8108,15 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Lock
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Lock
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Lock
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
@@ -8080,8 +8128,16 @@ PrefabInstance:
       value: Dial, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Dial, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: Dial, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
@@ -8089,6 +8145,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
@@ -12286,6 +12346,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: textInfo
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: rotateTime
       value: 0.4
       objectReference: {fileID: 0}
@@ -12298,12 +12362,28 @@ PrefabInstance:
       value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: childrenDials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: childrenDials.Array.data[0]
+      value: 
+      objectReference: {fileID: 1944202288}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: childrenDials.Array.data[1]
+      value: 
+      objectReference: {fileID: 285005686}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.size
-      value: 3
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
@@ -12311,6 +12391,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
@@ -12322,17 +12406,25 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
-      propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1944202288}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 285005686}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 285005686}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
-      propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1944202288}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 285005686}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
@@ -12354,11 +12446,19 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Lock
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: Lock
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onExitShadow.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Lock
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Lock
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
@@ -12384,6 +12484,10 @@ PrefabInstance:
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
       value: Dial, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
+      propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2448819088620686811, guid: 0de95f4cbb85d48f891c754367d7bf1f, type: 3}
       propertyPath: onStayShadow.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
