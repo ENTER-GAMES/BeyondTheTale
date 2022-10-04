@@ -159,7 +159,8 @@ public class WebCamTextureToMat : MonoBehaviour
         if (hasInitDone && webCamTexture.isPlaying && webCamTexture.didUpdateThisFrame)
         {
             Utils.webCamTextureToMat(webCamTexture, rgbaMat, colors);
-            detector.Run(rgbaMat);
+            if (didUpdateFirstFrame)
+                detector.Run(rgbaMat);
 
             if (!didUpdateSecondFrame && didUpdateFirstFrame)
             {

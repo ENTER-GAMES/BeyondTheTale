@@ -35,8 +35,8 @@ namespace Chapter_5_2
 
             matBack = new Mat(height, width, CvType.CV_8UC4, new Scalar(255, 255, 255, 255));
             matFront = new Mat(height, width, CvType.CV_8UC4, new Scalar(255, 255, 255, 255));
-            Utils.texture2DToMat(textureBack, matBack, false, 0);
-            Utils.texture2DToMat(textureFront, matFront, false, 0);
+            Utils.texture2DToMat(textureBack, matBack);
+            Utils.texture2DToMat(textureFront, matFront);
 
             tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
             renderer.material.mainTexture = tex;
@@ -54,14 +54,14 @@ namespace Chapter_5_2
             Core.bitwise_not(mask, mask_inv);
             Mat result = new Mat(height, width, CvType.CV_8UC4, new Scalar(255, 255, 255, 0));
             Core.bitwise_and(src, src, result, mask_inv);
-            Utils.matToTexture2D(result, tex, false, 0, false);
+            Utils.matToTexture2D(result, tex);
         }
 
         private Mat GetMatFromCamera()
         {
             Mat frame = detector.GetResult();
             Imgproc.resize(frame, frame, new Size(width, height));
-            Core.flip(frame, frame, 0);
+            //Core.flip(frame, frame, 0);
             return frame;
         }
     }
