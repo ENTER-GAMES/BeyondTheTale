@@ -11391,6 +11391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f1b7179789dcba45980d8768216bd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioPrefab: {fileID: 5634851743692508668, guid: 1725fc190c22b8d49b73c3266019f73c, type: 3}
 --- !u!4 &958827539
 Transform:
   m_ObjectHideFlags: 0
@@ -13007,6 +13008,57 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onHitRabbit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1810748364}
+        m_TargetAssemblyTypeName: Larva, Assembly-CSharp
+        m_MethodName: Hit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 522780748}
+        m_TargetAssemblyTypeName: Flower, Assembly-CSharp
+        m_MethodName: Hit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1098144036}
+        m_TargetAssemblyTypeName: HitEffect, Assembly-CSharp
+        m_MethodName: Hit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 958827538}
+        m_TargetAssemblyTypeName: SoundPlayer, Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 7023464b1b54e43069d1e6e2ccda9eba, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onScream:
     m_PersistentCalls:
       m_Calls:
@@ -13146,6 +13198,7 @@ MonoBehaviour:
   - {fileID: 1885662739}
   startActiveCount: 1
   endActiveCount: 5
+  rabbitChance: 20
   nextLevelTime: 4
   gameClearCount: 35
   gameOverCount: 3
