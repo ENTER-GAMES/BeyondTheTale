@@ -17,17 +17,13 @@ public class PageTrigger : MonoBehaviour
     [SerializeField]
     private float pagingDelayTime;
 
+    [Header("Triggers")]
+    [SerializeField]
+    private PageTriggerText[] pageTriggerTexts;
+
     [Header("Feedback")]
     [SerializeField]
     private GameObject[] feedbackLights;
-    // [SerializeField]
-    // private float defaultIntensity = 10;
-    // [SerializeField]
-    // private float activeIntensity = 30;
-
-    [Header("Target")]
-    [SerializeField]
-    private LayerMask targetLayerMask;
 
     [Header("Components")]
     private BoxCollider2D boxCollider2D;
@@ -161,21 +157,22 @@ public class PageTrigger : MonoBehaviour
 
     private int FindTargetPage()
     {
-        Vector3 startPoint = GetStartRayPoint();
-        float gap = GetRayGap();
-        int rayCount = pageCount * rayCountPerPage;
+        int pageIndex = -1;
 
-        for (int i = 0; i < rayCount; i++)
+        for (int i = 0; i < pageTriggerTexts.Length; i++)
         {
-            Vector3 point = startPoint + (transform.right * gap * i);
-            RaycastHit2D hit = Physics2D.Raycast(point, transform.up, rayHeight, targetLayerMask);
+            PageTriggerText trigger = pageTriggerTexts[i];
 
-            if (hit.collider == null) continue;
-
-            return i / rayCountPerPage;
+            if (trigger.IsTriggered && pageIndex == -1)
+            {
+                pageIndex = i;
+                trigger.IsSelected(true);
+            }
+            else
+                trigger.IsSelected(false);
         }
 
-        return -1;
+        return pageIndex;
     }
 
     private Vector3 GetStartRayPoint()
@@ -210,26 +207,26 @@ public class PageTrigger : MonoBehaviour
 
     }
 
-    private void OnDrawGizmos()
-    {
-        if (boxCollider2D == null) return;
+    // private void OnDrawGizmos()
+    // {
+    //     if (boxCollider2D == null) return;
 
-        Vector3 startPoint = GetStartRayPoint();
-        float gap = GetRayGap();
-        int rayCount = pageCount * rayCountPerPage;
+    //     Vector3 startPoint = GetStartRayPoint();
+    //     float gap = GetRayGap();
+    //     int rayCount = pageCount * rayCountPerPage;
 
-        for (int i = 0; i < rayCount; i++)
-        {
-            Vector3 point = startPoint + (transform.right * gap * i);
+    //     for (int i = 0; i < rayCount; i++)
+    //     {
+    //         Vector3 point = startPoint + (transform.right * gap * i);
 
-            if (currentPageIndex == (int)(i / rayCountPerPage))
-                Gizmos.color = Color.red;
-            else if (targetPageIndex == (int)(i / rayCountPerPage))
-                Gizmos.color = Color.green;
-            else
-                Gizmos.color = Color.yellow;
+    //         if (currentPageIndex == (int)(i / rayCountPerPage))
+    //             Gizmos.color = Color.red;
+    //         else if (targetPageIndex == (int)(i / rayCountPerPage))
+    //             Gizmos.color = Color.green;
+    //         else
+    //             Gizmos.color = Color.yellow;
 
-            Gizmos.DrawLine(point, point + (transform.up * rayHeight));
-        }
-    }
+    //         Gizmos.DrawLine(point, point + (transform.up * rayHeight));
+    //     }
+    // }
 }
