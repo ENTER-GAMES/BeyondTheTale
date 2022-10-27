@@ -3,14 +3,29 @@ using UnityEngine;
 
 public class MeshDrawer : MonoBehaviour
 {
+    protected static MeshDrawer instance;
+
+    protected int shadowCount = 0;
+    public static int ShadowCount => instance ? instance.shadowCount : 0;
+
     [SerializeField]
     protected ShadowObject shadowObjectPrefab;
     protected List<ShadowObject> shadowObjects = new List<ShadowObject>();
 
+    protected virtual void Awake() => instance = this;
+
     public virtual void Draw(List<Shadow> shadows)
     {
+        int newShadowCount = 0;
+
+        // 그림자 생성
         foreach (Shadow shadow in shadows)
-            CreateObject(shadow);
+        {
+            if (CreateObject(shadow))
+                newShadowCount++;
+        }
+
+        shadowCount = newShadowCount;
     }
 
     public virtual void Clear()
@@ -20,13 +35,14 @@ public class MeshDrawer : MonoBehaviour
         shadowObjects.Clear();
     }
 
-    protected void CreateObject(Shadow shadow)
+    protected bool CreateObject(Shadow shadow)
     {
         if (shadow.points.Length < 3)
-            return;
+            return false;
 
         ShadowObject clone = Instantiate(shadowObjectPrefab);
         clone.Init(shadow);
         shadowObjects.Add(clone);
+        return true;
     }
 }

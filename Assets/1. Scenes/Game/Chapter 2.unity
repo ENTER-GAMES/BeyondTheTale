@@ -13200,7 +13200,7 @@ MonoBehaviour:
   endActiveCount: 5
   rabbitChance: 20
   nextLevelTime: 4
-  gameClearCount: 35
+  gameClearCount: 20
   gameOverCount: 3
 --- !u!4 &1916544324
 Transform:
