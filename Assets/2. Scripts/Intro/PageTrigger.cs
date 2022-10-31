@@ -59,6 +59,7 @@ public class PageTrigger : MonoBehaviour
             if (target >= 0 && targetPageIndex != target)
             {
                 targetPageIndex = target;
+                SelectPage(targetPageIndex);
             }
 
             yield return wait;
@@ -154,12 +155,7 @@ public class PageTrigger : MonoBehaviour
             PageTriggerText trigger = pageTriggerTexts[i];
 
             if (trigger.IsTriggered && pageIndex == -1)
-            {
                 pageIndex = i;
-                trigger.IsSelected(true);
-            }
-            else
-                trigger.IsSelected(false);
         }
 
         return pageIndex;
@@ -178,6 +174,16 @@ public class PageTrigger : MonoBehaviour
     private float GetRayGap()
     {
         return boxCollider2D.size.x / (pageCount * rayCountPerPage - 1);
+    }
+
+    private void SelectPage(int targetPageIndex)
+    {
+        for (int i = 0; i < pageTriggerTexts.Length; i++)
+        {
+            PageTriggerText trigger = pageTriggerTexts[i];
+
+            trigger.IsSelected(i == targetPageIndex);
+        }
     }
 
     private void DisplayPage(int targetPageIndex)
