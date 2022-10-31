@@ -10,6 +10,7 @@ public class CatManager : MonoBehaviour
     public UnityEvent onHitCat = new UnityEvent();
     public UnityEvent<int> onHitRabbit = new UnityEvent<int>();
     public UnityEvent<int> onScream = new UnityEvent<int>();
+    public UnityEvent onArrivedHalfLine = new UnityEvent();
     public UnityEvent onGameClear = new UnityEvent();
     public UnityEvent onGameOver = new UnityEvent();
 
@@ -36,12 +37,15 @@ public class CatManager : MonoBehaviour
 
 
     [SerializeField]
+    private int halfLineCount = 10;         // 중간 지점 기준 개수 (고양이 남은 수)
+    [SerializeField]
     private int gameClearCount = 30;        // 게임 클리어 기준이 되는 고양이 처치 수
     [SerializeField]
     private int gameOverCount = 3;          // 게임 오버 기준이 되는 고양이 고함 수
     private int currentGameOverCount = 0;
 
-    private bool isGameOver = false;        // 게임오버 여부
+    private bool hasArrivedHalfLine = false;    // 중간 지점 넘었는지 여부
+    private bool isGameOver = false;            // 게임오버 여부
 
     private void Awake()
     {
@@ -72,6 +76,11 @@ public class CatManager : MonoBehaviour
     {
         if (activeCats.Count != 0)
             return;
+
+        if (gameClearCount - hitCount <= halfLineCount)
+        {
+            ArriveHalfLine();
+        }
 
         if (hitCount >= gameClearCount)
         {
@@ -119,6 +128,14 @@ public class CatManager : MonoBehaviour
 
         if (currentGameOverCount >= gameOverCount)
             GameOver();
+    }
+
+    private void ArriveHalfLine()
+    {
+        if (hasArrivedHalfLine) return;
+        hasArrivedHalfLine = true;
+
+        onArrivedHalfLine.Invoke();
     }
 
     private void GameClear()

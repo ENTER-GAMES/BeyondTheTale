@@ -66,6 +66,9 @@ MonoBehaviour:
     - displayTime: 1
       explainText: "\uCC3D\uBB38\uC744 \uB2EB\uC544\uC8FC\uC138\uC694!"
       explainAudio: {fileID: 8300000, guid: f2a9901978338424a8ecbec63628b8fc, type: 3}
+    - displayTime: 1
+      explainText: "\uD1A0\uB07C\uB294 \uAC74\uB4DC\uB9AC\uBA74 \uC548 \uB3FC\uC694!"
+      explainAudio: {fileID: 8300000, guid: 2a338f232d30c48bcb18fa35e745fd7e, type: 3}
   - targetSceneName: Chapter 4
     explainTexts:
     - displayTime: 1.1
