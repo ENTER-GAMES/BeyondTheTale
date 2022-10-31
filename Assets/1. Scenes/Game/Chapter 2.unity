@@ -10975,11 +10975,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 581616092, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 60
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 581616092, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 264
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 743877211, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_AnchorMax.y
@@ -13566,6 +13566,22 @@ PrefabInstance:
     - target: {fileID: 763358413227151333, guid: 143b7af33e328b6499f3409acd139bf4, type: 3}
       propertyPath: m_Name
       value: Window And Cat
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481289874097040649, guid: 143b7af33e328b6499f3409acd139bf4, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ee519f39a4a964aa29420790895b48f5, type: 3}
+    - target: {fileID: 7481289874097040649, guid: 143b7af33e328b6499f3409acd139bf4, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481289874097040649, guid: 143b7af33e328b6499f3409acd139bf4, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481289874097040649, guid: 143b7af33e328b6499f3409acd139bf4, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 143b7af33e328b6499f3409acd139bf4, type: 3}

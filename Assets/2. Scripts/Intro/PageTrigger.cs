@@ -21,10 +21,6 @@ public class PageTrigger : MonoBehaviour
     [SerializeField]
     private PageTriggerText[] pageTriggerTexts;
 
-    [Header("Feedback")]
-    [SerializeField]
-    private GameObject[] feedbackLights;
-
     [Header("Components")]
     private BoxCollider2D boxCollider2D;
 
@@ -63,12 +59,6 @@ public class PageTrigger : MonoBehaviour
             if (target >= 0 && targetPageIndex != target)
             {
                 targetPageIndex = target;
-
-                // 피드백 불빛 활성화
-                foreach (GameObject light in feedbackLights)
-                    light.SetActive(false);
-
-                feedbackLights[target].SetActive(true);
             }
 
             yield return wait;

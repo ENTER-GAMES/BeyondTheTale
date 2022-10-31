@@ -41,6 +41,8 @@ public class CatManager : MonoBehaviour
     private int gameOverCount = 3;          // 게임 오버 기준이 되는 고양이 고함 수
     private int currentGameOverCount = 0;
 
+    private bool isGameOver = false;        // 게임오버 여부
+
     private void Awake()
     {
         targetActiveCount = startActiveCount;
@@ -121,13 +123,17 @@ public class CatManager : MonoBehaviour
 
     private void GameClear()
     {
+        if (isGameOver) return;
+
         onGameClear.Invoke();
     }
 
     private void GameOver()
     {
-        onGameOver.Invoke();
+        if (isGameOver) return;
+        isGameOver = true;
 
+        onGameOver.Invoke();
         Invoke(nameof(Restart), 3);     // 3초 뒤, 재시작
     }
 
