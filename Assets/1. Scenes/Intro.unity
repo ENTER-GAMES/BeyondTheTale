@@ -888,7 +888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6969525928876952679, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3450d44ed7cfe984b919a7dbdf97acdd, type: 3}
@@ -941,7 +941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3535622391290044137, guid: 23380c17f99d8463a99edc1dfa06fdc6, type: 3}
       propertyPath: m_text
-      value: "\uB2E4\uACFC\uD68C\uB97C \uC990\uAE30\uB358 \uADF8\uB54C     \n<size=4><color=#0D0C0C>\uCE74\uB4DC\uBCD1\uC0AC</color></size>\uB4E4\uC774    
+      value: "\uB2E4\uACFC\uD68C\uB97C \uC990\uAE30\uB358 \uADF8\uB54C        \n<size=4><color=#0D0C0C>\uCE74\uB4DC\uBCD1\uC0AC</color></size>\uB4E4\uC774    
         \n\uCCB4\uC154 \uACE0\uC591\uC774\uB97C\n\uAD34\uB86D\uD614\uB2E4\uB294 \uC774\uC720\uB85C   
         \n\uC7A1\uC544\uAC00\uB824\uACE0 \uD588\uC5B4\uC694"
       objectReference: {fileID: 0}
@@ -1732,6 +1732,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2444683333555628833, guid: dffd70ecde1d6404397f5dae36fccfa2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 005924f4bd2e54d5991851c3745492dc, type: 3}
     - target: {fileID: 6991436894571143924, guid: dffd70ecde1d6404397f5dae36fccfa2, type: 3}
       propertyPath: m_text
       value: "\uD2F0\uD30C\uD2F0"
@@ -2514,19 +2518,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 359071424, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 359071424, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 359071424, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 359071424, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -132
       objectReference: {fileID: 0}
     - target: {fileID: 581616092, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2554,35 +2558,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1125162074, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1125162074, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1125162074, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1125162074, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -234
       objectReference: {fileID: 0}
     - target: {fileID: 1141430063, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1141430063, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1141430063, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1141430063, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 1991344589, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2650,7 +2654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1020509994210423022, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31b89b489e84d4cf1b1b92e83d2ae6e1, type: 3}
@@ -4129,6 +4133,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2444683333555628833, guid: dffd70ecde1d6404397f5dae36fccfa2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2bb2a6984d0364114866d6294b27dd68, type: 3}
     - target: {fileID: 6991436894571143924, guid: dffd70ecde1d6404397f5dae36fccfa2, type: 3}
       propertyPath: m_text
       value: "\uC7AC\uD310"
@@ -4325,6 +4333,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2444683333555628833, guid: dffd70ecde1d6404397f5dae36fccfa2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 91dcdf87128374527a89f89299fcae83, type: 3}
     - target: {fileID: 6991436894571143924, guid: dffd70ecde1d6404397f5dae36fccfa2, type: 3}
       propertyPath: m_text
       value: "\uBB34\uC11C\uC6CC"
@@ -6110,6 +6122,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2444683333555628833, guid: dffd70ecde1d6404397f5dae36fccfa2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b3f9af14a80b744dd81375cb85db518c, type: 3}
     - target: {fileID: 6991436894571143924, guid: dffd70ecde1d6404397f5dae36fccfa2, type: 3}
       propertyPath: m_text
       value: "\uC568\uB9AC\uC2A4"
@@ -9493,6 +9509,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2444683333555628833, guid: dffd70ecde1d6404397f5dae36fccfa2, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2c9c111661c7e4f1584b40911ba09958, type: 3}
     - target: {fileID: 6991436894571143924, guid: dffd70ecde1d6404397f5dae36fccfa2, type: 3}
       propertyPath: m_text
       value: "\uCCB4\uC154\uCEA3"
