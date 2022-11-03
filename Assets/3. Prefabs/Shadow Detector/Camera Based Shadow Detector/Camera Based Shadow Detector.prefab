@@ -856,7 +856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01d21da9614b1f48ba6d358619d4ea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requestedDeviceName: 
+  requestedDeviceName: C922 Pro Stream Webcam
   requestedWidth: 640
   requestedHeight: 360
   requestedFPS: 30
