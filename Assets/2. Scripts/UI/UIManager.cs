@@ -39,9 +39,6 @@ public class UIManager : MonoBehaviour
                     Accept();
             }
         }
-
-        if (Input.GetKeyDown(KeyCode.Q))
-            Application.Quit();
     }
 
     public void Cancel()
