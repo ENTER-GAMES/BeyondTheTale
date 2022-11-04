@@ -13,6 +13,8 @@ public class ShadowObject : MonoBehaviour
     public Bounds bounds => polygonCollider2D.bounds;
     [SerializeField]
     protected MeshRenderer meshRenderer;
+    private bool isActive = false;
+    public double Area => shadow.area;
 
     public void Init(Shadow shadow)
     {
@@ -36,11 +38,18 @@ public class ShadowObject : MonoBehaviour
     {
         meshRenderer.enabled = false;
         polygonCollider2D.enabled = false;
+        isActive = false;
     }
 
     public void Activate()
     {
         meshRenderer.enabled = true;
         polygonCollider2D.enabled = true;
+        isActive = true;
+    }
+
+    public bool IsActive()
+    {
+        return isActive;
     }
 }

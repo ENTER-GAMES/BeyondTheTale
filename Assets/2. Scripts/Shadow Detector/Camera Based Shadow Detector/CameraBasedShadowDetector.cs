@@ -232,7 +232,7 @@ public class CameraBasedShadowDetector : ShadowDetector
                 }
 
                 SetOffset(ref points);
-                Shadow shadow = new Shadow(CVUtils.PointToVector2(points));
+                Shadow shadow = new Shadow(CVUtils.PointToVector2(points), area);
                 shadows.Add(shadow);
             }
         }

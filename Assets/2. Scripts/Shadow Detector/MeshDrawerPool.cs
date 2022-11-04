@@ -4,27 +4,28 @@ using UnityEngine;
 
 public class MeshDrawerPool : MeshDrawer
 {
-    private List<ShadowObject> shadowPool = new List<ShadowObject>();
-
     public override void Draw(List<Shadow> shadows)
     {
         int newShadowCount = 0;
 
         foreach (Shadow shadow in shadows)
         {
-            if (shadowPool.Count > 0)
+            ShadowObject shadowObject = null;
+            for (int i = 0; i < shadowObjects.Count; i++)
             {
-                if (InitObject(shadowPool[0], shadow))
+                if (!shadowObjects[i].IsActive())
                 {
-                    shadowPool.RemoveAt(0);
-                    newShadowCount++;
-                }
+                    shadowObject = shadowObjects[i];
+                    break;
+                }    
             }
+
+            if (shadowObject != null)
+                InitObject(shadowObject, shadow);
             else
-            {
-                if (CreateObject(shadow))
-                    newShadowCount++;
-            }
+                CreateObject(shadow);
+
+            newShadowCount++;
         }
 
         shadowCount = newShadowCount;
@@ -34,10 +35,8 @@ public class MeshDrawerPool : MeshDrawer
     {
         foreach (ShadowObject so in shadowObjects)
         {
-            shadowPool.Add(so);
             so.Deactivate();
         }
-        shadowObjects.Clear();
     }
 
     private bool InitObject(ShadowObject shadowObject, Shadow shadow)
@@ -46,7 +45,6 @@ public class MeshDrawerPool : MeshDrawer
             return false;
 
         shadowObject.Init(shadow);
-        shadowObjects.Add(shadowObject);
         return true;
     }
 }

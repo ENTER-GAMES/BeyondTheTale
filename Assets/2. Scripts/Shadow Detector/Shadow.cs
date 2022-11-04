@@ -6,13 +6,23 @@ using UnityEngine;
 public class Shadow
 {
     public Vector2[] points;
+    public double area;
 
-    public Shadow(Vector2[] points)
+    public Shadow(Vector2[] points) : this(points, 0)
     {
-        this.points = points;
     }
 
-    public Shadow(List<Vector3> points)
+    public Shadow(List<Vector3> points) : this(points, 0)
+    {
+    }
+
+    public Shadow(Vector2[] points, double area)
+    {
+        this.points = points;
+        this.area = area;
+    }
+
+    public Shadow(List<Vector3> points, double area)
     {
         Vector2[] pointsArr = new Vector2[points.Count];
 
@@ -20,5 +30,6 @@ public class Shadow
             pointsArr[i] = points[i];
 
         this.points = pointsArr;
+        this.area = area;
     }
 }
