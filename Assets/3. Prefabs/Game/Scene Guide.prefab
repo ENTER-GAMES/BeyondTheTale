@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6237734521567899172}
   - component: {fileID: 8736760667141721343}
+  - component: {fileID: 2249865027688472299}
+  - component: {fileID: 8114915314819436823}
   m_Layer: 0
   m_Name: Scene Guide
   m_TagString: Untagged
@@ -46,34 +48,163 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explains:
-  - targetSceneName: Intro
-    explainTexts:
-    - displayTime: 2
-      explainText: "\uAC78\uC74C\uC744 \uC62E\uACA8 \uCC45\uC7A5\uC744 \uB118\uACA8\uBCF4\uC790!"
   - targetSceneName: Chapter 1
     explainTexts:
     - displayTime: 2
-      explainText: "\uADF8\uB9BC\uC790\uB85C \uC568\uB9AC\uC2A4\uAC00 \uD53C\uD558\uB3C4\uB85D
-        \uD558\uC790!"
+      explainText: "\uC568\uB9AC\uC2A4\uAC00 \uC7A5\uC560\uBB3C\uC5D0 \uBD80\uB52A\uD788\uC9C0
+        \uC54A\uB3C4\uB85D"
+      explainAudio: {fileID: 8300000, guid: b54d24606181c435dad401f98957989e, type: 3}
+    - displayTime: 2
+      explainText: "\uC568\uB9AC\uC2A4\uB97C \uCC9C\uCC9C\uD788 \uBC00\uC5B4 \uB3C4\uC640\uC8FC\uC138\uC694!"
+      explainAudio: {fileID: 8300000, guid: 1917a429f111c4e77b54ff9823c3a55f, type: 3}
   - targetSceneName: Chapter 2
     explainTexts:
     - displayTime: 2
-      explainText: "\uACE0\uC591\uC774\uAC00 \uC18C\uB9AC\uCE58\uAE30 \uC804\uC5D0
-        \uCC3D\uBB38\uC744 \uB2EB\uC790!"
+      explainText: "\uCCB4\uC154 \uACE0\uC591\uC774\uAC00 \uD070 \uC18C\uB9AC\uB85C
+        \uC7A5\uB09C\uCE58\uC9C0 \uBABB\uD558\uAC8C"
+      explainAudio: {fileID: 8300000, guid: 1877cfb46264d4dcd95f09f1add54092, type: 3}
+    - displayTime: 1
+      explainText: "\uCC3D\uBB38\uC744 \uB2EB\uC544\uC8FC\uC138\uC694!"
+      explainAudio: {fileID: 8300000, guid: f2a9901978338424a8ecbec63628b8fc, type: 3}
+    - displayTime: 1
+      explainText: "\uD1A0\uB07C\uB294 \uAC74\uB4DC\uB9AC\uBA74 \uC548 \uB3FC\uC694!"
+      explainAudio: {fileID: 8300000, guid: 2a338f232d30c48bcb18fa35e745fd7e, type: 3}
   - targetSceneName: Chapter 4
     explainTexts:
+    - displayTime: 1.1
+      explainText: "\uADF8\uB9BC\uC790\uB85C \uAE38\uC744 \uB9CC\uB4E4\uC5B4"
+      explainAudio: {fileID: 8300000, guid: eca1d3c0b9c204eaf8cba601cf7c8128, type: 3}
     - displayTime: 2
-      explainText: "\uCC28\uB97C \uCC3B\uC794\uC5D0 \uC62E\uACA8\uB2F4\uC790!"
+      explainText: "\uBAA8\uB4E0 \uCC3B\uC794\uC5D0 \uCC28\uB97C \uCC44\uC6CC\uC8FC\uC138\uC694"
+      explainAudio: {fileID: 8300000, guid: 7cba60b26eee64c1d892184c8c9998a5, type: 3}
   - targetSceneName: Chapter 5-1
     explainTexts:
+    - displayTime: 1.5
+      explainText: "\uC568\uB9AC\uC2A4\uAC00 \uB4E4\uD0A4\uC9C0 \uC54A\uB3C4\uB85D"
+      explainAudio: {fileID: 8300000, guid: e268d5d98ec0f456a87cf5a235b67c83, type: 3}
     - displayTime: 2
-      explainText: "\uBCD1\uC0AC\uC758 \uBE5B\uC744 \uAC00\uB824 \uC568\uB9AC\uC2A4\uC758
-        \uD0C8\uCD9C\uC744 \uB3D5\uC790!"
+      explainText: "\uCE74\uB4DC\uBCD1\uC0AC\uC758 \uBD88\uBE5B\uC744 \uAC00\uB824\uC8FC\uC138\uC694"
+      explainAudio: {fileID: 8300000, guid: 896b89e14b9e5400f94e9933a52ee0bd, type: 3}
   - targetSceneName: Chapter 5-2
     explainTexts:
+    - displayTime: 1
+      explainText: "\uB2E4\uC774\uC5BC\uC744 \uD480\uC5B4"
+      explainAudio: {fileID: 8300000, guid: 482e1386d80da4572854251ffe1e817a, type: 3}
     - displayTime: 2
-      explainText: "\uBE44\uBC00 \uBB38\uC758 \uBC88\uD638\uB97C \uC5BB\uC5B4 \uD0C8\uCD9C\uD558\uC790!"
+      explainText: "\uC568\uB9AC\uC2A4\uAC00 \uB098\uAC08 \uC218 \uC788\uB3C4\uB85D
+        \uB3C4\uC640\uC8FC\uC138\uC694!"
+      explainAudio: {fileID: 8300000, guid: 75f6c171a15ae45cd928ac6bc0ccc4ac, type: 3}
   charDelayTime: 0.3
+--- !u!114 &2249865027688472299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2731627941977078515}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7611a95fa324e798e6e3fdf36ca3b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetNobodyTime: 5
+  targetSceneName: Intro
+--- !u!82 &8114915314819436823
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2731627941977078515}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -1824327359177631349, guid: f05b40db3100aae4e9803886de8b1c0c, type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4315899552732794574
 GameObject:
   m_ObjectHideFlags: 0

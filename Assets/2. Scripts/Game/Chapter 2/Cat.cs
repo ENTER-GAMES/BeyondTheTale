@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WindowState
+{
+    Cat,
+    Rabbit
+}
+
 public class Cat : MonoBehaviour
 {
     private CatManager catManager;
@@ -18,6 +24,8 @@ public class Cat : MonoBehaviour
     private Transform effectPosition;
     [SerializeField]
     private GameObject effectPrefab;
+
+    private WindowState currentState = WindowState.Cat;
 
     private void Awake()
     {
@@ -47,10 +55,15 @@ public class Cat : MonoBehaviour
         catManager.OnDoorOpen();
     }
 
-    public void OnHit()
+    public void OnHitCat()
     {
         catManager.OnHitCat();
         Instantiate(effectPrefab, transform.position, Quaternion.identity);
+    }
+
+    public void OnHitRabbit()
+    {
+        catManager.OnHitRabbit();
     }
 
     public void OnScream()
@@ -64,8 +77,9 @@ public class Cat : MonoBehaviour
         catManager.OnClose(this);
     }
 
-    public void Activate()
+    public void Activate(WindowState state)
     {
+        currentState = state;
         StopAllCoroutines();
         StartCoroutine(ActivateRoutine());
     }
@@ -75,7 +89,10 @@ public class Cat : MonoBehaviour
         float time = Random.Range(startTimeMin, startTimeMax);
         yield return new WaitForSeconds(time);
         animator.SetBool("hit", false);
-        animator.SetTrigger("start");
+        if (currentState == WindowState.Cat)
+            animator.SetTrigger("cat");
+        else if (currentState == WindowState.Rabbit)
+            animator.SetTrigger("rabbit");
     }
 
     private void OnDrawGizmosSelected()

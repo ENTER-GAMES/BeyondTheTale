@@ -38,11 +38,15 @@ public class ShadowCaster2DWithPloygonCollider2D : MonoBehaviour
     /// <summary>
     /// 콜라이더 좌표를 기반으로 그림자 업데이트
     /// </summary>
+    private Vector3[] hiddenShadow = new Vector3[] { new Vector3(0, 0, 0), new Vector3(0, 0, 0), new Vector3(0, 0, 0) };
     public void UpdateFromCollider()
     {
         if (polygonCollider2D != null)
         {
-            UpdateShadowFromPoints(polygonCollider2D.points);
+            if (polygonCollider2D.enabled)
+                UpdateShadowFromPoints(polygonCollider2D.points);
+            else
+                UpdateShadowFromPoints(hiddenShadow);
         }
     }
 
