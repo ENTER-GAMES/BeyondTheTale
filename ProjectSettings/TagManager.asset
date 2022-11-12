@@ -37,8 +37,8 @@ TagManager:
   - Text
   - 
   - 
-  - 
-  - 
+  - Obstacle Collider
+  - Shadow Collider
   - 
   - 
   - Pass Liquid
