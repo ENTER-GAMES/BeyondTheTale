@@ -7568,7 +7568,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8955955889696968476, guid: 4ee540f80c4927847b04490f43ec9168, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955955889696968476, guid: 4ee540f80c4927847b04490f43ec9168, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955955889696968476, guid: 4ee540f80c4927847b04490f43ec9168, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8955955889769349726, guid: 4ee540f80c4927847b04490f43ec9168, type: 3}
@@ -7669,6 +7677,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8955955889997145048, guid: 4ee540f80c4927847b04490f43ec9168, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8955955890008750360, guid: 4ee540f80c4927847b04490f43ec9168, type: 3}
+      propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8955955890008750360, guid: 4ee540f80c4927847b04490f43ec9168, type: 3}
@@ -11216,7 +11228,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &1937850026
 RectTransform:
