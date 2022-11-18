@@ -23,22 +23,20 @@ public class SceneGuide : MonoBehaviour
 
     private void Awake()
     {
+        textExplain = GetComponentInChildren<TextMeshProUGUI>();
+        audioSource = GetComponent<AudioSource>();
+
         if (instance)
-        {
-            Destroy(this.gameObject);
             return;
-        }
 
         instance = this;
         DontDestroyOnLoad(this.gameObject);
-
-        textExplain = GetComponentInChildren<TextMeshProUGUI>();
-
-        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
+        if (instance != this) return;
+
         SceneManager.sceneLoaded += (Scene scene, LoadSceneMode mode) =>
             {
                 if (prevSceneName == scene.name) return;
@@ -49,14 +47,18 @@ public class SceneGuide : MonoBehaviour
 
                 StopAllCoroutines();
 
-                if (FindExplainBySceneName(scene.name, out SceneExplain explain))
-                    StartCoroutine(ExplainRoutine(explain));
+                ExplainBySceneName(scene.name);
             };
 
         Scene currentScene = SceneManager.GetActiveScene();
         prevSceneName = currentScene.name;
 
-        if (FindExplainBySceneName(currentScene.name, out SceneExplain explain))
+        ExplainBySceneName(currentScene.name);
+    }
+
+    public void ExplainBySceneName(string sceneName)
+    {
+        if (FindExplainBySceneName(sceneName, out SceneExplain explain))
             StartCoroutine(ExplainRoutine(explain));
     }
 
