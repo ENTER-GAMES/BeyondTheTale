@@ -29,6 +29,8 @@ public class SceneGuide : MonoBehaviour
         if (instance)
             return;
 
+        Application.targetFrameRate = 60;
+
         instance = this;
         DontDestroyOnLoad(this.gameObject);
     }
