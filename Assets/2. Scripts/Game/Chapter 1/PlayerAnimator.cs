@@ -27,7 +27,10 @@ namespace BeyondTheTale.Chapter1
         {
             if (!IsShadowObject(other)) return;
 
-            Flip(other.transform);
+            if (other.transform.position.x < transform.position.x)
+                Flip(true);
+            else
+                Flip(false);
         }
 
         private bool IsShadowObject(GameObject other)
@@ -35,12 +38,9 @@ namespace BeyondTheTale.Chapter1
             return other.CompareTag("Shadow");
         }
 
-        private void Flip(Transform other)
+        public void Flip(bool flag)
         {
-            if (other.position.x < transform.position.x)
-                spriteRenderer.flipX = true;
-            else
-                spriteRenderer.flipX = false;
+            spriteRenderer.flipX = flag;
         }
 
         public void OnHit()

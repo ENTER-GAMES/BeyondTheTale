@@ -11,7 +11,7 @@ public enum WindowState
 public class Cat : MonoBehaviour
 {
     private CatManager catManager;
-    private Animator animator;
+    protected Animator animator;
     [SerializeField]
     private float startTimeMin = 0;
     [SerializeField]
@@ -37,7 +37,7 @@ public class Cat : MonoBehaviour
         this.catManager = catManager;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         CheckShadow();
     }
