@@ -10052,6 +10052,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scene Guide
       objectReference: {fileID: 0}
+    - target: {fileID: 2731627941977078515, guid: f0f6e719f750f431789b47f0c43ec75b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5201110058061093420, guid: f0f6e719f750f431789b47f0c43ec75b, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6237734521567899172, guid: f0f6e719f750f431789b47f0c43ec75b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -10364,6 +10372,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scene Changer
       objectReference: {fileID: 0}
+    - target: {fileID: 777195088201629946, guid: ac048d869f0e04b12b7cfcb2b779574f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7530305543682232055, guid: ac048d869f0e04b12b7cfcb2b779574f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -10594,7 +10606,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
 --- !u!114 &544595823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11034,7 +11046,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &723549860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11137,7 +11149,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
 --- !u!114 &727988929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12688,7 +12700,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
 --- !u!114 &1810136238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12776,7 +12788,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
 --- !u!114 &1818469222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13086,7 +13098,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
 --- !u!114 &1885662743
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13321,7 +13333,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 165224345}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
-        m_MethodName: LoadIntroScene
+        m_MethodName: LoadFirstScene
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13414,7 +13426,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
 --- !u!114 &2044575477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13542,7 +13554,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
 --- !u!114 &763358414252220084
 MonoBehaviour:
   m_ObjectHideFlags: 0
