@@ -26,17 +26,6 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene("Intro");
     }
 
-    public void LoadFirstScene(float delay)
-    {
-        Invoke(nameof(PrivateLoadFirstScene), delay);
-    }
-
-    private void PrivateLoadFirstScene()
-    {
-        detector?.Dispose();
-        SceneManager.LoadScene(0);
-    }
-
     private void Update()
     {
         if (uiManager == null || !uiManager.IsUIOpen)

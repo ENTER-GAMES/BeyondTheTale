@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BeyondTheTale.Chapter1
 {
-    public class PlayerControllerForPC : MonoBehaviour
+    public class PlayerControllerForMobile : MonoBehaviour
     {
         private new Rigidbody2D rigidbody2D;
         private PlayerAnimator playerAnimator;
