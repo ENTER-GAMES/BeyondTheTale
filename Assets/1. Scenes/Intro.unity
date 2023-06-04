@@ -10397,6 +10397,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Trigger Text - 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6991436895627942551, guid: dffd70ecde1d6404397f5dae36fccfa2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7759708212569369557, guid: dffd70ecde1d6404397f5dae36fccfa2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dffd70ecde1d6404397f5dae36fccfa2, type: 3}
 --- !u!114 &6991436895024631140 stripped
