@@ -17583,7 +17583,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!224 &1678066177
 RectTransform:
@@ -19094,6 +19094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f1b7179789dcba45980d8768216bd85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioPrefab: {fileID: 5634851743692508668, guid: 1725fc190c22b8d49b73c3266019f73c, type: 3}
 --- !u!4 &1976487998
 Transform:
   m_ObjectHideFlags: 0

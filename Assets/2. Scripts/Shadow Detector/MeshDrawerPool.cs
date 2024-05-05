@@ -8,18 +8,26 @@ public class MeshDrawerPool : MeshDrawer
 
     public override void Draw(List<Shadow> shadows)
     {
+        int newShadowCount = 0;
+
         foreach (Shadow shadow in shadows)
         {
             if (shadowPool.Count > 0)
             {
-                InitObject(shadowPool[0], shadow);
-                shadowPool.RemoveAt(0);
+                if (InitObject(shadowPool[0], shadow))
+                {
+                    shadowPool.RemoveAt(0);
+                    newShadowCount++;
+                }
             }
             else
             {
-                CreateObject(shadow);
+                if (CreateObject(shadow))
+                    newShadowCount++;
             }
         }
+
+        shadowCount = newShadowCount;
     }
 
     public override void Clear()
@@ -32,12 +40,13 @@ public class MeshDrawerPool : MeshDrawer
         shadowObjects.Clear();
     }
 
-    private void InitObject(ShadowObject shadowObject, Shadow shadow)
+    private bool InitObject(ShadowObject shadowObject, Shadow shadow)
     {
         if (shadow.points.Length < 3)
-            return;
+            return false;
 
         shadowObject.Init(shadow);
         shadowObjects.Add(shadowObject);
+        return true;
     }
 }

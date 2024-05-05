@@ -14,14 +14,24 @@ public class TextTyper : MonoBehaviour
 
     private string message;
 
+    [Header("Narration")]
+    [SerializeField]
+    private AudioClip narrationAudioClip;
+    private AudioSource audioSource;
+
     private void Awake()
     {
         textMeshPro = GetComponent<TextMeshPro>();
+        audioSource = GetComponent<AudioSource>();
         message = textMeshPro.text;
     }
 
     public void Type()
     {
+        audioSource.Stop();
+        audioSource.clip = narrationAudioClip;
+        audioSource.Play();
+
         StopAllCoroutines();
         StartCoroutine(ExplainRoutine());
     }
